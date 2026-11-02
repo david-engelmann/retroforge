@@ -56,3 +56,40 @@ def redo_moments(tape):
         if isinstance(call_id, str):
             calls[call_id] = (key, event["seq"])
     return moments
+
+
+def rescue_moments(tape):
+    """Every rescue moment in one valid tape, in seq
+    order (RF-9, RF-10).
+
+    A rescue moment is a main-chain user message that
+    is not the tape's first main-chain user message and
+    that arrives after at least one agent action since
+    the previous main-chain user message, an agent
+    action being a main-chain assistant message or a
+    main-chain tool call. Each moment is a dict with
+    the message's seq and the tool it is attributed
+    to, the tool of the most recent main-chain tool
+    call before it, or None when no main-chain tool
+    call precedes it.
+    """
+    moments = []
+    seen_user = False
+    agent_acted = False
+    last_tool = None
+    for event in tape["events"]:
+        if event.get("sidechain") is not False:
+            continue
+        kind = event.get("kind")
+        if kind == "tool_call":
+            agent_acted = True
+            last_tool = event.get("tool")
+        elif kind == "message" and event.get("role") == "assistant":
+            agent_acted = True
+        elif kind == "message" and event.get("role") == "user":
+            if seen_user and agent_acted:
+                moments.append({"seq": event["seq"],
+                                "tool": last_tool})
+            seen_user = True
+            agent_acted = False
+    return moments
