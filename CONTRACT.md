@@ -109,3 +109,37 @@ sentence is superseded for every round until that one.
   optional. When present it must be a non-negative
   integer, and the validator names any other value
   as a defect. Test, tests/test_rescue.py.
+
+## Round 2 amendments, after the reviews (recorded before the repair code)
+
+- RF-2a. A citation stating kind message resolves
+  only when the event at its seq is a main-chain
+  user message (role user, sidechain false). A
+  citation to an assistant message or a sidechain
+  message names a defect, the same as a wrong kind.
+  Test, tests/test_rescue.py.
+- RF-11a. Proposal ids are unique within the file by
+  construction or not at all: when any proposal's
+  id would equal an id already emitted in the same
+  file (a tool named to collide, in either
+  direction), the later proposal's id carries a
+  suffix of a dash and the first eight characters
+  of its own registry experiment id's digest, which
+  is content derived and deterministic. Emitting a file its own
+  validator refuses is a build defect, never a
+  validation error at write time. Test,
+  tests/test_rescue.py.
+- RF-11b. The rescue hunk and rationale state the
+  counted fact in its counted form: the operator's
+  turn followed the tool's work, after the agent
+  had acted. The stronger reading (the operator
+  interrupted or corrected that work) is the
+  design's signal name, not a claim the count
+  makes. Test, tests/test_rescue.py.
+- RF-14. The period's evidence is the set of
+  distinct tapes. A tape whose canonical digest
+  repeats an earlier tape in the input order adds
+  no moments to either reader pass; the same tape
+  filed twice is one tape. This repairs a Round 1
+  seam the redo pass shared. Test,
+  tests/test_rescue.py.
