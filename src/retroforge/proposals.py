@@ -13,12 +13,13 @@ invalid and the validator names each broken citation.
 from __future__ import annotations
 
 from .digest import digest_of
-from .moments import redo_moments
+from .moments import redo_moments, rescue_moments
 
 PROPOSAL_VERSION = "1.0"
 PROPOSAL_TYPES = ("rules-edit", "hook-change", "roster-note")
 HUNK_ACTIONS = ("add", "strike", "rewrite")
 REDO_THRESHOLD = 2
+RESCUE_THRESHOLD = 2
 
 
 def build_proposals(tapes, target="AGENTS.md"):
@@ -35,48 +36,97 @@ def build_proposals(tapes, target="AGENTS.md"):
     period = {"from": min(starts) if starts else None,
               "to": max(starts) if starts else None}
     by_tool = {}
+    rescues_by_tool = {}
+    unattributed_rescues = 0
+    seen_digests = set()
     for _, tape, digest in tapes:
+        if digest in seen_digests:
+            continue
+        seen_digests.add(digest)
         for moment in redo_moments(tape):
             by_tool.setdefault(moment["tool"], []).append(
                 (digest, moment))
+        for moment in rescue_moments(tape):
+            if moment["tool"] is None:
+                unattributed_rescues += 1
+            else:
+                rescues_by_tool.setdefault(
+                    moment["tool"], []).append((digest, moment))
+    tools = sorted(set(by_tool) | set(rescues_by_tool),
+                   key=lambda name: (name is None, name))
     proposals = []
-    for tool in sorted(by_tool, key=lambda name: (name is None, name)):
-        moments = by_tool[tool]
-        if len(moments) < REDO_THRESHOLD:
-            continue
-        citations = [{"tape": digest, "seq": moment["seq"],
-                      "kind": "tool_call"}
-                     for digest, moment in moments]
-        proposal = {
-            "id": f"rules-edit-{tool}",
-            "type": "rules-edit",
-            "target": target,
-            "hunk": {
-                "action": "add",
-                "text": (f"Before calling {tool} again after a "
-                         f"failure, stop and read the error, then "
-                         f"change the input or the approach. This "
-                         f"run repeated a failed {tool} call "
-                         f"{len(moments)} times across the period."),
-            },
-            "rationale": (
-                f"{tool} was called again with the same input "
-                f"after an error {len(moments)} times in the "
-                f"period, at the cited moments."),
-            "citations": citations,
-        }
-        proposal["registry"] = {
-            "experiment_id": "exp-" + digest_of(
-                {key: proposal[key]
-                 for key in ("type", "target", "hunk", "rationale",
-                             "citations")}
-                | {"baseline_period": period})[:16],
-            "baseline_period": period,
-        }
+
+    def emit(proposal):
+        if any(other["id"] == proposal["id"]
+               for other in proposals):
+            suffix = proposal["registry"][
+                "experiment_id"][len("exp-"):][:8]
+            proposal["id"] = f"{proposal['id']}-{suffix}"
         proposals.append(proposal)
-    return {"proposal_version": PROPOSAL_VERSION,
-            "period": period,
-            "proposals": proposals}
+
+    for tool in tools:
+        moments = by_tool.get(tool, [])
+        if len(moments) >= REDO_THRESHOLD:
+            citations = [{"tape": digest, "seq": moment["seq"],
+                          "kind": "tool_call"}
+                         for digest, moment in moments]
+            emit(_proposal(
+                f"rules-edit-{tool}", target,
+                (f"Before calling {tool} again after a "
+                 f"failure, stop and read the error, then "
+                 f"change the input or the approach. This "
+                 f"run repeated a failed {tool} call "
+                 f"{len(moments)} times across the period."),
+                (f"{tool} was called again with the same input "
+                 f"after an error {len(moments)} times in the "
+                 f"period, at the cited moments."),
+                citations, period))
+        found = rescues_by_tool.get(tool, [])
+        if len(found) >= RESCUE_THRESHOLD:
+            citations = [{"tape": digest, "seq": moment["seq"],
+                          "kind": "message"}
+                         for digest, moment in found]
+            pid = f"rules-edit-rescue-{tool}"
+            emit(_proposal(
+                pid, target,
+                (f"Before acting on {tool} output, state what "
+                 f"it shows and what happens next, so the "
+                 f"operator can redirect early. In this "
+                 f"period the operator's turn followed "
+                 f"{tool} work {len(found)} times, each time "
+                 f"after the agent had acted."),
+                (f"The operator's turn followed {tool} work "
+                 f"{len(found)} times in the period, each "
+                 f"time after the agent had acted, at the "
+                 f"cited moments."),
+                citations, period))
+    document = {"proposal_version": PROPOSAL_VERSION,
+                "period": period,
+                "proposals": proposals}
+    if unattributed_rescues:
+        document["unattributed_rescues"] = unattributed_rescues
+    return document
+
+
+def _proposal(pid, target, hunk_text, rationale, citations,
+              period):
+    proposal = {
+        "id": pid,
+        "type": "rules-edit",
+        "target": target,
+        "hunk": {"action": "add", "text": hunk_text},
+        "rationale": rationale,
+        "citations": citations,
+    }
+    proposal["registry"] = {
+        "experiment_id": "exp-" + digest_of(
+            {key: proposal[key]
+             for key in ("type", "target", "hunk", "rationale",
+                         "citations")}
+            | {"baseline_period": period})[:16],
+        "baseline_period": period,
+    }
+    return proposal
 
 
 def validate_proposals(document, tapes_by_digest):
@@ -91,6 +141,13 @@ def validate_proposals(document, tapes_by_digest):
     defects = []
     if document.get("proposal_version") != PROPOSAL_VERSION:
         defects.append("proposal_version is not 1.0")
+    if "unattributed_rescues" in document:
+        count = document["unattributed_rescues"]
+        if not isinstance(count, int) \
+                or isinstance(count, bool) or count < 0:
+            defects.append(
+                "unattributed_rescues is not a non-negative "
+                "integer")
     period = document.get("period")
     if not isinstance(period, dict):
         defects.append("period is not an object")
@@ -180,4 +237,10 @@ def _citation_defects(where, citation, tapes_by_digest):
         return [f"{where} names no event in its tape"]
     if events[seq].get("kind") != citation.get("kind"):
         return [f"{where} states the wrong kind for its event"]
+    if citation.get("kind") == "message":
+        event = events[seq]
+        if event.get("role") != "user" \
+                or event.get("sidechain") is not False:
+            return [f"{where} cites a message that is not a "
+                    f"main-chain user turn"]
     return []

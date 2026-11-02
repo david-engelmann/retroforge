@@ -69,3 +69,77 @@ the tool's end state, not this round's: RF-8 governs
 Round 1, and the only output is the proposal file, which a
 later round learns to open as a pull request. The stub
 sentence is superseded for every round until that one.
+
+## Round 2. Rescue moments (RF-9 to RF-13)
+
+- RF-9. A rescue moment is a main-chain user message
+  (kind message, role user, sidechain false) that is
+  not the first main-chain user message in its tape
+  and that arrives after at least one agent action
+  since the previous main-chain user message, where
+  an agent action is a main-chain assistant message
+  or a main-chain tool call. A user message that
+  follows another user message with no agent action
+  between them is a continuation, not a rescue. The
+  moment is recorded at the user message's seq. Test,
+  tests/test_rescue.py.
+- RF-10. A rescue moment is attributed to the tool of
+  the most recent main-chain tool call before it in
+  the same tape. A moment with no earlier main-chain
+  tool call is unattributed: it is counted in the
+  proposal file's unattributed_rescues field, which
+  is present only when the count is positive, and it
+  is never cited. Test, tests/test_rescue.py.
+- RF-11. When attributed rescue moments for the same
+  tool reach two across the period, the run emits one
+  additional rules-edit proposal for that tool, with
+  id rules-edit-rescue-<tool>, a hunk naming the tool
+  and the number of times the operator stepped in,
+  and citations to the rescue moments, each stating
+  kind message. Below the threshold, no rescue
+  proposal is emitted for that tool. The redo
+  proposal's id and text are unchanged from Round 1.
+  Test, tests/test_rescue.py.
+- RF-12. Proposal order is by tool name; within one
+  tool the redo proposal precedes the rescue
+  proposal. The file stays deterministic under RF-7.
+  Test, tests/test_rescue.py.
+- RF-13. The proposal version stays 1.0; the
+  unattributed_rescues field is additive and
+  optional. When present it must be a non-negative
+  integer, and the validator names any other value
+  as a defect. Test, tests/test_rescue.py.
+
+## Round 2 amendments, after the reviews (recorded before the repair code)
+
+- RF-2a. A citation stating kind message resolves
+  only when the event at its seq is a main-chain
+  user message (role user, sidechain false). A
+  citation to an assistant message or a sidechain
+  message names a defect, the same as a wrong kind.
+  Test, tests/test_rescue.py.
+- RF-11a. Proposal ids are unique within the file by
+  construction or not at all: when any proposal's
+  id would equal an id already emitted in the same
+  file (a tool named to collide, in either
+  direction), the later proposal's id carries a
+  suffix of a dash and the first eight characters
+  of its own registry experiment id's digest, which
+  is content derived and deterministic. Emitting a file its own
+  validator refuses is a build defect, never a
+  validation error at write time. Test,
+  tests/test_rescue.py.
+- RF-11b. The rescue hunk and rationale state the
+  counted fact in its counted form: the operator's
+  turn followed the tool's work, after the agent
+  had acted. The stronger reading (the operator
+  interrupted or corrected that work) is the
+  design's signal name, not a claim the count
+  makes. Test, tests/test_rescue.py.
+- RF-14. The period's evidence is the set of
+  distinct tapes. A tape whose canonical digest
+  repeats an earlier tape in the input order adds
+  no moments to either reader pass; the same tape
+  filed twice is one tape. This repairs a Round 1
+  seam the redo pass shared. Test,
+  tests/test_rescue.py.
