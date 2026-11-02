@@ -24,6 +24,14 @@ class DigestError(ValueError):
 
 
 def _render_number(value):
+    """Render a finite float as ECMAScript renders it.
+
+    repr gives the shortest digits that round trip. From
+    them, point is the count of digits before the decimal
+    point when the value is written out in decimal, and the
+    four cases at the end are the ECMAScript number to
+    string cases.
+    """
     if value == 0:
         return "0"
     sign = "-" if value < 0 else ""

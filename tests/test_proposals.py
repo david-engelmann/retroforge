@@ -154,3 +154,183 @@ def test_cli_propose_to_stdout_is_byte_deterministic(tmp_path, capsys):
     document = json.loads(first)
     assert document["period"] == {"from": T0, "to": T1}
     assert len(document["proposals"][0]["citations"]) == 4
+
+
+
+from retroforge.digest import canonical_bytes
+from retroforge.evidence import EvidencePackError, gate_citations
+from retroforge.tapes import EVENT_KINDS, tape_defects
+
+
+def test_canonical_form_1_battery_against_the_reference_values():
+    cases = [
+        (42, b"42"),
+        (150.0, b"150"),
+        (0.000001, b"0.000001"),
+        (1e-7, b"1e-7"),
+        (1e21, b"1e+21"),
+        (123456789.123456789, b"123456789.12345679"),
+        (5e-324, b"5e-324"),
+        (-0.0, b"0"),
+        ({"b": 1e21, "a": [0.000001, 2.5]},
+         b'{"a":[0.000001,2.5],"b":1e+21}'),
+        ({"￿": 1, "\U00010000": 2},
+         b'{"\xf0\x90\x80\x80":2,"\xef\xbf\xbf":1}'),
+    ]
+    for value, expected in cases:
+        assert canonical_bytes(value) == expected, value
+
+
+def test_the_kind_enum_is_the_formats_eight():
+    assert EVENT_KINDS == {
+        "session_start", "message", "tool_call", "tool_result",
+        "diff", "spend", "note", "session_end"}
+
+
+def test_pairing_and_shape_defects_exclude_a_tape():
+    dangling = redo_tape(failures=1)
+    dangling["events"].insert(0, result(0, "ghost", True))
+    for index, event in enumerate(dangling["events"]):
+        event["seq"] = index
+    assert any("answers no earlier" in d
+               for d in tape_defects(dangling))
+    listed = redo_tape(failures=1)
+    listed["events"][0]["tool"] = ["Read"]
+    assert any("tool must be" in d for d in tape_defects(listed))
+    missing = redo_tape(failures=1)
+    del missing["events"][0]["tool"]
+    assert any("tool must be" in d for d in tape_defects(missing))
+    dup = redo_tape(failures=1)
+    dup["events"][2]["call_id"] = "c0"
+    assert any("used twice" in d for d in tape_defects(dup))
+    bad_seq = redo_tape(failures=1)
+    bad_seq["events"][0]["seq"] = True
+    assert any("seq is not 0" in d for d in tape_defects(bad_seq))
+    bad_error = redo_tape(failures=1)
+    bad_error["events"][1]["is_error"] = 1
+    assert any("is_error must be" in d
+               for d in tape_defects(bad_error))
+    future = {"tape_version": "2.0", "run": {}, "events": [
+        call(0, "c0")]}
+    assert any("tape_version" in d for d in tape_defects(future))
+
+
+def test_an_error_must_answer_the_earlier_call_before_the_repeat():
+    tape = {"tape_version": "1.0", "run": {"started_at": T0},
+            "events": [
+                call(0, "a"), result(1, "a", False),
+                call(2, "b"), result(3, "b", True),
+                call(4, "c")],
+            "outcome": {"status": "completed",
+                        "basis": "final-assistant-message"}}
+    assert redo_moments(tape) == [
+        {"seq": 4, "earlier_seq": 2, "tool": "Read"}]
+    late = {"tape_version": "1.0", "run": {"started_at": T0},
+            "events": [
+                call(0, "a"), call(1, "b"), result(2, "a", True)],
+            "outcome": {"status": "completed",
+                        "basis": "final-assistant-message"}}
+    assert redo_moments(late) == []
+
+
+def test_the_experiment_id_moves_with_the_baseline_period():
+    redo = redo_tape()
+    quiet = {"tape_version": "1.0",
+             "run": {"harness": "claude-code", "session_id": "q",
+                     "started_at": T1},
+             "events": [call(0, "only", tool="Write", ts=T1)],
+             "outcome": {"status": "completed",
+                         "basis": "final-assistant-message"}}
+    base = build_proposals([("a.json", redo, digest_of(redo))])
+    wider = build_proposals(
+        [("a.json", redo, digest_of(redo)),
+         ("z.json", quiet, digest_of(quiet))])
+    first = base["proposals"][0]
+    second = wider["proposals"][0]
+    assert first["citations"] == second["citations"]
+    assert second["registry"]["baseline_period"] == {
+        "from": T0, "to": T1}
+    assert first["registry"]["experiment_id"] != \
+        second["registry"]["experiment_id"]
+
+
+def test_the_validator_checks_period_registry_and_duplicate_ids():
+    tape = redo_tape()
+    digest = digest_of(tape)
+    document = build_proposals([("a.json", tape, digest)])
+    document["proposals"][0]["registry"]["experiment_id"] = "x"
+    defects = validate_proposals(document, {digest: tape})
+    assert any("experiment_id" in d for d in defects)
+    document = build_proposals([("a.json", tape, digest)])
+    del document["period"]
+    defects = validate_proposals(document, {digest: tape})
+    assert any("period" in d for d in defects)
+    document = build_proposals([("a.json", tape, digest)])
+    document["proposals"].append(dict(document["proposals"][0]))
+    defects = validate_proposals(document, {digest: tape})
+    assert any("used twice" in d for d in defects)
+
+
+def test_gate_citations_refuse_until_the_format_is_pinned():
+    with pytest.raises(EvidencePackError):
+        gate_citations("pack.json")
+
+
+def test_cli_the_output_never_overwrites_an_input_tape(
+        tmp_path, capsys):
+    tape_path = write(tmp_path, "a.json", redo_tape())
+    before = tape_path.read_text(encoding="utf-8")
+    assert main(["propose", str(tmp_path),
+                 "-o", str(tape_path)]) == 1
+    assert "never writes over" in capsys.readouterr().err
+    assert tape_path.read_text(encoding="utf-8") == before
+
+
+def test_cli_a_write_failure_is_a_named_error(tmp_path, capsys):
+    write(tmp_path, "a.json", redo_tape())
+    assert main(["propose", str(tmp_path),
+                 "-o", str(tmp_path)]) == 1
+    assert "cannot write the proposal file" in \
+        capsys.readouterr().err
+
+
+def test_cli_orderings_are_filename_then_tool(tmp_path, capsys):
+    zeta = redo_tape()
+    zeta["events"] = [
+        call(0, "z0", tool="Zeta"), result(1, "z0", True),
+        call(2, "z1", tool="Zeta"), result(3, "z1", True),
+        call(4, "z2", tool="Zeta")]
+    write(tmp_path, "a.json", zeta)
+    alpha = redo_tape()
+    alpha["events"] = [
+        call(0, "a0", tool="Alpha"), result(1, "a0", True),
+        call(2, "a1", tool="Alpha"), result(3, "a1", True),
+        call(4, "a2", tool="Alpha")]
+    write(tmp_path, "z.json", alpha)
+    assert main(["propose", str(tmp_path)]) == 0
+    document = json.loads(capsys.readouterr().out)
+    assert [p["id"] for p in document["proposals"]] == [
+        "rules-edit-Alpha", "rules-edit-Zeta"]
+
+
+def test_cli_citations_follow_filename_order(tmp_path, capsys):
+    first = redo_tape(failures=1)
+    second = redo_tape(failures=1)
+    second["run"]["session_id"] = "other"
+    write(tmp_path, "a.json", first)
+    write(tmp_path, "z.json", second)
+    assert main(["propose", str(tmp_path)]) == 0
+    document = json.loads(capsys.readouterr().out)
+    cited = [c["tape"] for c in
+             document["proposals"][0]["citations"]]
+    assert cited == [digest_of(first), digest_of(second)]
+
+
+def test_cli_a_rerun_may_overwrite_its_own_proposal(
+        tmp_path, capsys):
+    write(tmp_path, "a.json", redo_tape())
+    out = tmp_path / "proposal.json"
+    assert main(["propose", str(tmp_path), "-o", str(out)]) == 0
+    assert main(["propose", str(tmp_path), "-o", str(out)]) == 0
+    err = capsys.readouterr().err
+    assert "proposal.json is excluded" in err

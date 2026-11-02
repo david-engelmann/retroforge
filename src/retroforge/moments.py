@@ -6,7 +6,13 @@ result answering the earlier call in between. The moment is
 recorded at the later call's seq. Inputs are compared by
 their canonical form 1 bytes, so two inputs that differ
 only in key order are the same call, and two that differ in
-any value are not.
+any value are not. The tape has already passed the format
+checks in tapes.py, so a result's call id answers an
+earlier call and arrives after it; an error recorded for a
+call is therefore always in between that call and any
+later repeat examined here. Earlier calls are indexed by
+their tool and input, so detection stays linear in the
+size of the tape.
 """
 from __future__ import annotations
 
@@ -22,15 +28,13 @@ def redo_moments(tape):
     be shown to match another call.
     """
     moments = []
-    earlier = []
-    errors_between = set()
+    earlier = {}
+    errored = set()
     for event in tape["events"]:
         kind = event.get("kind")
         if kind == "tool_result":
             if event.get("is_error") is True:
-                call_id = event.get("call_id")
-                if isinstance(call_id, str):
-                    errors_between.add(call_id)
+                errored.add(event.get("call_id"))
             continue
         if kind != "tool_call":
             continue
@@ -39,13 +43,12 @@ def redo_moments(tape):
                    canonical_bytes(event.get("input")))
         except DigestError:
             continue
-        for past_key, past_seq, past_call_id in earlier:
-            if past_key == key and past_call_id in errors_between:
+        for past_seq, past_call_id in earlier.get(key, ()):
+            if past_call_id in errored:
                 moments.append({"seq": event["seq"],
                                 "earlier_seq": past_seq,
                                 "tool": event.get("tool")})
                 break
-        call_id = event.get("call_id")
-        earlier.append((key, event["seq"],
-                        call_id if isinstance(call_id, str) else None))
+        earlier.setdefault(key, []).append(
+            (event["seq"], event.get("call_id")))
     return moments

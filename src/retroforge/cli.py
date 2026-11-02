@@ -28,13 +28,22 @@ def _propose(source_dir, output, target):
         return 1
     tapes = []
     by_digest = {}
-    for path in sorted(directory.iterdir(), key=lambda p: p.name):
+    try:
+        entries = sorted(directory.iterdir(), key=lambda p: p.name)
+    except OSError:
+        print(f"error, cannot list the directory, {source_dir}",
+              file=sys.stderr)
+        return 1
+
+    for path in entries:
         if path.suffix != ".json":
             continue
-        tape, reason = load_tape_file(path)
+        tape, reason, defects = load_tape_file(path)
         if tape is FAILED:
             print(f"error, {path.name} is excluded, {reason}",
                   file=sys.stderr)
+            for defect in defects:
+                print(f"defect, {defect}", file=sys.stderr)
             continue
         try:
             digest = digest_of(tape)
@@ -48,6 +57,15 @@ def _propose(source_dir, output, target):
         print("error, no valid tapes in the directory",
               file=sys.stderr)
         return 1
+    if output:
+        resolved = pathlib.Path(output).resolve()
+        loaded = {(directory / name).resolve()
+                  for name, _, _ in tapes}
+        if resolved in loaded:
+            print("error, the output path is one of the input "
+                  "tapes, the run never writes over its own "
+                  "evidence", file=sys.stderr)
+            return 1
     document = build_proposals(tapes, target=target)
     defects = validate_proposals(document, by_digest)
     if defects:
@@ -70,6 +88,10 @@ def _propose(source_dir, output, target):
         else:
             print("error, cannot write the proposal file to stdout",
                   file=sys.stderr)
+            # The broken stream would fail again at shutdown
+            # and mask this refusal with exit 120 and an
+            # ignored exception dump, so it is replaced with
+            # a sink before returning.
             try:
                 sys.stdout.close()
             except OSError:
@@ -92,7 +114,6 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.command == "propose":
         return _propose(args.source_dir, args.output, args.target)
-    return 2
 
 
 if __name__ == "__main__":

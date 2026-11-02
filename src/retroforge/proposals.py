@@ -68,8 +68,9 @@ def build_proposals(tapes, target="AGENTS.md"):
         proposal["registry"] = {
             "experiment_id": "exp-" + digest_of(
                 {key: proposal[key]
-                 for key in ("type", "target", "hunk",
-                             "citations")})[:16],
+                 for key in ("type", "target", "hunk", "rationale",
+                             "citations")}
+                | {"baseline_period": period})[:16],
             "baseline_period": period,
         }
         proposals.append(proposal)
@@ -90,10 +91,21 @@ def validate_proposals(document, tapes_by_digest):
     defects = []
     if document.get("proposal_version") != PROPOSAL_VERSION:
         defects.append("proposal_version is not 1.0")
+    period = document.get("period")
+    if not isinstance(period, dict):
+        defects.append("period is not an object")
+    else:
+        for key in ("from", "to"):
+            if key not in period or not (
+                    period[key] is None
+                    or isinstance(period[key], str)):
+                defects.append(
+                    f"period.{key} must be a string or null")
     proposals = document.get("proposals")
     if not isinstance(proposals, list):
         defects.append("proposals is not an array")
         return defects
+    seen_ids = set()
     for index, proposal in enumerate(proposals):
         where = f"proposals[{index}]"
         if not isinstance(proposal, dict):
@@ -103,6 +115,30 @@ def validate_proposals(document, tapes_by_digest):
                       "rationale", "citations", "registry"):
             if field not in proposal:
                 defects.append(f"{where} is missing {field}")
+        for field in ("id", "target", "rationale"):
+            if field in proposal and (
+                    not isinstance(proposal[field], str)
+                    or not proposal[field]):
+                defects.append(
+                    f"{where}.{field} must be a non-empty string")
+        if isinstance(proposal.get("id"), str):
+            if proposal["id"] in seen_ids:
+                defects.append(
+                    f"{where}.id {proposal['id']!r} is used twice")
+            seen_ids.add(proposal["id"])
+        registry = proposal.get("registry")
+        if isinstance(registry, dict):
+            experiment = registry.get("experiment_id")
+            if not isinstance(experiment, str)                     or not experiment.startswith("exp-"):
+                defects.append(
+                    f"{where}.registry.experiment_id is not an "
+                    f"experiment id")
+            if not isinstance(registry.get("baseline_period"), dict):
+                defects.append(
+                    f"{where}.registry.baseline_period is not an "
+                    f"object")
+        elif "registry" in proposal:
+            defects.append(f"{where}.registry is not an object")
         if proposal.get("type") not in PROPOSAL_TYPES:
             defects.append(f"{where}.type is not a proposal type")
         hunk = proposal.get("hunk")
@@ -110,8 +146,8 @@ def validate_proposals(document, tapes_by_digest):
             if hunk.get("action") not in HUNK_ACTIONS:
                 defects.append(
                     f"{where}.hunk.action is not a hunk action")
-            if not isinstance(hunk.get("text"), str) \
-                    or not hunk.get("text"):
+            if (not isinstance(hunk.get("text"), str)
+                    or not hunk.get("text")):
                 defects.append(f"{where}.hunk.text is empty")
         elif "hunk" in proposal:
             defects.append(f"{where}.hunk is not an object")
@@ -133,14 +169,14 @@ def _citation_defects(where, citation, tapes_by_digest):
     if not isinstance(citation, dict):
         return [f"{where} is not an object"]
     digest = citation.get("tape")
-    tape = tapes_by_digest.get(digest) \
-        if isinstance(digest, str) else None
+    tape = (tapes_by_digest.get(digest)
+            if isinstance(digest, str) else None)
     if tape is None:
         return [f"{where} names a tape outside the input set"]
     seq = citation.get("seq")
     events = tape["events"]
-    if not isinstance(seq, int) or isinstance(seq, bool) \
-            or not 0 <= seq < len(events):
+    if (not isinstance(seq, int) or isinstance(seq, bool)
+            or not 0 <= seq < len(events)):
         return [f"{where} names no event in its tape"]
     if events[seq].get("kind") != citation.get("kind"):
         return [f"{where} states the wrong kind for its event"]
