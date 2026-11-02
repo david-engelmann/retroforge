@@ -38,7 +38,11 @@ def build_proposals(tapes, target="AGENTS.md"):
     by_tool = {}
     rescues_by_tool = {}
     unattributed_rescues = 0
+    seen_digests = set()
     for _, tape, digest in tapes:
+        if digest in seen_digests:
+            continue
+        seen_digests.add(digest)
         for moment in redo_moments(tape):
             by_tool.setdefault(moment["tool"], []).append(
                 (digest, moment))
@@ -51,13 +55,22 @@ def build_proposals(tapes, target="AGENTS.md"):
     tools = sorted(set(by_tool) | set(rescues_by_tool),
                    key=lambda name: (name is None, name))
     proposals = []
+
+    def emit(proposal):
+        if any(other["id"] == proposal["id"]
+               for other in proposals):
+            suffix = proposal["registry"][
+                "experiment_id"][len("exp-"):][:8]
+            proposal["id"] = f"{proposal['id']}-{suffix}"
+        proposals.append(proposal)
+
     for tool in tools:
         moments = by_tool.get(tool, [])
         if len(moments) >= REDO_THRESHOLD:
             citations = [{"tape": digest, "seq": moment["seq"],
                           "kind": "tool_call"}
                          for digest, moment in moments]
-            proposals.append(_proposal(
+            emit(_proposal(
                 f"rules-edit-{tool}", target,
                 (f"Before calling {tool} again after a "
                  f"failure, stop and read the error, then "
@@ -73,18 +86,19 @@ def build_proposals(tapes, target="AGENTS.md"):
             citations = [{"tape": digest, "seq": moment["seq"],
                           "kind": "message"}
                          for digest, moment in found]
-            proposals.append(_proposal(
-                f"rules-edit-rescue-{tool}", target,
+            pid = f"rules-edit-rescue-{tool}"
+            emit(_proposal(
+                pid, target,
                 (f"Before acting on {tool} output, state what "
                  f"it shows and what happens next, so the "
-                 f"operator can redirect early instead of "
-                 f"stepping in. The operator stepped in "
-                 f"{len(found)} times after {tool} work in "
-                 f"this period."),
-                (f"The operator interrupted, corrected, or "
-                 f"rephrased after {tool} work {len(found)} "
-                 f"times in the period, at the cited "
-                 f"moments."),
+                 f"operator can redirect early. In this "
+                 f"period the operator's turn followed "
+                 f"{tool} work {len(found)} times, each time "
+                 f"after the agent had acted."),
+                (f"The operator's turn followed {tool} work "
+                 f"{len(found)} times in the period, each "
+                 f"time after the agent had acted, at the "
+                 f"cited moments."),
                 citations, period))
     document = {"proposal_version": PROPOSAL_VERSION,
                 "period": period,
@@ -223,4 +237,10 @@ def _citation_defects(where, citation, tapes_by_digest):
         return [f"{where} names no event in its tape"]
     if events[seq].get("kind") != citation.get("kind"):
         return [f"{where} states the wrong kind for its event"]
+    if citation.get("kind") == "message":
+        event = events[seq]
+        if event.get("role") != "user" \
+                or event.get("sidechain") is not False:
+            return [f"{where} cites a message that is not a "
+                    f"main-chain user turn"]
     return []

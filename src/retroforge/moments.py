@@ -1,4 +1,5 @@
-"""Redo moments (RF-4).
+"""Moment passes over one tape: redo moments (RF-4)
+and rescue moments (RF-9, RF-10).
 
 A redo moment is a tool call whose tool and input match an
 earlier tool call in the same tape, with an error tool

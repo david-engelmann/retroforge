@@ -1,6 +1,5 @@
 """RF-9 to RF-13, rescue moments."""
-import pytest
-
+import json
 from retroforge.digest import digest_of
 from retroforge.moments import rescue_moments
 from retroforge.proposals import build_proposals, validate_proposals
@@ -77,7 +76,7 @@ def test_two_attributed_rescues_emit_one_rescue_proposal():
     assert [p["id"] for p in document["proposals"]] == [
         "rules-edit-rescue-Edit"]
     proposal = document["proposals"][0]
-    assert "stepped in 2 times" in proposal["hunk"]["text"]
+    assert "followed Edit work 2 times" in proposal["hunk"]["text"]
     assert all(c["kind"] == "message"
                for c in proposal["citations"])
     assert validate_proposals(document, {digest: one}) == []
@@ -102,9 +101,91 @@ def test_below_threshold_and_unattributed_accounting():
 def test_rescues_accumulate_across_tapes_and_follow_redo_in_order():
     first = rescue_tape(rescues=1)
     second = rescue_tape(rescues=1)
+    second["run"]["session_id"] = "s2"
     d1, d2 = digest_of(first), digest_of(second)
     document = build_proposals([("a.json", first, d1),
                                 ("b.json", second, d2)])
     assert [p["id"] for p in document["proposals"]] == [
         "rules-edit-rescue-Edit"]
     assert len(document["proposals"][0]["citations"]) == 2
+
+
+def result(seq, call_id, is_error):
+    return {"seq": seq, "kind": "tool_result", "sidechain": False,
+            "timestamp": T0, "call_id": call_id,
+            "is_error": is_error, "text": "boom" if is_error else "ok"}
+
+
+def test_the_same_tape_twice_is_one_tape():
+    one = rescue_tape(rescues=1)
+    digest = digest_of(one)
+    document = build_proposals([("a.json", one, digest),
+                                ("copy.json", one, digest)])
+    assert document["proposals"] == []
+    two = rescue_tape(rescues=2)
+    d2 = digest_of(two)
+    document = build_proposals([("a.json", two, d2),
+                                ("copy.json", two, d2)])
+    assert len(document["proposals"]) == 1
+    assert len(document["proposals"][0]["citations"]) == 2
+
+
+def test_attribution_is_the_most_recent_tool_call():
+    events = [msg(0, "user"), call(1, "Edit"), call(2, "Bash"),
+              msg(3, "user"), call(4, "Edit"), msg(5, "user")]
+    found = rescue_moments(tape(events))
+    assert found == [{"seq": 3, "tool": "Bash"},
+                     {"seq": 5, "tool": "Edit"}]
+
+
+def test_redo_precedes_rescue_for_one_tool_in_one_period():
+    events = [msg(0, "user")]
+    seq = 1
+    for i in range(2):
+        events.append(call(seq, "Edit"))
+        events.append(result(seq + 1, f"c{seq}", True)); seq += 2
+    events.append(call(seq, "Edit")); seq += 1
+    for _ in range(2):
+        events.append(msg(seq, "assistant")); seq += 1
+        events.append(msg(seq, "user")); seq += 1
+    one = tape(events)
+    digest = digest_of(one)
+    document = build_proposals([("a.json", one, digest)])
+    assert [p["id"] for p in document["proposals"]] == [
+        "rules-edit-Edit", "rules-edit-rescue-Edit"]
+    assert validate_proposals(document, {digest: one}) == []
+
+
+def test_a_tool_named_to_collide_still_yields_a_valid_file():
+    events = [msg(0, "user")]
+    seq = 1
+    for tool in ("Edit", "rescue-Edit"):
+        for _ in range(2):
+            events.append(call(seq, tool)); seq += 1
+            events.append(msg(seq, "assistant")); seq += 1
+            events.append(msg(seq, "user")); seq += 1
+    for i in range(2):
+        events.append(call(seq, "rescue-Edit"))
+        events.append(result(seq + 1, f"c{seq}", True)); seq += 2
+    events.append(call(seq, "rescue-Edit")); seq += 1
+    one = tape(events)
+    digest = digest_of(one)
+    document = build_proposals([("a.json", one, digest)])
+    ids = [p["id"] for p in document["proposals"]]
+    assert len(ids) == len(set(ids))
+    assert validate_proposals(document, {digest: one}) == []
+
+
+def test_a_message_citation_must_name_an_operator_turn():
+    one = rescue_tape(rescues=2)
+    digest = digest_of(one)
+    document = build_proposals([("a.json", one, digest)])
+    proposal = document["proposals"][0]
+    forged = json.loads(json.dumps(document))
+    assistant_seq = next(
+        e["seq"] for e in one["events"]
+        if e["kind"] == "message" and e["role"] == "assistant")
+    forged["proposals"][0]["citations"][0]["seq"] = assistant_seq
+    defects = validate_proposals(forged, {digest: one})
+    assert any("not a main-chain user turn" in d for d in defects)
+    assert proposal["citations"][0]["kind"] == "message"
