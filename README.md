@@ -8,17 +8,14 @@ Observability tools capture traces and stop at dashboards and scores, so the ret
 
 ## Status
 
-Seeded in October 2026. Local setup is in progress on the setup
-branch. The remote seeding pass is waiting on a token access fix, so
-work is banked locally until pushes clear. This repo is in phase 3
-of the Retrospective Line and its build waits on the phase gate, the
-main chat confirmation that the Gate Truth evidence pack schema has
-merged and passed acceptance. Design work may proceed, build does
-not start before the gate.
+Round 2 is built and in review on its branch. Setup and Round 1
+landed earlier in the programme; the build proceeds on the
+flighttape formats only, with gate evidence behind the adapter
+stub, under the programme's package A ruling.
 
 ## Programme status
 
-- Closed perfection rounds, 1 of 100. A round counts only when a
+- Closed perfection rounds, 2 of 100. A round counts only when a
   full cycle of work, audit, review, red team, and approval has
   closed.
 - Round 1 adds the propose command. It reads a directory of
@@ -31,6 +28,14 @@ not start before the gate.
   with the programme. The build opened under the programme's
   package A ruling, on the flighttape formats only, with gate
   evidence behind the adapter stub.
+- Round 2 adds the rescue pass. A rescue moment is a user turn
+  that follows agent action since the previous user turn,
+  attributed to the tool whose work it followed; two for one
+  tool emit a second rules edit citing the operator turns.
+  The run counts distinct tapes, proposal ids cannot collide,
+  and message citations resolve only to main-chain user turns.
+  Obligations RF-9 to RF-14, met, with the reviews recorded
+  with the programme.
 - Local gate, python3 scripts/codepoint_scan.py and, once tests
   exist, python3 -m pytest tests -q. CI runs the same commands.
 
