@@ -12,12 +12,34 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import tempfile
 import pathlib
 import sys
 
 from .digest import DigestError, digest_of
 from .proposals import build_proposals, validate_proposals
 from .tapes import FAILED, load_tape_file
+
+
+def _write_atomically(path, text):
+    """Write through a sibling temp file, replaced on success.
+
+    A failed write leaves the earlier proposal intact
+    instead of truncating it and writing half a file.
+    """
+    handle, temp_name = tempfile.mkstemp(
+        dir=str(path.parent), prefix=path.name + ".", suffix=".tmp")
+    try:
+        with os.fdopen(handle, "w", encoding="utf-8") as stream:
+            stream.write(text)
+            stream.flush()
+        os.replace(temp_name, path)
+    except OSError:
+        try:
+            os.unlink(temp_name)
+        except OSError:
+            pass
+        raise
 
 
 def _propose(source_dir, output, target):
@@ -77,7 +99,7 @@ def _propose(source_dir, output, target):
     text = json.dumps(document, indent=2, sort_keys=True) + "\n"
     try:
         if output:
-            pathlib.Path(output).write_text(text, encoding="utf-8")
+            _write_atomically(pathlib.Path(output), text)
         else:
             sys.stdout.write(text)
             sys.stdout.flush()

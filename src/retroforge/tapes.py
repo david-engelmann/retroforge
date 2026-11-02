@@ -89,7 +89,7 @@ def tape_defects(tape):
                 or seq != index:
             defects.append(f"{where}.seq is not {index}")
         kind = event.get("kind")
-        if kind not in EVENT_KINDS:
+        if not isinstance(kind, str) or kind not in EVENT_KINDS:
             defects.append(f"{where}.kind is not in the format enum")
             continue
         call_id = event.get("call_id")

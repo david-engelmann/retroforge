@@ -28,13 +28,18 @@ def redo_moments(tape):
     be shown to match another call.
     """
     moments = []
-    earlier = {}
-    errored = set()
+    calls = {}
+    first_errored = {}
     for event in tape["events"]:
         kind = event.get("kind")
         if kind == "tool_result":
             if event.get("is_error") is True:
-                errored.add(event.get("call_id"))
+                found = calls.get(event.get("call_id"))
+                if found is not None:
+                    key, seq = found
+                    current = first_errored.get(key)
+                    if current is None or seq < current:
+                        first_errored[key] = seq
             continue
         if kind != "tool_call":
             continue
@@ -43,12 +48,11 @@ def redo_moments(tape):
                    canonical_bytes(event.get("input")))
         except DigestError:
             continue
-        for past_seq, past_call_id in earlier.get(key, ()):
-            if past_call_id in errored:
-                moments.append({"seq": event["seq"],
-                                "earlier_seq": past_seq,
-                                "tool": event.get("tool")})
-                break
-        earlier.setdefault(key, []).append(
-            (event["seq"], event.get("call_id")))
+        if key in first_errored:
+            moments.append({"seq": event["seq"],
+                            "earlier_seq": first_errored[key],
+                            "tool": event.get("tool")})
+        call_id = event.get("call_id")
+        if isinstance(call_id, str):
+            calls[call_id] = (key, event["seq"])
     return moments

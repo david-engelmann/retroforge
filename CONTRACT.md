@@ -61,3 +61,11 @@ on it lands.
   evidence enters proposals only as citations behind the
   evidence pack adapter stub; no Gate Truth format is
   consumed in this round. Test, tests/test_proposals.py.
+
+Advisory amendment recorded in the Round 1 landing. The
+stub contract at the head of this file describes the
+output as a pull request or a diff for a human. That is
+the tool's end state, not this round's: RF-8 governs
+Round 1, and the only output is the proposal file, which a
+later round learns to open as a pull request. The stub
+sentence is superseded for every round until that one.

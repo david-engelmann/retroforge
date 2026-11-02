@@ -334,3 +334,39 @@ def test_cli_a_rerun_may_overwrite_its_own_proposal(
     assert main(["propose", str(tmp_path), "-o", str(out)]) == 0
     err = capsys.readouterr().err
     assert "proposal.json is excluded" in err
+
+
+def test_an_unhashable_kind_is_a_defect_not_a_crash():
+    tape = redo_tape(failures=1)
+    tape["events"][0]["kind"] = ["tool_call"]
+    defects = tape_defects(tape)
+    assert any("kind is not in the format enum" in d
+               for d in defects)
+
+
+def test_canonical_form_renders_big_integers_exactly():
+    assert canonical_bytes(2 ** 60 + 1) == b"1152921504606846977"
+
+
+def test_identical_calls_cite_the_earliest_errored_call():
+    tape = redo_tape(failures=3)
+    moments = redo_moments(tape)
+    assert [m["seq"] for m in moments] == [2, 4, 6]
+    assert all(m["earlier_seq"] == 0 for m in moments)
+
+
+def test_a_failed_write_leaves_the_earlier_proposal_intact(
+        tmp_path, monkeypatch):
+    import os as _os
+    write(tmp_path, "a.json", redo_tape())
+    out = tmp_path / "proposal.json"
+    assert main(["propose", str(tmp_path), "-o", str(out)]) == 0
+    before = out.read_text(encoding="utf-8")
+
+    def broken_replace(source, target):
+        raise OSError("simulated replace failure")
+
+    monkeypatch.setattr(_os, "replace", broken_replace)
+    assert main(["propose", str(tmp_path), "-o", str(out)]) == 1
+    assert out.read_text(encoding="utf-8") == before
+    assert not list(tmp_path.glob("proposal.json.*.tmp"))
