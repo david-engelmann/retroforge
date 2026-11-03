@@ -266,3 +266,17 @@ sentence is superseded for every round until that one.
   CodeRabbit's advisory pass on Round 3's PR 4
   posted no findings (zero entries on the review
   endpoints), so no disposition is owed from it.
+- RF-25a. Amendment, on the red team's Round 4
+  Major: a dangling final component. When the
+  output's final component is a symlink whose
+  target does not exist, the resolver reads the
+  target spelling and resolves it against the
+  link's parent before the lexical finish, as
+  realpath does; a dangling output whose target
+  spelling lands on a tape is refused at the
+  guard, and a dangling output naming no tape
+  proceeds as before. The harness gains the
+  sharp cell (the target spelling through a
+  missing component onto a tape) and the agreeing
+  cell (a dangling output naming no tape replaces
+  the link on both sides).
