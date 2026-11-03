@@ -760,20 +760,28 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
     // overwrite check and the write.
     let output = args.output.as_ref().filter(|units| !units.is_empty());
     if let Some(output) = output {
-        let resolved = resolve_path(output);
-        let loaded: Vec<Vec<u16>> = tapes
-            .iter()
-            .map(|(name, _, _)| {
-                // pathlib's join: an empty directory
-                // contributes no component at all.
-                let mut joined = args.source_dir.clone();
-                if !joined.is_empty() && !joined.ends_with(&['/' as u16]) {
-                    joined.push('/' as u16);
-                }
-                joined.extend_from_slice(&name.0);
-                resolve_path(&joined)
-            })
-            .collect();
+        // The Python resolves the output and every
+        // loaded tape before comparing; a path whose
+        // resolution meets a symlink loop raises
+        // there, uncaught (the crash class, RF-25).
+        let resolved = match resolve_path(output) {
+            Some(resolved) => resolved,
+            None => return 1,
+        };
+        let mut loaded: Vec<Vec<u16>> = Vec::new();
+        for (name, _, _) in &tapes {
+            // pathlib's join: an empty directory
+            // contributes no component at all.
+            let mut joined = args.source_dir.clone();
+            if !joined.is_empty() && !joined.ends_with(&['/' as u16]) {
+                joined.push('/' as u16);
+            }
+            joined.extend_from_slice(&name.0);
+            match resolve_path(&joined) {
+                Some(resolved_tape) => loaded.push(resolved_tape),
+                None => return 1,
+            }
+        }
         if loaded.contains(&resolved) {
             error_line(
                 &Msg::str("error, the output path is one of the input tapes, the run never writes over its own evidence"),
@@ -943,8 +951,19 @@ fn has_json_suffix(name: &[u16]) -> bool {
 /// pathlib's resolve, in unit form: absolute
 /// against the working directory, symlinks
 /// resolved where the path exists, the rest
-/// normalized lexically.
-fn resolve_path(units: &[u16]) -> Vec<u16> {
+/// normalized lexically. Resolution fails
+/// outright (None) where the finished path
+/// passes through a symlink loop: pathlib's
+/// resolve raises there (its closing stat meets
+/// the kernel's loop error), uncaught in the
+/// Python, and the caller treats the shape as
+/// the crash class (RF-25). The loop is judged
+/// on the finished path, not on the spellings
+/// the peel tries along the way: a loop
+/// component a following ".." cancels never
+/// survives into the finished path, and the
+/// Python resolves those spellings cleanly.
+fn resolve_path(units: &[u16]) -> Option<Vec<u16>> {
     let path = os_path_from_units(units);
     let absolute = if path.is_absolute() {
         path
@@ -955,7 +974,15 @@ fn resolve_path(units: &[u16]) -> Vec<u16> {
         Ok(found) => found,
         Err(_) => {
             // Resolve the longest existing prefix,
-            // then append the rest normalized.
+            // then append the rest normalized. Peel
+            // one component at a time, any kind
+            // (RF-24): a ".." or "." component
+            // peels like a name, so a tail carrying
+            // one still gets its existing prefix
+            // resolved, and the lexical finish
+            // then pops the resolved prefix
+            // exactly as realpath does.
+            use std::path::Component;
             let mut prefix = absolute.clone();
             let mut rest: Vec<std::ffi::OsString> = Vec::new();
             loop {
@@ -967,21 +994,54 @@ fn resolve_path(units: &[u16]) -> Vec<u16> {
                         }
                         break normalize_lexical(&out);
                     }
-                    Err(_) => match prefix.file_name() {
-                        Some(name) => {
-                            rest.push(name.to_os_string());
-                            prefix = prefix.parent().map(|p| p.to_path_buf()).unwrap_or_default();
-                            if prefix.as_os_str().is_empty() {
-                                break normalize_lexical(&absolute);
+                    Err(_) => {
+                        let last = prefix.components().next_back();
+                        let peeled = match last {
+                            Some(Component::Normal(name)) => Some(name.to_os_string()),
+                            Some(Component::ParentDir) => Some(std::ffi::OsString::from("..")),
+                            Some(Component::CurDir) => Some(std::ffi::OsString::from(".")),
+                            _ => None,
+                        };
+                        match (peeled, prefix.parent()) {
+                            (Some(name), Some(parent)) => {
+                                rest.push(name);
+                                prefix = parent.to_path_buf();
                             }
+                            _ => break normalize_lexical(&absolute),
                         }
-                        None => break normalize_lexical(&absolute),
-                    },
+                    }
                 }
             }
         }
     };
-    fsdecode_units(&os_bytes(&resolved.as_os_str().to_owned()))
+    if path_loops(&resolved) {
+        return None;
+    }
+    Some(fsdecode_units(&os_bytes(&resolved.as_os_str().to_owned())))
+}
+
+/// True where the finished path passes through a
+/// symlink loop: canonicalizing its own prefixes
+/// one component at a time meets the kernel's
+/// loop error. A prefix failing any other way (a
+/// component that does not exist, an unsearchable
+/// directory) ends the walk, as no loop can hide
+/// in the lexical tail beyond it.
+fn path_loops(path: &Path) -> bool {
+    const ELOOP: i32 = 40;
+    use std::path::Component;
+    let mut prefix = PathBuf::from("/");
+    for component in path.components() {
+        if let Component::Normal(name) = component {
+            prefix.push(name);
+            match std::fs::canonicalize(&prefix) {
+                Ok(_) => {}
+                Err(error) if error.raw_os_error() == Some(ELOOP) => return true,
+                Err(_) => break,
+            }
+        }
+    }
+    false
 }
 
 fn normalize_lexical(path: &Path) -> PathBuf {
