@@ -1,0 +1,14 @@
+[package]
+name = "retroforge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+flighttape = { git = "https://github.com/david-engelmann/flighttape", rev = "ba8d4b550850179722f48b8f9c909e199efe3548" }
+sha2 = "0.10"
+
+[dev-dependencies]
+flighttape = { git = "https://github.com/david-engelmann/flighttape", rev = "ba8d4b550850179722f48b8f9c909e199efe3548" }
+
+[profile.dev]
+debug = 0
