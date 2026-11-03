@@ -402,13 +402,11 @@ fn top_help_action(token: &[u16], stdout_closed: bool, stderr_closed: bool) -> O
         && token[1] != '-' as u16
         && !looks_like_negative_number(token)
     {
-        // A short cluster: help when h is reached
-        // before any character nothing owns.
-        for unit in &token[1..] {
-            if *unit == 'h' as u16 {
-                return Some(print_help(TOP_HELP, stdout_closed, stderr_closed));
-            }
-            return None;
+        // A short cluster: help only when h is its
+        // first character; an unknown character
+        // ahead of h makes the whole token an extra.
+        if token[1] == 'h' as u16 {
+            return Some(print_help(TOP_HELP, stdout_closed, stderr_closed));
         }
     }
     None
