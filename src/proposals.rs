@@ -282,11 +282,7 @@ pub fn validate_proposals(document: &Value, tapes_by_digest: &HashMap<String, &V
     match document.get("period") {
         Some(period) if period.as_object().is_some() => {
             for key in ["from", "to"] {
-                let valid = match period.get(key) {
-                    Some(Value::Null) => true,
-                    Some(Value::Str(_)) => true,
-                    _ => false,
-                };
+                let valid = matches!(period.get(key), Some(Value::Null) | Some(Value::Str(_)));
                 if !valid {
                     defects.push(Msg::str(&format!("period.{key} must be a string or null")));
                 }
