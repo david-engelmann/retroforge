@@ -36,8 +36,9 @@ stub, under the programme's package A ruling.
   and message citations resolve only to main-chain user turns.
   Obligations RF-9 to RF-14, met, with the reviews recorded
   with the programme.
-- Local gate, python3 scripts/codepoint_scan.py and, once tests
-  exist, python3 -m pytest tests -q. CI runs the same commands.
+- Local gate, python3 scripts/codepoint_scan.py, cargo fmt
+  --check, cargo clippy --all-targets -- -D warnings, and
+  cargo test. CI runs the same commands.
 
 ## Licence
 
