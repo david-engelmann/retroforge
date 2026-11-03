@@ -922,7 +922,7 @@ fn read_sorted_entries(directory: &PathBuf) -> std::io::Result<Vec<(Vec<u16>, Pa
         let name = fsdecode_units(&os_bytes(&entry.file_name()));
         entries.push((name, entry.path()));
     }
-    entries.sort_by(|a, b| scalars_of(&a.0).cmp(&scalars_of(&b.0)));
+    entries.sort_by_cached_key(|entry| scalars_of(&entry.0));
     Ok(entries)
 }
 
