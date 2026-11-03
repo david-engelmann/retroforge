@@ -143,3 +143,93 @@ sentence is superseded for every round until that one.
   filed twice is one tape. This repairs a Round 1
   seam the redo pass shared. Test,
   tests/test_rescue.py.
+
+## Round 3. The Rust port (RF-15 to RF-22)
+
+- RF-15. The port reproduces the behavior of
+  Rounds 1 and 2 exactly, the Python on main at
+  09b4686 standing as the behavioral spec, its
+  tests included. Every divergence found is
+  repaired or named as a deviation in the round
+  dossier; an unnamed divergence is a defect.
+  Test, the ported suite and the differential
+  harness of RF-21.
+- RF-16. The tool is a library crate with a thin
+  binary, the family shape. Tape JSON reading and
+  the canonical value model come from the
+  flighttape crate pinned at ba8d4b5. The format
+  checks of tapes.py are this tool's own subset
+  with its own phrases and stand in this crate
+  over the crate's parsed values; they are not
+  the flighttape validator, whose acceptance is
+  the format's whole rule. There is no onrecord
+  dependency: the digest resemblance makes no
+  claim-store dependency. Test, Cargo.toml and
+  the ported suite.
+- RF-17. The loading discipline is probed at the
+  shipped CLI before coding, per surface: the
+  tape file read (bytes, strict UTF-8, the
+  Python's named reasons for an unreadable file,
+  a non-UTF-8 file, a non-JSON file, and a number
+  too large to read), the JSON reader's
+  acceptance where it differs from the Python's
+  (integer literal bounds, depth, duplicate
+  keys, constants), the structural checks in
+  tapes.py's order with its exact phrases, the
+  directory listing in filename order with the
+  .json suffix filter, exclusion lines printed
+  to stderr while the run proceeds, the no
+  valid tapes refusal, and the refusal when the
+  resolved output path is one of the input
+  tapes. Depth decisions are made in parse
+  order, never by a whole-file pre-check. Test,
+  the differential harness.
+- RF-18. Proposal and tape digests render
+  canonical form 1 in a local digest module with
+  CPython repr-exact digits over the crate's
+  value model, the onrecord port's pattern,
+  because experiment ids are behavior
+  verdictloop consumes and the flighttape
+  crate's renderer is ECMAScript-faithful and
+  runs one digit long on exactly terminating
+  expansions. A digest failure excludes the tape
+  with the reason the CLI names. Test, the
+  ported suite's id pins and the harness.
+- RF-19. Rendering is byte-exact. The proposal
+  document renders as json.dumps with an indent
+  of two and keys sorted as the Python sorts
+  strings, plus a trailing newline; floats
+  render by CPython's repr. The output file
+  write is atomic in the Python's mkstemp shape
+  (a sibling temp file, replaced on success,
+  unlinked on failure). Stdout writes follow the
+  Python's stdio law, including the sink
+  replacement after a failed stdout write so
+  the shutdown flush cannot mask the refusal.
+  Argparse help and error bytes are pinned from
+  captures at COLUMNS=80. Test, the ported suite
+  and the harness's help battery.
+- RF-20. The Python tests port file for file
+  (tests/test_proposals.py, tests/test_rescue.py),
+  every fixture kept. Cargo tests are the
+  primary suite. Test, cargo test.
+- RF-21. A differential harness runs the whole
+  command surface against the Python oracle:
+  directory shapes, tape files sound and
+  defective in every tapes.py phrase, digest
+  failures, moment shapes crossing both
+  thresholds, duplicate tapes under RF-14,
+  proposal id collisions under RF-11a, output
+  to stdout, to a fresh path, onto an input
+  tape, and into failure, and the argument
+  surface. Files are compared after every step,
+  not only streams. Test, the harness run
+  recorded in the dossier.
+- RF-22. The round dossier carries the port
+  report: port or rewrite with reasons, the
+  Rust and Python line share measured on the
+  landing tree, the bindings determination by
+  consumer shape, and a complete non-Rust
+  remainder register with a written
+  justification per item. An unjustified
+  non-Rust remainder is a defect.
