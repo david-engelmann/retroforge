@@ -158,30 +158,70 @@ fn print_out(msg: &Msg, stdout_closed: bool, stderr_closed: bool) -> bool {
 // The parser.
 
 struct ParseFailure {
+    prog: &'static str,
     usage: &'static str,
     message: Msg,
 }
 
-/// argparse's error exit: usage and the error line
-/// to stderr at exit 2. When the usage write itself
-/// fails the Python's error line is lost in its
-/// fallback stream; the usage-collapse shape is
-/// reproduced by exiting 1 in that case.
+fn top_failure(message: Msg) -> ParseFailure {
+    ParseFailure {
+        prog: "retroforge",
+        usage: TOP_USAGE,
+        message,
+    }
+}
+
+fn sub_failure(message: Msg) -> ParseFailure {
+    ParseFailure {
+        prog: "retroforge propose",
+        usage: PROPOSE_USAGE,
+        message,
+    }
+}
+
+/// argparse's error exit: the usage and the error
+/// line to stderr at exit 2, the error line naming
+/// the parser that raised it (the subcommand's
+/// errors carry its full name). When the usage
+/// write itself fails the Python's error line is
+/// lost in its fallback stream; the usage-collapse
+/// shape is reproduced by exiting 1 in that case.
 fn parse_error(failure: ParseFailure, stdout_closed: bool, stderr_closed: bool) -> i32 {
     let mut usage = failure.usage.to_string();
     usage.push('\n');
-    let usage_ok = if stderr_closed {
-        write_stdout(usage.as_bytes(), stdout_closed)
-    } else {
-        write_stderr(usage.as_bytes(), false, stdout_closed)
-    };
+    if stderr_closed {
+        // The usage migrates to stdout alone: the
+        // Python's error line is lost in its fallback
+        // stream, and the migrated write succeeds
+        // into the runtime's substituted stream even
+        // when stdout was itself closed at launch.
+        // A genuine write failure collapses the exit
+        // to 1 (the family's usage-collapse shape).
+        let mut out = std::io::stdout().lock();
+        let ok = out.write_all(usage.as_bytes()).is_ok() && out.flush().is_ok();
+        return if ok { 2 } else { 1 };
+    }
+    let usage_ok = write_stderr(usage.as_bytes(), false, stdout_closed);
     if !usage_ok {
         return 1;
     }
-    let mut line = Msg::str("retroforge: error: ");
+    let mut line = Msg::str(&format!("{}: error: ", failure.prog));
     line.push_msg(&failure.message);
     error_line(&line, stdout_closed, stderr_closed);
     2
+}
+
+/// Print a help text at exit 0: to stdout, or to
+/// stderr when stdout was closed at launch.
+fn print_help(help: &'static str, stdout_closed: bool, stderr_closed: bool) -> i32 {
+    let help = Msg::str(help);
+    if stdout_closed {
+        let text = help.render_stderr();
+        write_stderr(text.as_bytes(), stderr_closed, true);
+    } else {
+        print_out(&help, false, stderr_closed);
+    }
+    0
 }
 
 fn units(text: &str) -> Vec<u16> {
@@ -281,62 +321,126 @@ fn match_long(name: &[u16]) -> LongMatch {
 
 pub fn run_with_args(raw: &[Vec<u16>], stdout_closed: bool, stderr_closed: bool) -> i32 {
     let args = tokens(raw);
-    if args.is_empty() {
-        return parse_error(
-            ParseFailure {
-                usage: TOP_USAGE,
-                message: Msg::str("the following arguments are required: command"),
-            },
-            stdout_closed,
-            stderr_closed,
-        );
-    }
-    let first = &args[0].units;
-    if units_eq(first, "-h") || units_eq(first, "--help") {
-        // Top help: to stdout at exit 0, or to
-        // stderr when stdout was closed at launch.
-        let help = Msg::str(TOP_HELP);
-        if stdout_closed {
-            let text = help.render_stderr();
-            write_stderr(text.as_bytes(), stderr_closed, true);
-            return 0;
+    let mut top_extras: Vec<Token> = Vec::new();
+    let mut seen_separator = false;
+    let mut index = 0;
+    while index < args.len() {
+        let token = &args[index];
+        let u = &token.units;
+        if !seen_separator && units_eq(u, "--") {
+            seen_separator = true;
+            index += 1;
+            continue;
         }
-        print_out(&help, false, stderr_closed);
-        return 0;
+        if !seen_separator {
+            if let Some(code) = top_help_action(u, stdout_closed, stderr_closed) {
+                return code;
+            }
+            if is_option_like(u) {
+                top_extras.push(token.clone());
+                index += 1;
+                continue;
+            }
+        }
+        // The first value token is the command.
+        if units_eq(u, "propose") {
+            return match parse_propose(&args[index + 1..], stdout_closed, stderr_closed) {
+                SubOutcome::Done(code) => code,
+                SubOutcome::Parsed(parsed, sub_extras) => {
+                    let mut all = top_extras;
+                    all.extend(sub_extras);
+                    if !all.is_empty() {
+                        return parse_error(
+                            top_failure(unrecognized(&all)),
+                            stdout_closed,
+                            stderr_closed,
+                        );
+                    }
+                    propose(&parsed, stdout_closed, stderr_closed)
+                }
+            };
+        }
+        let mut message = Msg::str("argument command: invalid choice: ");
+        message.push_str(&crate::pyrepr::repr_text(&Text::from_units(u.clone())));
+        message.push_str(" (choose from 'propose')");
+        return parse_error(top_failure(message), stdout_closed, stderr_closed);
     }
-    if units_eq(first, "propose") {
-        return run_propose(&args[1..], stdout_closed, stderr_closed);
-    }
-    if is_option_like(first) {
-        return parse_error(
-            ParseFailure {
-                usage: TOP_USAGE,
-                message: unrecognized(&args),
-            },
-            stdout_closed,
-            stderr_closed,
-        );
-    }
-    let mut message = Msg::str("argument command: invalid choice: ");
-    message.push_str(&crate::pyrepr::repr_text(&Text::from_units(first.clone())));
-    message.push_str(" (choose from 'propose')");
     parse_error(
-        ParseFailure {
-            usage: TOP_USAGE,
-            message,
-        },
+        top_failure(Msg::str("the following arguments are required: command")),
         stdout_closed,
         stderr_closed,
     )
 }
 
+/// A help action at the top level, when the token
+/// is one: bare or clustered -h, --help in full or
+/// by prefix. A glued value is the explicit
+/// argument error. Help acts as its token is
+/// reached, ahead of any later token.
+fn top_help_action(token: &[u16], stdout_closed: bool, stderr_closed: bool) -> Option<i32> {
+    if units_eq(token, "-h") {
+        return Some(print_help(TOP_HELP, stdout_closed, stderr_closed));
+    }
+    if token.len() > 2 && token[0] == '-' as u16 && token[1] == '-' as u16 {
+        let (name, glued) = split_glued(token);
+        if matches!(match_long_top(name), LongMatch::Help) {
+            return Some(match glued {
+                Some(value) => help_explicit(
+                    top_failure(Msg::new()),
+                    "-h/--help",
+                    &value,
+                    stdout_closed,
+                    stderr_closed,
+                ),
+                None => print_help(TOP_HELP, stdout_closed, stderr_closed),
+            });
+        }
+        return None;
+    }
+    if token.len() > 1
+        && token[0] == '-' as u16
+        && token[1] != '-' as u16
+        && !looks_like_negative_number(token)
+    {
+        // A short cluster: help when h is reached
+        // before any character nothing owns.
+        for unit in &token[1..] {
+            if *unit == 'h' as u16 {
+                return Some(print_help(TOP_HELP, stdout_closed, stderr_closed));
+            }
+            return None;
+        }
+    }
+    None
+}
+
+/// The top parser's only long option is --help.
+fn match_long_top(name: &[u16]) -> LongMatch {
+    let full = units("--help");
+    if name == full.as_slice() {
+        return LongMatch::Help;
+    }
+    if name.len() > 2 && full.starts_with(name) {
+        return LongMatch::Help;
+    }
+    LongMatch::Unknown
+}
+
+fn split_glued(token: &[u16]) -> (&[u16], Option<Vec<u16>>) {
+    match token.iter().position(|c| *c == '=' as u16) {
+        Some(at) => (&token[..at], Some(token[at + 1..].to_vec())),
+        None => (token, None),
+    }
+}
+
 fn unrecognized(args: &[Token]) -> Msg {
     let mut message = Msg::str("unrecognized arguments: ");
-    let parts: Vec<String> = args
-        .iter()
-        .map(|token| String::from_utf16_lossy(&token.units))
-        .collect();
-    message.push_str(&parts.join(" "));
+    for (index, token) in args.iter().enumerate() {
+        if index > 0 {
+            message.push_str(" ");
+        }
+        message.push_units(&token.units);
+    }
     message
 }
 
@@ -346,23 +450,26 @@ struct ProposeArgs {
     output: Option<Vec<u16>>,
 }
 
-fn run_propose(args: &[Token], stdout_closed: bool, stderr_closed: bool) -> i32 {
-    let parsed = match parse_propose(args, stdout_closed, stderr_closed) {
-        Ok(parsed) => parsed,
-        Err(code) => return code,
-    };
-    propose(&parsed, stdout_closed, stderr_closed)
+enum SubOutcome {
+    Done(i32),
+    Parsed(ProposeArgs, Vec<Token>),
 }
 
-fn parse_propose(
-    args: &[Token],
-    stdout_closed: bool,
-    stderr_closed: bool,
-) -> Result<ProposeArgs, i32> {
+/// The subparser's scan. argparse matches and acts
+/// token by token: a token's own matching (an
+/// option's value, a cluster's whole shape) settles
+/// before its actions run, so a cluster whose -o
+/// lacks a value errors even when its -h comes
+/// first, while a help token ahead of a later
+/// erroring token prints help and exits. Extras
+/// and the missing-source refusal settle after the
+/// whole scan, the refusal first; extras bubble to
+/// the top parser's report.
+fn parse_propose(args: &[Token], stdout_closed: bool, stderr_closed: bool) -> SubOutcome {
     let mut source_dir: Option<Vec<u16>> = None;
     let mut target: Option<Vec<u16>> = None;
     let mut output: Option<Vec<u16>> = None;
-    let mut extras: Vec<&Token> = Vec::new();
+    let mut extras: Vec<Token> = Vec::new();
     let mut positional_only = false;
     let mut index = 0;
     while index < args.len() {
@@ -373,64 +480,46 @@ fn parse_propose(
             index += 1;
             continue;
         }
-        if !positional_only && (units_eq(u, "-h") || units_eq(u, "--help")) {
-            let help = Msg::str(PROPOSE_HELP);
-            if stdout_closed {
-                let text = help.render_stderr();
-                write_stderr(text.as_bytes(), stderr_closed, true);
-            } else {
-                print_out(&help, false, stderr_closed);
-            }
-            return Err(0);
-        }
         if !positional_only && u.len() > 2 && u[0] == '-' as u16 && u[1] == '-' as u16 {
-            // A long option, possibly with =value.
-            let (name, glued) = match u.iter().position(|c| *c == '=' as u16) {
-                Some(at) => (&u[..at], Some(u[at + 1..].to_vec())),
-                None => (&u[..], None),
-            };
+            let (name, glued) = split_glued(u);
             match match_long(name) {
                 LongMatch::Help => {
-                    if let Some(value) = &glued {
-                        return Err(help_explicit(
+                    return SubOutcome::Done(match glued {
+                        Some(value) => help_explicit(
+                            sub_failure(Msg::new()),
                             "-h/--help",
-                            value,
-                            PROPOSE_USAGE,
+                            &value,
                             stdout_closed,
                             stderr_closed,
-                        ));
-                    }
-                    let help = Msg::str(PROPOSE_HELP);
-                    if stdout_closed {
-                        let text = help.render_stderr();
-                        write_stderr(text.as_bytes(), stderr_closed, true);
-                    } else {
-                        print_out(&help, false, stderr_closed);
-                    }
-                    return Err(0);
+                        ),
+                        None => print_help(PROPOSE_HELP, stdout_closed, stderr_closed),
+                    });
                 }
                 LongMatch::Target | LongMatch::Output => {
-                    let which = matches!(match_long(name), LongMatch::Target);
-                    let named = if which { "--target" } else { "--output" };
+                    let named = if matches!(match_long(name), LongMatch::Target) {
+                        "--target"
+                    } else {
+                        "--output"
+                    };
                     let value = match glued {
                         Some(value) => value,
-                        None => match take_value(args, &mut index) {
-                            Ok(value) => value,
-                            Err(()) => {
-                                return Err(parse_error(
-                                    ParseFailure {
-                                        usage: PROPOSE_USAGE,
-                                        message: Msg::str(&format!(
-                                            "argument {named}: expected one argument"
-                                        )),
-                                    },
+                        None => match next_value(args, index) {
+                            Some(value) => {
+                                index += 1;
+                                value
+                            }
+                            None => {
+                                return SubOutcome::Done(parse_error(
+                                    sub_failure(Msg::str(&format!(
+                                        "argument {named}: expected one argument"
+                                    ))),
                                     stdout_closed,
                                     stderr_closed,
-                                ))
+                                ));
                             }
                         },
                     };
-                    if which {
+                    if named == "--target" {
                         target = Some(value);
                     } else {
                         output = Some(value);
@@ -439,7 +528,7 @@ fn parse_propose(
                     continue;
                 }
                 LongMatch::Unknown => {
-                    extras.push(token);
+                    extras.push(token.clone());
                     index += 1;
                     continue;
                 }
@@ -451,66 +540,66 @@ fn parse_propose(
             && u[1] != '-' as u16
             && !looks_like_negative_number(u)
         {
-            // A short cluster: h is help, o takes a
-            // value (the rest of the token or the
-            // next token).
+            // A short cluster, matched whole first:
+            // h is help, o takes the rest of the
+            // token or the next value token, and any
+            // other character makes the whole token
+            // an extra.
             let cluster = &u[1..];
-            let mut at = 0;
+            let mut help = false;
+            let mut unknown = false;
+            let mut missing = false;
+            let mut cluster_output: Option<Vec<u16>> = None;
             let mut consumed_next = false;
-            let mut failed: Option<i32> = None;
+            let mut at = 0;
             while at < cluster.len() {
                 match cluster[at] {
                     0x68 => {
-                        let help = Msg::str(PROPOSE_HELP);
-                        if stdout_closed {
-                            let text = help.render_stderr();
-                            write_stderr(text.as_bytes(), stderr_closed, true);
-                        } else {
-                            print_out(&help, false, stderr_closed);
-                        }
-                        return Err(0);
+                        help = true;
+                        at += 1;
                     }
                     0x6F => {
                         let rest = &cluster[at + 1..];
                         if !rest.is_empty() {
-                            let value = if rest[0] == '=' as u16 {
+                            cluster_output = Some(if rest[0] == '=' as u16 {
                                 rest[1..].to_vec()
                             } else {
                                 rest.to_vec()
-                            };
-                            output = Some(value);
-                            at = cluster.len();
+                            });
                         } else {
-                            match take_value(args, &mut index) {
-                                Ok(value) => {
-                                    output = Some(value);
+                            match next_value(args, index) {
+                                Some(value) => {
+                                    cluster_output = Some(value);
                                     consumed_next = true;
-                                    at = cluster.len();
                                 }
-                                Err(()) => {
-                                    failed = Some(parse_error(
-                                        ParseFailure {
-                                            usage: PROPOSE_USAGE,
-                                            message: Msg::str(
-                                                "argument -o/--output: expected one argument",
-                                            ),
-                                        },
-                                        stdout_closed,
-                                        stderr_closed,
-                                    ));
-                                    at = cluster.len();
-                                }
+                                None => missing = true,
                             }
                         }
+                        at = cluster.len();
                     }
                     _ => {
-                        extras.push(token);
+                        unknown = true;
                         at = cluster.len();
                     }
                 }
             }
-            if let Some(code) = failed {
-                return Err(code);
+            if missing {
+                return SubOutcome::Done(parse_error(
+                    sub_failure(Msg::str("argument -o/--output: expected one argument")),
+                    stdout_closed,
+                    stderr_closed,
+                ));
+            }
+            if unknown {
+                extras.push(token.clone());
+                index += 1;
+                continue;
+            }
+            if help {
+                return SubOutcome::Done(print_help(PROPOSE_HELP, stdout_closed, stderr_closed));
+            }
+            if let Some(value) = cluster_output {
+                output = Some(value);
             }
             if consumed_next {
                 index += 1;
@@ -518,67 +607,56 @@ fn parse_propose(
             index += 1;
             continue;
         }
-        // A positional or a value-like token.
         if source_dir.is_none() {
             source_dir = Some(u.clone());
         } else {
-            extras.push(token);
+            extras.push(token.clone());
         }
         index += 1;
     }
-    if let Some(dir) = source_dir {
-        if !extras.is_empty() {
-            return Err(parse_error(
-                ParseFailure {
-                    usage: PROPOSE_USAGE,
-                    message: unrecognized(&extras.iter().map(|t| (*t).clone()).collect::<Vec<_>>()),
-                },
-                stdout_closed,
-                stderr_closed,
-            ));
-        }
-        return Ok(ProposeArgs {
-            source_dir: dir,
-            target,
-            output,
-        });
+    match source_dir {
+        None => SubOutcome::Done(parse_error(
+            sub_failure(Msg::str("the following arguments are required: source_dir")),
+            stdout_closed,
+            stderr_closed,
+        )),
+        Some(source_dir) => SubOutcome::Parsed(
+            ProposeArgs {
+                source_dir,
+                target,
+                output,
+            },
+            extras,
+        ),
     }
-    Err(parse_error(
-        ParseFailure {
-            usage: PROPOSE_USAGE,
-            message: Msg::str("the following arguments are required: source_dir"),
-        },
-        stdout_closed,
-        stderr_closed,
-    ))
 }
 
-/// argparse: an option that expects one argument
-/// takes the next token unless it looks like an
-/// option; otherwise the caller raises the refusal
-/// naming the option.
-fn take_value(args: &[Token], index: &mut usize) -> Result<Vec<u16>, ()> {
-    let next = args.get(*index + 1);
-    match next {
-        Some(token) if !is_option_like(&token.units) => {
-            *index += 1;
-            Ok(token.units.clone())
-        }
-        _ => Err(()),
+/// The token after `index` as an option's value,
+/// when it is a value: not an option-like token
+/// and not the separator.
+fn next_value(args: &[Token], index: usize) -> Option<Vec<u16>> {
+    let next = args.get(index + 1)?;
+    if is_option_like(&next.units) || units_eq(&next.units, "--") {
+        return None;
     }
+    Some(next.units.clone())
 }
 
 fn help_explicit(
+    failure: ParseFailure,
     named: &str,
     value: &[u16],
-    usage: &'static str,
     stdout_closed: bool,
     stderr_closed: bool,
 ) -> i32 {
     let mut message = Msg::str(&format!("argument {named}: ignored explicit argument "));
     message.push_str(&crate::pyrepr::repr_text(&Text::from_units(value.to_vec())));
     parse_error(
-        ParseFailure { usage, message },
+        ParseFailure {
+            prog: failure.prog,
+            usage: failure.usage,
+            message,
+        },
         stdout_closed,
         stderr_closed,
     )
@@ -651,7 +729,11 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
     for (_, tape, digest) in &tapes {
         by_digest.insert(digest.clone(), tape);
     }
-    if let Some(output) = &args.output {
+    // An empty output string is no output at all:
+    // the Python's `if output:` guards both the
+    // overwrite check and the write.
+    let output = args.output.as_ref().filter(|units| !units.is_empty());
+    if let Some(output) = output {
         let resolved = resolve_path(output);
         let loaded: Vec<Vec<u16>> = tapes
             .iter()
@@ -695,7 +777,7 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
         }
         return 1;
     }
-    match &args.output {
+    match output {
         None => {
             let bytes = match dumps_view(&document, Mode::Stdout) {
                 Ok(bytes) => bytes,
@@ -716,7 +798,7 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
         }
         Some(output) => {
             let out_display = Msg(output.clone());
-            let out_path = os_path_from_units(output);
+            let out_path = os_path_from_units(output.as_slice());
             match write_atomically(&out_path, &document) {
                 WriteOutcome::Written => 0,
                 WriteOutcome::Refused => {
