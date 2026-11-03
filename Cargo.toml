@@ -4,11 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-flighttape = { git = "https://github.com/david-engelmann/flighttape", rev = "ba8d4b550850179722f48b8f9c909e199efe3548" }
+flighttape = { git = "https://github.com/david-engelmann/flighttape", rev = "eebce0be75a9c2ffa534635e37160c7cbef5d96e" }
 sha2 = "0.10"
 
 [dev-dependencies]
-flighttape = { git = "https://github.com/david-engelmann/flighttape", rev = "ba8d4b550850179722f48b8f9c909e199efe3548" }
+flighttape = { git = "https://github.com/david-engelmann/flighttape", rev = "eebce0be75a9c2ffa534635e37160c7cbef5d96e" }
 
 [profile.dev]
 debug = 0

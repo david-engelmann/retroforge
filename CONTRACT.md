@@ -233,3 +233,50 @@ sentence is superseded for every round until that one.
   remainder register with a written
   justification per item. An unjustified
   non-Rust remainder is a defect.
+- RF-23. Round 4 re-pins the flighttape crate
+  from ba8d4b550850179722f48b8f9c909e199efe3548 to
+  eebce0be75a9c2ffa534635e37160c7cbef5d96e, its
+  Round 12 merge, so the whole line stands on one
+  flighttape rev. The differential harness re-run
+  is the proof of what moves: a control run
+  against the re-pinned binary over the standing
+  corpus, its failures enumerated before any
+  harness edit, and no behavior outside the
+  crate's timestamp grammar may move silently.
+- RF-24. The output guard's resolver peels the
+  last component of any kind, as secondbill's
+  repair and wallofwrong's WW-25 do, and the
+  harness gains the interleave cells on both
+  guard sides (the owed file's item 2 shape).
+- RF-25. The round probes the resolver's loop
+  posture against the oracle and takes the
+  outcome the oracle dictates: if the Python
+  counts an unresolvable output as naming an
+  input, the resolver becomes ELOOP-fallible in
+  wallofwrong's WW-25a shape (the loop judged on
+  the finished path's prefixes); if the Python
+  crashes uncaught on a loop, the shape stands
+  as the named crash class with harness cells
+  asserting it. Either way the loop cells land
+  in the harness in this round, and the dossier
+  records which branch the oracle took.
+- RF-26. The round's verification is the full
+  local gate plus the differential harness at
+  zero failures, RF-23 to RF-25 cells included.
+  CodeRabbit's advisory pass on Round 3's PR 4
+  posted no findings (zero entries on the review
+  endpoints), so no disposition is owed from it.
+- RF-25a. Amendment, on the red team's Round 4
+  Major: a dangling final component. When the
+  output's final component is a symlink whose
+  target does not exist, the resolver reads the
+  target spelling and resolves it against the
+  link's parent before the lexical finish, as
+  realpath does; a dangling output whose target
+  spelling lands on a tape is refused at the
+  guard, and a dangling output naming no tape
+  proceeds as before. The harness gains the
+  sharp cell (the target spelling through a
+  missing component onto a tape) and the agreeing
+  cell (a dangling output naming no tape replaces
+  the link on both sides).
