@@ -963,13 +963,17 @@ fn has_json_suffix(name: &[u16]) -> bool {
 /// component a following ".." cancels never
 /// survives into the finished path, and the
 /// Python resolves those spellings cleanly.
+/// A dangling final link is read for its target
+/// spelling before any of this (RF-25a, see
+/// dangling_target).
 fn resolve_path(units: &[u16]) -> Option<Vec<u16>> {
     let path = os_path_from_units(units);
-    let absolute = if path.is_absolute() {
+    let spelled = if path.is_absolute() {
         path
     } else {
         std::env::current_dir().unwrap_or_default().join(&path)
     };
+    let absolute = dangling_target(&spelled).unwrap_or(spelled);
     let resolved = match std::fs::canonicalize(&absolute) {
         Ok(found) => found,
         Err(_) => {
@@ -1018,6 +1022,33 @@ fn resolve_path(units: &[u16]) -> Option<Vec<u16>> {
         return None;
     }
     Some(fsdecode_units(&os_bytes(&resolved.as_os_str().to_owned())))
+}
+
+/// The subject a dangling final link hands the
+/// resolution (RF-25a): where the spelled path's
+/// final component is a symlink whose target
+/// cannot be canonicalized (the target does not
+/// exist as spelled), realpath reads the target
+/// spelling and proceeds on it resolved against
+/// the link's parent, popping a missing
+/// component in the spelling lexically, so the
+/// spelling can land on a tape the spelled path
+/// never names. The peel alone would peel the
+/// link's own name and lose the target entirely.
+/// Anything else (no final link, or a target
+/// that resolves) leaves the resolution on the
+/// spelled path.
+fn dangling_target(spelled: &Path) -> Option<PathBuf> {
+    let meta = std::fs::symlink_metadata(spelled).ok()?;
+    if !meta.file_type().is_symlink() {
+        return None;
+    }
+    let target = std::fs::read_link(spelled).ok()?;
+    let subject = spelled.parent()?.join(&target);
+    if std::fs::canonicalize(&subject).is_ok() {
+        return None;
+    }
+    Some(subject)
 }
 
 /// True where the finished path passes through a
