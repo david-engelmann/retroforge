@@ -176,8 +176,8 @@ fn two_redo_moments_emit_one_proposal_with_resolving_citations() {
     assert_eq!(stub.get("baseline_period").unwrap(), &period);
     let again = build_proposals(&[triple(&tape)], &Text::from_str("AGENTS.md")).unwrap();
     assert_eq!(
-        retroforge::emit::dumps_view(&again, retroforge::emit::Mode::Strict).unwrap(),
-        retroforge::emit::dumps_view(&document, retroforge::emit::Mode::Strict).unwrap()
+        retroforge::emit::dumps_view(&again),
+        retroforge::emit::dumps_view(&document)
     );
 }
 
@@ -485,12 +485,11 @@ fn the_experiment_id_moves_with_the_baseline_period() {
         call(0, "only", "Write", "a.py", T1)
     ));
     let base = build_proposals(&[triple(&redo)], &Text::from_str("AGENTS.md")).unwrap();
-    let mut second_triple = (
+    let second_triple = (
         retroforge::util::Msg::str("z.json"),
         quiet.clone(),
         digest(&quiet),
     );
-    second_triple.0 = retroforge::util::Msg::str("z.json");
     let wider = build_proposals(
         &[triple(&redo), second_triple],
         &Text::from_str("AGENTS.md"),
@@ -736,4 +735,91 @@ fn a_failed_write_leaves_the_earlier_proposal_intact() {
         })
         .collect();
     assert!(leftovers.is_empty(), "{leftovers:?}");
+}
+
+#[test]
+fn the_validator_compares_citation_kinds_as_values() {
+    let tape = redo_tape(T0, 2);
+    let digest = digest(&tape);
+    let mut document = build_proposals(&[triple(&tape)], &Text::from_str("AGENTS.md")).unwrap();
+    let citation = match document.get_mut("proposals") {
+        Some(Value::Array(items)) => match items[0].get_mut("citations") {
+            Some(Value::Array(citations)) => &mut citations[0],
+            _ => panic!("citations"),
+        },
+        _ => panic!("proposals"),
+    };
+    set(citation, "kind", Value::Int("3".to_string()));
+    let cited_seq = match citation.get("seq") {
+        Some(Value::Int(digits)) => digits.parse::<usize>().unwrap(),
+        _ => panic!("seq"),
+    };
+    // The cited event carries the same non-string
+    // kind: the Python compares the values, and two
+    // equal non-string kinds pass.
+    let mut odd_tape = tape.clone();
+    set(
+        event_at(&mut odd_tape, cited_seq),
+        "kind",
+        Value::Int("3".to_string()),
+    );
+    let defects = {
+        let mut by_digest: HashMap<String, &Value> = HashMap::new();
+        by_digest.insert(digest.clone(), &odd_tape);
+        validate_proposals(&document, &by_digest)
+    };
+    assert!(!any_defect(&defects, "wrong kind"), "{defects:?}");
+    // A different non-string kind is the wrong kind.
+    set(
+        event_at(&mut odd_tape, cited_seq),
+        "kind",
+        Value::Int("4".to_string()),
+    );
+    let mut by_digest: HashMap<String, &Value> = HashMap::new();
+    by_digest.insert(digest.clone(), &odd_tape);
+    let defects = validate_proposals(&document, &by_digest);
+    assert!(any_defect(&defects, "wrong kind"), "{defects:?}");
+}
+
+#[test]
+fn the_validator_reads_minus_zero_as_zero() {
+    let tape = redo_tape(T0, 2);
+    let mut by_digest: HashMap<String, &Value> = HashMap::new();
+    by_digest.insert(digest(&tape), &tape);
+    let mut document = build_proposals(&[triple(&tape)], &Text::from_str("AGENTS.md")).unwrap();
+    if let Value::Object(entries) = &mut document {
+        entries.push((
+            Text::from_str("unattributed_rescues"),
+            Value::Int("-0".to_string()),
+        ));
+    }
+    let defects = validate_proposals(&document, &by_digest);
+    assert!(!any_defect(&defects, "unattributed_rescues"), "{defects:?}");
+    if let Value::Object(entries) = &mut document {
+        entries[3].1 = Value::Int("-1".to_string());
+    }
+    let defects = validate_proposals(&document, &by_digest);
+    assert!(any_defect(&defects, "unattributed_rescues"), "{defects:?}");
+}
+
+#[test]
+fn the_validator_prefix_tests_the_experiment_id_units() {
+    let tape = redo_tape(T0, 2);
+    let mut by_digest: HashMap<String, &Value> = HashMap::new();
+    by_digest.insert(digest(&tape), &tape);
+    let mut document = build_proposals(&[triple(&tape)], &Text::from_str("AGENTS.md")).unwrap();
+    let first = match document.get_mut("proposals") {
+        Some(Value::Array(items)) => &mut items[0],
+        _ => panic!("proposals"),
+    };
+    let registry = first.get_mut("registry").unwrap();
+    let mut units: Vec<u16> = "exp-".encode_utf16().collect();
+    units.push(0xD800);
+    set(
+        registry,
+        "experiment_id",
+        Value::Str(Text::from_units(units)),
+    );
+    let defects = validate_proposals(&document, &by_digest);
+    assert!(!any_defect(&defects, "experiment_id"), "{defects:?}");
 }

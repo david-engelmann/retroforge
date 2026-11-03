@@ -24,7 +24,7 @@ use std::path::{Path, PathBuf};
 use flighttape::value::{Text, Value};
 
 use crate::digest::{digest_of, Budget};
-use crate::emit::{dumps_view, Mode};
+use crate::emit::dumps_view;
 use crate::helptext::{PROPOSE_HELP, PROPOSE_USAGE, TOP_HELP, TOP_USAGE};
 use crate::proposals::{build_proposals, validate_proposals};
 use crate::tapes::{load_tape_file, TapeLoad};
@@ -284,10 +284,17 @@ enum LongMatch {
     Target,
     Output,
     Help,
+    Ambiguous,
     Unknown,
 }
 
 fn match_long(name: &[u16]) -> LongMatch {
+    // An empty option name (the token "--=...")
+    // prefix-matches every long option: ambiguous
+    // where a parser has more than one.
+    if name.len() == 2 {
+        return LongMatch::Ambiguous;
+    }
     let candidates: [(&str, LongMatch); 3] = [
         ("--target", LongMatch::Target),
         ("--output", LongMatch::Output),
@@ -301,7 +308,7 @@ fn match_long(name: &[u16]) -> LongMatch {
                 LongMatch::Target => LongMatch::Target,
                 LongMatch::Output => LongMatch::Output,
                 LongMatch::Help => LongMatch::Help,
-                LongMatch::Unknown => LongMatch::Unknown,
+                _ => LongMatch::Unknown,
             };
         }
         if name.len() > 2 && full.starts_with(name) {
@@ -312,7 +319,7 @@ fn match_long(name: &[u16]) -> LongMatch {
                 LongMatch::Target => LongMatch::Target,
                 LongMatch::Output => LongMatch::Output,
                 LongMatch::Help => LongMatch::Help,
-                LongMatch::Unknown => LongMatch::Unknown,
+                _ => LongMatch::Unknown,
             });
         }
     }
@@ -322,25 +329,29 @@ fn match_long(name: &[u16]) -> LongMatch {
 pub fn run_with_args(raw: &[Vec<u16>], stdout_closed: bool, stderr_closed: bool) -> i32 {
     let args = tokens(raw);
     let mut top_extras: Vec<Token> = Vec::new();
-    let mut seen_separator = false;
     let mut index = 0;
     while index < args.len() {
         let token = &args[index];
         let u = &token.units;
-        if !seen_separator && units_eq(u, "--") {
-            seen_separator = true;
+        if units_eq(u, "--") {
+            // The subparsers positional takes the
+            // separator itself as its value when any
+            // token follows it; a trailing separator
+            // alone leaves the command missing.
+            if index + 1 == args.len() {
+                break;
+            }
+            let mut message = Msg::str("argument command: invalid choice: '--'");
+            message.push_str(" (choose from 'propose')");
+            return parse_error(top_failure(message), stdout_closed, stderr_closed);
+        }
+        if let Some(code) = top_help_action(u, stdout_closed, stderr_closed) {
+            return code;
+        }
+        if is_option_like(u) {
+            top_extras.push(token.clone());
             index += 1;
             continue;
-        }
-        if !seen_separator {
-            if let Some(code) = top_help_action(u, stdout_closed, stderr_closed) {
-                return code;
-            }
-            if is_option_like(u) {
-                top_extras.push(token.clone());
-                index += 1;
-                continue;
-            }
         }
         // The first value token is the command.
         if units_eq(u, "propose") {
@@ -412,10 +423,15 @@ fn top_help_action(token: &[u16], stdout_closed: bool, stderr_closed: bool) -> O
     None
 }
 
-/// The top parser's only long option is --help.
+/// The top parser's only long option is --help,
+/// so even the empty name (the token "--=...")
+/// resolves to it.
 fn match_long_top(name: &[u16]) -> LongMatch {
     let full = units("--help");
     if name == full.as_slice() {
+        return LongMatch::Help;
+    }
+    if name.len() == 2 {
         return LongMatch::Help;
     }
     if name.len() > 2 && full.starts_with(name) {
@@ -481,6 +497,16 @@ fn parse_propose(args: &[Token], stdout_closed: bool, stderr_closed: bool) -> Su
         if !positional_only && u.len() > 2 && u[0] == '-' as u16 && u[1] == '-' as u16 {
             let (name, glued) = split_glued(u);
             match match_long(name) {
+                LongMatch::Ambiguous => {
+                    let mut message = Msg::str("ambiguous option: ");
+                    message.push_units(u);
+                    message.push_str(" could match --help, --target, --output");
+                    return SubOutcome::Done(parse_error(
+                        sub_failure(message),
+                        stdout_closed,
+                        stderr_closed,
+                    ));
+                }
                 LongMatch::Help => {
                     return SubOutcome::Done(match glued {
                         Some(value) => help_explicit(
@@ -494,10 +520,12 @@ fn parse_propose(args: &[Token], stdout_closed: bool, stderr_closed: bool) -> Su
                     });
                 }
                 LongMatch::Target | LongMatch::Output => {
+                    // argparse names an option in its
+                    // errors by all of its strings.
                     let named = if matches!(match_long(name), LongMatch::Target) {
                         "--target"
                     } else {
-                        "--output"
+                        "-o/--output"
                     };
                     let value = match glued {
                         Some(value) => value,
@@ -736,8 +764,10 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
         let loaded: Vec<Vec<u16>> = tapes
             .iter()
             .map(|(name, _, _)| {
+                // pathlib's join: an empty directory
+                // contributes no component at all.
                 let mut joined = args.source_dir.clone();
-                if !joined.ends_with(&['/' as u16]) {
+                if !joined.is_empty() && !joined.ends_with(&['/' as u16]) {
                     joined.push('/' as u16);
                 }
                 joined.extend_from_slice(&name.0);
@@ -775,12 +805,13 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
         }
         return 1;
     }
+    // The Python renders the document text before
+    // anything is written anywhere; the temp file
+    // below is created only for a text that already
+    // exists.
+    let bytes = dumps_view(&document);
     match output {
         None => {
-            let bytes = match dumps_view(&document, Mode::Stdout) {
-                Ok(bytes) => bytes,
-                Err(_) => return 1, // the crash class at the stdout write
-            };
             if write_stdout(&bytes, stdout_closed) {
                 0
             } else if stdout_closed {
@@ -797,7 +828,7 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
         Some(output) => {
             let out_display = Msg(output.clone());
             let out_path = os_path_from_units(output.as_slice());
-            match write_atomically(&out_path, &document) {
+            match write_atomically(&out_path, &bytes) {
                 WriteOutcome::Written => 0,
                 WriteOutcome::Refused => {
                     let mut line = Msg::str("error, cannot write the proposal file, ");
@@ -805,7 +836,6 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
                     error_line(&line, stdout_closed, stderr_closed);
                     1
                 }
-                WriteOutcome::Crash => 1,
             }
         }
     }
@@ -814,17 +844,14 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
 enum WriteOutcome {
     Written,
     Refused,
-    Crash,
 }
 
-/// The Python's _write_atomically: a sibling temp
-/// file (prefix the name and a dot, suffix .tmp,
-/// mode 0600), written, flushed, and replaced over
-/// the target. An OS error unlinks the temp and
-/// refuses; a render failure is not an OS error in
-/// the Python and leaves the temp standing (the
-/// crash class).
-fn write_atomically(path: &PathBuf, document: &Value) -> WriteOutcome {
+/// The Python's _write_atomically over a rendered
+/// text: a sibling temp file (prefix the name and
+/// a dot, suffix .tmp, mode 0600), written, flushed,
+/// and replaced over the target. An OS error
+/// unlinks the temp and refuses.
+fn write_atomically(path: &PathBuf, bytes: &[u8]) -> WriteOutcome {
     let parent = path.parent().map(|p| p.to_path_buf()).unwrap_or_default();
     let name = path
         .file_name()
@@ -834,13 +861,9 @@ fn write_atomically(path: &PathBuf, document: &Value) -> WriteOutcome {
         Ok(temp) => temp,
         Err(_) => return WriteOutcome::Refused,
     };
-    let bytes = match dumps_view(document, Mode::Strict) {
-        Ok(bytes) => bytes,
-        Err(_) => return WriteOutcome::Crash,
-    };
     let written = (|| -> std::io::Result<()> {
         let mut file = std::fs::File::create(&temp)?;
-        file.write_all(&bytes)?;
+        file.write_all(bytes)?;
         file.flush()?;
         Ok(())
     })();

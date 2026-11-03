@@ -59,7 +59,18 @@ pub fn load_tape_file(path: &Path) -> TapeLoad {
     let tape = match flighttape::json::parse(&text) {
         Ok(tape) => tape,
         Err(flighttape::json::ParseError::TooLarge) => {
-            return TapeLoad::Excluded("the file holds a number too large to read", Vec::new());
+            // RF-17: the reason is decided in parse
+            // order. The Python's recursive reader
+            // refuses a nest past its limit before it
+            // ever converts an integer that sits
+            // deeper, so a file carrying both defects
+            // is excluded for whichever the text
+            // reaches first.
+            return if depth_crossed_before_first_large_int(&text) {
+                TapeLoad::Excluded("the file is not valid JSON", Vec::new())
+            } else {
+                TapeLoad::Excluded("the file holds a number too large to read", Vec::new())
+            };
         }
         Err(flighttape::json::ParseError::Invalid) => {
             return TapeLoad::Excluded("the file is not valid JSON", Vec::new());
@@ -212,4 +223,78 @@ pub fn tape_defects(tape: &Value) -> Vec<Msg> {
 
 fn text_is_str(value: &Value, name: &str) -> bool {
     matches!(value, Value::Str(text) if text.as_str().is_some_and(|s| s == name))
+}
+
+/// One pass over the text in parse order, comparing
+/// two offsets: where the container nesting first
+/// reaches the parse cap, and where the first
+/// integer literal past the digit limit starts.
+/// True when the nesting is reached first (or the
+/// integer never appears, which the caller cannot
+/// see: its parse already refused one). Strings
+/// are skipped with their escapes; a number token
+/// is an integer when it carries no fraction or
+/// exponent mark, and its size is its digit count
+/// as written, signs and leading zeros included in
+/// position only.
+fn depth_crossed_before_first_large_int(text: &str) -> bool {
+    let bytes = text.as_bytes();
+    let mut depth = 0usize;
+    let mut crossing: Option<usize> = None;
+    let mut index = 0;
+    while index < bytes.len() {
+        match bytes[index] {
+            b'"' => {
+                index += 1;
+                while index < bytes.len() {
+                    match bytes[index] {
+                        b'\\' => index += 2,
+                        b'"' => {
+                            index += 1;
+                            break;
+                        }
+                        _ => index += 1,
+                    }
+                }
+            }
+            b'{' | b'[' => {
+                depth += 1;
+                if depth == JSON_DEPTH_CAP && crossing.is_none() {
+                    crossing = Some(index);
+                }
+                index += 1;
+            }
+            b'}' | b']' => {
+                depth = depth.saturating_sub(1);
+                index += 1;
+            }
+            b'-' | b'0'..=b'9' => {
+                let start = index;
+                let mut digits = 0usize;
+                let mut integer = true;
+                while index < bytes.len() {
+                    match bytes[index] {
+                        b'0'..=b'9' => {
+                            digits += 1;
+                            index += 1;
+                        }
+                        b'.' | b'e' | b'E' => {
+                            integer = false;
+                            index += 1;
+                        }
+                        b'-' | b'+' => index += 1,
+                        _ => break,
+                    }
+                }
+                if integer && digits > 4300 {
+                    return match crossing {
+                        Some(at) => at < start,
+                        None => false,
+                    };
+                }
+            }
+            _ => index += 1,
+        }
+    }
+    crossing.is_some()
 }

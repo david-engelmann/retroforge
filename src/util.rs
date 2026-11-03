@@ -112,19 +112,6 @@ pub fn scalar_span(units: &[u16], index: usize) -> usize {
     }
 }
 
-/// The unit index at which scalar number
-/// `scalar_index` begins (the unit length when the
-/// index runs past the last scalar).
-pub fn unit_offset(units: &[u16], scalar_index: usize) -> usize {
-    let mut unit_at = 0;
-    let mut seen = 0;
-    while seen < scalar_index && unit_at < units.len() {
-        unit_at += scalar_span(units, unit_at);
-        seen += 1;
-    }
-    unit_at
-}
-
 /// The inverse: encode text units back to OS bytes,
 /// mapping surrogateescape units back to their bytes.
 /// A lone surrogate outside the escape range cannot
@@ -198,10 +185,10 @@ pub fn stderr_render(units: &[u16]) -> String {
 }
 
 /// A message under construction, held as text units
-/// so a name the Python inserts raw (a claim id, a
-/// path) keeps its exact units until the message is
-/// rendered for its destination: stderr renders
-/// backslashreplace, stdout surrogateescape.
+/// so a name the Python inserts raw (a tape name, a
+/// digest, a path) keeps its exact units until the
+/// message is rendered for its destination: stderr
+/// renders backslashreplace, stdout surrogateescape.
 #[derive(Clone, Debug, PartialEq)]
 pub struct Msg(pub Vec<u16>);
 
@@ -242,8 +229,13 @@ impl Msg {
 }
 
 /// The OS path for a normalized display path: the
-/// fsencoding of its units.
+/// fsencoding of its units. The empty path is the
+/// current directory, as pathlib's Path("") is
+/// Path("."); an empty PathBuf names nothing.
 pub fn os_path_from_units(units: &[u16]) -> std::path::PathBuf {
+    if units.is_empty() {
+        return std::path::PathBuf::from(".");
+    }
     #[cfg(unix)]
     {
         use std::os::unix::ffi::OsStringExt;

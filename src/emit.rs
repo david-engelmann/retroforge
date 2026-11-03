@@ -325,8 +325,9 @@ fn write_number(value: &Value, out: &mut Vec<u8>) {
     }
 }
 
-/// json.dumps with separators (",", ":") and no
-/// indent: the appended claim line, without its
+/// A compact render with separators (",", ":")
+/// and no indent: the one-line form the test
+/// suites write fixture tapes in, without a
 /// trailing newline.
 pub fn dumps_line(value: &Value, mode: Mode) -> Result<Vec<u8>, EmitError> {
     let mut out = Vec::new();
@@ -367,13 +368,43 @@ fn write_compact(value: &Value, mode: Mode, out: &mut Vec<u8>) -> Result<(), Emi
     Ok(())
 }
 
-/// json.dumps with an indent of two: the view
-/// document, trailing newline included.
-pub fn dumps_view(value: &Value, mode: Mode) -> Result<Vec<u8>, EmitError> {
+/// json.dumps with an indent of two and the
+/// default ensure_ascii: the proposal document,
+/// trailing newline included. Every character
+/// outside the printable ASCII range renders as a
+/// \uXXXX escape, astral characters as a surrogate
+/// pair of escapes, so the bytes are pure ASCII and
+/// the render cannot fail on text.
+pub fn dumps_view(value: &Value) -> Vec<u8> {
     let mut out = Vec::new();
-    write_indented(value, 0, mode, &mut out)?;
+    write_indented(value, 0, &mut out);
     out.push(b'\n');
-    Ok(out)
+    out
+}
+
+/// One text as a JSON string under ensure_ascii:
+/// unit by unit, so a surrogate pair renders as
+/// the two escapes the Python writes and a lone
+/// unit as its own escape.
+fn escape_string_ascii(text: &Text, out: &mut Vec<u8>) {
+    out.push(b'"');
+    for unit in text.units() {
+        let unit = *unit;
+        match unit {
+            0x22 => out.extend_from_slice(b"\\\""),
+            0x5C => out.extend_from_slice(b"\\\\"),
+            0x08 => out.extend_from_slice(b"\\b"),
+            0x09 => out.extend_from_slice(b"\\t"),
+            0x0A => out.extend_from_slice(b"\\n"),
+            0x0C => out.extend_from_slice(b"\\f"),
+            0x0D => out.extend_from_slice(b"\\r"),
+            0x20..=0x7E => out.push(unit as u8),
+            _ => {
+                out.extend_from_slice(format!("\\u{unit:04x}").as_bytes());
+            }
+        }
+    }
+    out.push(b'"');
 }
 
 fn push_indent(out: &mut Vec<u8>, depth: usize) {
@@ -382,27 +413,22 @@ fn push_indent(out: &mut Vec<u8>, depth: usize) {
     }
 }
 
-fn write_indented(
-    value: &Value,
-    depth: usize,
-    mode: Mode,
-    out: &mut Vec<u8>,
-) -> Result<(), EmitError> {
+fn write_indented(value: &Value, depth: usize, out: &mut Vec<u8>) {
     match value {
         Value::Null => out.extend_from_slice(b"null"),
         Value::Bool(true) => out.extend_from_slice(b"true"),
         Value::Bool(false) => out.extend_from_slice(b"false"),
         Value::Int(_) | Value::Float(_) => write_number(value, out),
-        Value::Str(text) => escape_string(text, mode, out)?,
+        Value::Str(text) => escape_string_ascii(text, out),
         Value::Array(items) => {
             if items.is_empty() {
                 out.extend_from_slice(b"[]");
-                return Ok(());
+                return;
             }
             out.extend_from_slice(b"[\n");
             for (index, item) in items.iter().enumerate() {
                 push_indent(out, depth + 1);
-                write_indented(item, depth + 1, mode, out)?;
+                write_indented(item, depth + 1, out);
                 if index + 1 < items.len() {
                     out.push(b',');
                 }
@@ -414,16 +440,16 @@ fn write_indented(
         Value::Object(entries) => {
             if entries.is_empty() {
                 out.extend_from_slice(b"{}");
-                return Ok(());
+                return;
             }
             let mut sorted: Vec<&(Text, Value)> = entries.iter().collect();
             sorted.sort_by_cached_key(|(key, _)| crate::util::scalars_of(key.units()));
             out.extend_from_slice(b"{\n");
             for (index, (key, item)) in sorted.iter().enumerate() {
                 push_indent(out, depth + 1);
-                escape_string(key, mode, out)?;
+                escape_string_ascii(key, out);
                 out.extend_from_slice(b": ");
-                write_indented(item, depth + 1, mode, out)?;
+                write_indented(item, depth + 1, out);
                 if index + 1 < sorted.len() {
                     out.push(b',');
                 }
@@ -433,5 +459,4 @@ fn write_indented(
             out.push(b'}');
         }
     }
-    Ok(())
 }

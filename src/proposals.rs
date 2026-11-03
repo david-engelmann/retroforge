@@ -269,8 +269,11 @@ pub fn validate_proposals(document: &Value, tapes_by_digest: &HashMap<String, &V
         defects.push(Msg::str("proposal_version is not 1.0"));
     }
     if let Some(count) = document.get("unattributed_rescues") {
+        // The Python compares the parsed integer:
+        // -0 is 0 and stands; a negative value is
+        // one with a nonzero digit under its sign.
         let valid = match count {
-            Value::Int(digits) => !digits.starts_with('-'),
+            Value::Int(digits) => !digits.starts_with('-') || digits[1..].chars().all(|c| c == '0'),
             _ => false,
         };
         if !valid {
@@ -336,9 +339,12 @@ pub fn validate_proposals(document: &Value, tapes_by_digest: &HashMap<String, &V
         }
         match proposal.get("registry") {
             Some(registry) if registry.as_object().is_some() => {
+                // The prefix test runs on the units:
+                // a text with lone surrogates still
+                // answers startswith in the Python.
                 let experiment_ok = matches!(
                     registry.get("experiment_id"),
-                    Some(Value::Str(t)) if t.as_str().is_some_and(|s| s.starts_with("exp-"))
+                    Some(Value::Str(t)) if t.units().starts_with(&units_of("exp-"))
                 );
                 if !experiment_ok {
                     defects.push(Msg::str(&format!(
@@ -440,8 +446,11 @@ fn citation_defects(
         None => return vec![Msg::str(&format!("{where_} names no event in its tape"))],
     };
     let event = &events[seq];
+    // The Python compares the two values of any
+    // type for equality; two equal non-string kinds
+    // pass.
     let kind_ok = match (event.get("kind"), citation.get("kind")) {
-        (Some(Value::Str(a)), Some(Value::Str(b))) => a == b,
+        (Some(a), Some(b)) => a == b,
         _ => false,
     };
     if !kind_ok {
@@ -473,6 +482,10 @@ fn int_in_range(digits: &str, len: usize) -> Option<usize> {
     } else {
         None
     }
+}
+
+fn units_of(text: &str) -> Vec<u16> {
+    text.encode_utf16().collect()
 }
 
 fn str_is(value: &Value, name: &str) -> bool {
