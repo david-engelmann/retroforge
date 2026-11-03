@@ -8,14 +8,14 @@ Observability tools capture traces and stop at dashboards and scores, so the ret
 
 ## Status
 
-Round 2 is built and in review on its branch. Setup and Round 1
-landed earlier in the programme; the build proceeds on the
-flighttape formats only, with gate evidence behind the adapter
-stub, under the programme's package A ruling.
+Round 3 is built and in review on its branch. Setup and Rounds
+1 and 2 landed earlier in the programme; the build proceeds on
+the flighttape formats only, with gate evidence behind the
+adapter stub, under the programme's package A ruling.
 
 ## Programme status
 
-- Closed perfection rounds, 2 of 100. A round counts only when a
+- Closed perfection rounds, 3 of 100. A round counts only when a
   full cycle of work, audit, review, red team, and approval has
   closed.
 - Round 1 adds the propose command. It reads a directory of
@@ -36,6 +36,15 @@ stub, under the programme's package A ruling.
   and message citations resolve only to main-chain user turns.
   Obligations RF-9 to RF-14, met, with the reviews recorded
   with the programme.
+- Round 3 ports the tool to Rust. The Python of Rounds 1 and 2
+  stands as the behavioral spec and leaves the tree; the crate
+  reproduces it exactly, the proposal document rendering under
+  the same escaping rules, the argument parser matching token
+  by token, and the tape loader deciding its refusals in parse
+  order. The tests ported file for file and a differential
+  harness holds the port against the Python across the whole
+  command surface. Obligations RF-15 to RF-22, met, with the
+  reviews recorded with the programme.
 - Local gate, python3 scripts/codepoint_scan.py, cargo fmt
   --check, cargo clippy --all-targets -- -D warnings, and
   cargo test. CI runs the same commands.
