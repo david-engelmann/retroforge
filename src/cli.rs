@@ -19,7 +19,7 @@
 
 use std::collections::HashMap;
 use std::io::Write;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use flighttape::value::{Text, Value};
 
@@ -835,8 +835,14 @@ fn propose(args: &ProposeArgs, stdout_closed: bool, stderr_closed: bool) -> i32 
         }
         Some(output) => {
             let out_display = Msg(output.clone());
-            let out_path = os_path_from_units(output.as_slice());
-            match write_atomically(&out_path, &bytes) {
+            // The Python hands the write a pathlib
+            // Path, whose construction has already
+            // rewritten the spelling (RF-35); the
+            // refusal message keeps the raw spelling,
+            // as the Python's does.
+            let (constructed, parent, name) = construct_path(output.as_slice());
+            let out_path = os_path_from_units(&constructed);
+            match write_atomically(&out_path, &parent, &name, &bytes) {
                 WriteOutcome::Written => 0,
                 WriteOutcome::Refused => {
                     let mut line = Msg::str("error, cannot write the proposal file, ");
@@ -854,18 +860,89 @@ enum WriteOutcome {
     Refused,
 }
 
+/// pathlib's construction of a spelled path, in
+/// unit form (RF-35): the spelling the write seam
+/// consumes, with its parent and its name under
+/// pathlib's decomposition. Construction drops
+/// every empty component and every "." component,
+/// wherever it stands; a ".." component and every
+/// other component stand whole; a leading pair of
+/// separators stands as the anchor and a longer
+/// leading run collapses to one separator; a
+/// spelling with no component left stands as "."
+/// (or as its anchor). The name is the last
+/// component, empty only for an anchor alone or
+/// "."; the parent is the spelling less its last
+/// component, "." for a lone relative component
+/// and the anchor for a lone anchored one.
+fn construct_path(units: &[u16]) -> (Vec<u16>, Vec<u16>, Vec<u16>) {
+    const SEP: u16 = '/' as u16;
+    const DOT: u16 = '.' as u16;
+    let (anchor, rest): (Vec<u16>, &[u16]) =
+        if units.len() >= 2 && units[0] == SEP && units[1] == SEP && units.get(2) != Some(&SEP) {
+            (vec![SEP, SEP], &units[2..])
+        } else if units.first() == Some(&SEP) {
+            (vec![SEP], &units[1..])
+        } else {
+            (Vec::new(), units)
+        };
+    let mut parts: Vec<&[u16]> = Vec::new();
+    for part in rest.split(|unit| *unit == SEP) {
+        if part.is_empty() || (part.len() == 1 && part[0] == DOT) {
+            continue;
+        }
+        parts.push(part);
+    }
+    // The anchor already ends at a separator, so
+    // the parts join onto it directly; a relative
+    // spelling joins its parts alone.
+    let joined = |some: &[&[u16]]| -> Vec<u16> {
+        let mut out = anchor.clone();
+        for (index, part) in some.iter().enumerate() {
+            if index > 0 {
+                out.push(SEP);
+            }
+            out.extend_from_slice(part);
+        }
+        out
+    };
+    let constructed = if parts.is_empty() {
+        if anchor.is_empty() {
+            vec![DOT]
+        } else {
+            anchor.clone()
+        }
+    } else {
+        joined(&parts)
+    };
+    let name = parts.last().map(|part| part.to_vec()).unwrap_or_default();
+    let parent = match parts.len() {
+        0 => constructed.clone(),
+        1 => {
+            if anchor.is_empty() {
+                vec![DOT]
+            } else {
+                anchor.clone()
+            }
+        }
+        count => joined(&parts[..count - 1]),
+    };
+    (constructed, parent, name)
+}
+
 /// The Python's _write_atomically over a rendered
-/// text: a sibling temp file (prefix the name and
+/// text: a sibling temp file in the constructed
+/// path's parent (prefix the constructed name and
 /// a dot, suffix .tmp, mode 0600), written, flushed,
-/// and replaced over the target. An OS error
-/// unlinks the temp and refuses.
-fn write_atomically(path: &PathBuf, bytes: &[u8]) -> WriteOutcome {
-    let parent = path.parent().map(|p| p.to_path_buf()).unwrap_or_default();
-    let name = path
-        .file_name()
-        .map(|n| n.to_string_lossy().into_owned())
-        .unwrap_or_default();
-    let temp = match make_temp(&parent, &name) {
+/// and replaced over the constructed path. An OS
+/// error unlinks the temp and refuses.
+fn write_atomically(
+    path: &PathBuf,
+    parent: &[u16],
+    name: &[u16],
+    bytes: &[u8],
+) -> WriteOutcome {
+    let temp = match make_temp(parent, name) {
         Ok(temp) => temp,
         Err(_) => return WriteOutcome::Refused,
     };
@@ -890,7 +967,7 @@ fn write_atomically(path: &PathBuf, bytes: &[u8]) -> WriteOutcome {
     }
 }
 
-fn make_temp(parent: &Path, name: &str) -> std::io::Result<PathBuf> {
+fn make_temp(parent: &[u16], name: &[u16]) -> std::io::Result<PathBuf> {
     use std::os::unix::fs::OpenOptionsExt;
     const ALPHABET: &[u8] = b"abcdefghijklmnopqrstuvwxyz0123456789_";
     let mut rng = std::time::SystemTime::now()
@@ -905,14 +982,27 @@ fn make_temp(parent: &Path, name: &str) -> std::io::Result<PathBuf> {
             rng ^= rng << 17;
             random.push(ALPHABET[(rng % 36) as usize] as char);
         }
-        let candidate = parent.join(format!("{name}.{random}.tmp"));
+        // The temp spelling is built in units, the
+        // way mkstemp joins the parent, the prefix,
+        // and the suffix: a separator between the
+        // parent and the name unless the parent
+        // already ends with one.
+        let mut candidate = parent.to_vec();
+        if candidate.last() != Some(&('/' as u16)) {
+            candidate.push('/' as u16);
+        }
+        candidate.extend_from_slice(name);
+        candidate.push('.' as u16);
+        candidate.extend(random.bytes().map(|byte| byte as u16));
+        candidate.extend(".tmp".chars().map(|unit| unit as u16));
+        let path = os_path_from_units(&candidate);
         match std::fs::OpenOptions::new()
             .write(true)
             .create_new(true)
             .mode(0o600)
-            .open(&candidate)
+            .open(&path)
         {
-            Ok(_) => return Ok(candidate),
+            Ok(_) => return Ok(path),
             Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => continue,
             Err(error) => return Err(error),
         }
