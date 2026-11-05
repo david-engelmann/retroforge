@@ -280,3 +280,38 @@ sentence is superseded for every round until that one.
   missing component onto a tape) and the agreeing
   cell (a dangling output naming no tape replaces
   the link on both sides).
+- RF-27. Round 5 discharges the two probes filed
+  in this line's Round 5 owed file: the dangling
+  link chain and the deleted working directory,
+  both at the output guard. The chain question:
+  Round 4's dangling repair (RF-25a) splices a
+  dangling final component once; bluepencil's
+  Round 4 red team proved a chain of dangling
+  links defeats a single splice and its repair
+  iterated to the kernel's 40 link bound. This
+  crate's oracle resolves chains fully (subject
+  to its own walk), so the probe pass measures
+  chain lengths at the guard (onto the tape
+  input, away, and through a cancelled chain)
+  on the oracle and the port and fixes the
+  divergence set before any repair is written.
+- RF-28. The deleted-cwd question: from a
+  deleted working directory, a relative output
+  spelling against this crate's oracle and
+  port. The oracle crashes uncaught out of
+  resolve failures on this surface already
+  (RF-25's loop posture); whether its guard
+  call raises the same way on a failed getcwd,
+  and what the port's resolver does there, is
+  measured cell by cell (relative onto,
+  relative away, absolute onto, absolute away)
+  before any repair is written. Repairs follow
+  the measurements under new clauses if the
+  probe set expands.
+- RF-29. The differential harness gains the
+  proven cells with control runs against the
+  pre-repair binary failing exactly the new
+  cells, and the standing harness stays clean.
+- RF-30. README records 5 of 100 only in the
+  closure commit written after this round's
+  three reviews, fixes, and owner verification.
