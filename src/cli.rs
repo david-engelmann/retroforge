@@ -936,12 +936,7 @@ fn construct_path(units: &[u16]) -> (Vec<u16>, Vec<u16>, Vec<u16>) {
 /// a dot, suffix .tmp, mode 0600), written, flushed,
 /// and replaced over the constructed path. An OS
 /// error unlinks the temp and refuses.
-fn write_atomically(
-    path: &PathBuf,
-    parent: &[u16],
-    name: &[u16],
-    bytes: &[u8],
-) -> WriteOutcome {
+fn write_atomically(path: &PathBuf, parent: &[u16], name: &[u16], bytes: &[u8]) -> WriteOutcome {
     let temp = match make_temp(parent, name) {
         Ok(temp) => temp,
         Err(_) => return WriteOutcome::Refused,
