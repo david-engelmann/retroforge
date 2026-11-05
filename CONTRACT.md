@@ -315,3 +315,50 @@ sentence is superseded for every round until that one.
 - RF-30. README records 5 of 100 only in the
   closure commit written after this round's
   three reviews, fixes, and owner verification.
+- RF-31. Amendment, on the Round 5 probe pass: the
+  resolver becomes the interpreter's walk itself, a
+  transcription of posixpath._joinrealpath with
+  strict=False over raw bytes, as in unheard's
+  UH-25 shape. It follows chains of dangling and
+  sound links alike, splice by splice, so a chain
+  whose final spelling lands on a tape is refused
+  at the guard at every length the oracle resolves,
+  and the single-splice dangling repair (RF-25a),
+  the canonicalize peel, and the finished-path loop
+  walk retire. A link whose target the walk cannot
+  read fails the resolution, as the interpreter's
+  uncaught raise does.
+- RF-32. The walk carries the interpreter's
+  recursion budget, measured at this CLI: a
+  resolution nesting 990 splices resolves, and the
+  991st splice raises RecursionError in the Python,
+  in the dangling, existing-final, and prefix
+  families alike; a splice call entered past depth
+  990 fails the resolution here (the crash class).
+  The depth counts nesting, not splices in total.
+  The closing stat of the finished path still
+  reports a loop as the crash class (RF-25).
+- RF-33. A relative spelling whose working
+  directory cannot be read fails the resolution
+  (the crash class), on the output side and the
+  tape side alike: the interpreter raises
+  FileNotFoundError out of the abspath at the end
+  of every relative resolve from a deleted working
+  directory, and from such a directory no relative
+  component can be stat'ed, so no relative walk
+  completes there. Absolute spellings never read
+  the working directory, and their deleted-cwd
+  cells already agree.
+- RF-34. The harness gains the proven cells: the
+  chain boundaries (dangling onto at 2, 41, 990,
+  and the 991 crash cell; dangling away at 42 and
+  990; existing-final onto at 41; prefix onto and
+  away at 41), the cancelled-loop final spelling,
+  the dangling cycles, and the deleted-cwd launch
+  family (relative onto and away with an absolute
+  source, absolute onto and away, the ".." source
+  family, and a stdout control), with control runs
+  against the pre-repair binary failing exactly
+  the divergence cells. The absolute-intermediate
+  chain shape is probe-pinned instead: a harness
+  seed cannot spell a per-side absolute target.
