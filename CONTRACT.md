@@ -362,3 +362,70 @@ sentence is superseded for every round until that one.
   the divergence cells. The absolute-intermediate
   chain shape is probe-pinned instead: a harness
   seed cannot spell a per-side absolute target.
+- RF-35. Amendment, on the Round 5 red team's
+  Major M1: the write consumes the output spelling
+  as pathlib's construction hands it to
+  _write_atomically. Construction drops every
+  empty component and every "." component,
+  wherever it stands in the spelling; a ".."
+  component and every other component stand
+  whole; a leading pair of separators stands as
+  the anchor and a longer leading run collapses
+  to one separator; a spelling with no component
+  left stands as "." (or as its anchor). The temp
+  file is created in the constructed path's
+  parent, its prefix is the constructed path's
+  name and a dot, and the replace target is the
+  constructed path itself, the parent and the
+  name taken under pathlib's decomposition: the
+  name is the last component, empty only for an
+  anchor alone or "."; the parent is the spelling
+  less its last component, "." for a lone relative
+  component and the anchor for a lone anchored
+  one. The guard's resolve and the cannot-write
+  message keep the raw argv spelling, as the
+  Python's do.
+- RF-36. The class boundary, measured at the
+  interpreter and end to end: a trailing separator
+  in any count and trailing dot components in any
+  mixture diverge before this repair and are the
+  class ("out.json/", "out.json//", "out.json/.",
+  "./out.json/", "sub/out.json/.", and a missing
+  name under a trailing separator, "newdir/"). A
+  trailing ".." does not drop: construction keeps
+  it whole, so the write still names the parent
+  directory and refuses as the raw spelling did;
+  "..." and dotted names (".y", "..y", "y.") are
+  ordinary components. Internal empty, dot, and
+  dotdot components already agreed, the kernel
+  absorbing them at the temp creation and the
+  replace alike. A spelling of only separators
+  and dots collapses as RF-35 states ("." , "..",
+  "/", "./") and refuses the write.
+- RF-37. The command's other pathlib
+  constructions, read from the oracle's cli.py:
+  the source directory at the head of _propose,
+  the output resolve at the guard, and the tape
+  joins. The directory construction changes no
+  observable behavior beyond the empty spelling,
+  whose "." mapping already stands in
+  os_path_from_units and is pinned by the
+  standing harness; every other source spelling
+  reaches the same directory test and listing
+  through the kernel, and the joins carry bare
+  tape names with no tail to drop. The guard's
+  resolve already agrees on the tailed spellings
+  ("a.json/" refuses at the guard on both sides).
+  No repair beyond RF-35.
+- RF-38. The harness gains the tailed-output
+  cells of RF-36: the trailing separator and dot
+  forms, an overwrite of an existing proposal
+  under a tail, a missing name under a tail, a
+  directory under a tail, the collapsed
+  spellings, and the boundary pins (a trailing
+  dotdot, a dotdot followed by a name through an
+  existing directory, "..." as a name, and the
+  onto spellings the guard refuses), with control
+  runs against the pre-repair binary failing
+  exactly the new divergence cells and the pins
+  passing as regression coverage.
