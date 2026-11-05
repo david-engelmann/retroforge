@@ -464,3 +464,74 @@ sentence is superseded for every round until that one.
 - RF-41. README records 6 of 100 only in the
   closure commit written after this round's
   three reviews, fixes, and owner verification.
+- RF-42. The temp placement law, measured in
+  Round 6 against the oracle: the write's temp
+  is created under the lexically absolutized
+  parent of the constructed path. The absolutize
+  step is mkstemp's own: the parent joined onto
+  the working directory when it is relative,
+  then normalized lexically in posixpath's
+  normpath shape over the spelling's bytes
+  (empty and "." components drop, ".." pops the
+  component standing before it, whatever that
+  component names; a pop at the root drops; a
+  leading separator pair stands as the anchor).
+  No link is resolved anywhere in that step.
+  The rename target remains the constructed
+  path itself, and the cannot-write message
+  keeps the raw argv spelling, as RF-35 and
+  RF-38 already hold. The convicted family is
+  the popped link: an output whose constructed
+  parent carries a symlink component that a
+  following ".." pops, where the lexically
+  popped parent does not exist (or is a file)
+  while the physically resolved parent does.
+  There the oracle's temp creation fails in the
+  lexical parent and the write refuses, where
+  the pre-repair port created its temp under
+  the spelled parent, the kernel resolved the
+  link, and the statement of proposals landed.
+  RF-39's points about the seam are corrected
+  for this family wherever they spoke of the
+  spelled parent as the temp's home.
+- RF-43. The boundary agreements, measured with
+  the family: where the lexical parent exists
+  as a directory the behavior is unchanged
+  (both sides create the temp there or in the
+  physical parent and agree in outcome; where
+  the physical parent is then missing, the
+  oracle fails at its replace and the port at
+  its temp creation, and both refuse with the
+  same message); where neither parent exists
+  both refuse at temp creation; where the
+  popped component is a real directory the
+  lexical and physical pops coincide. An
+  absolute parent never consults the working
+  directory; a failed working-directory read
+  under a relative parent fails the temp
+  creation into the cannot-write refusal,
+  which is mkstemp's own posture (its abspath
+  raises there). That arm is unreachable behind
+  the guard in this command, whose resolve of a
+  relative output from a deleted working
+  directory already takes the crash class under
+  RF-33; it stands so the placement step is
+  total, not as a reachable divergence.
+- RF-44. The harness gains the popped-link
+  cells: the boundary pins as their own case
+  (neither parent, the lexical parent only,
+  both parents) with the real-directory pop
+  beside them, and one case per convicted shape
+  (plain, the trailing separator, the trailing
+  dot, the absolute spelling, the deep parent,
+  the escape link, the target carrying its own
+  dotdot, the lexical parent as a file, two
+  links popped in sequence, and the overwrite
+  of an existing output at the physical
+  target), the absolute cells carried by an
+  "abs" step form that substitutes the side's
+  own sandbox path and normalizes it back out
+  of the compared streams. Controls against the
+  pre-repair binary fail exactly the convicted
+  cases' write steps, and the pins pass the
+  control as regression coverage.
