@@ -15,7 +15,7 @@ adapter stub, under the programme's package A ruling.
 
 ## Programme status
 
-- Closed perfection rounds, 5 of 100. A round counts only when a
+- Closed perfection rounds, 6 of 100. A round counts only when a
   full cycle of work, audit, review, red team, and approval has
   closed.
 - Round 1 adds the propose command. It reads a directory of

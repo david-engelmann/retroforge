@@ -19,7 +19,7 @@
 
 use std::collections::HashMap;
 use std::io::Write;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use flighttape::value::{Text, Value};
 
@@ -28,7 +28,9 @@ use crate::emit::dumps_view;
 use crate::helptext::{PROPOSE_HELP, PROPOSE_USAGE, TOP_HELP, TOP_USAGE};
 use crate::proposals::{build_proposals, validate_proposals};
 use crate::tapes::{load_tape_file, TapeLoad};
-use crate::util::{closed_at_launch, fsdecode_units, os_path_from_units, scalars_of, Msg};
+use crate::util::{
+    closed_at_launch, fsdecode_units, fsencode_bytes, os_path_from_units, scalars_of, Msg,
+};
 
 /// The tape digest render budget, probed at the
 /// oracle for the load path (RF-17): an array
@@ -931,13 +933,21 @@ fn construct_path(units: &[u16]) -> (Vec<u16>, Vec<u16>, Vec<u16>) {
 }
 
 /// The Python's _write_atomically over a rendered
-/// text: a sibling temp file in the constructed
-/// path's parent (prefix the constructed name and
-/// a dot, suffix .tmp, mode 0600), written, flushed,
-/// and replaced over the constructed path. An OS
-/// error unlinks the temp and refuses.
+/// text: a sibling temp file (prefix the
+/// constructed name and a dot, suffix .tmp, mode
+/// 0600), written, flushed, and replaced over the
+/// constructed path. The temp's directory is the
+/// constructed parent's lexical absolutization
+/// (RF-42), the spelling mkstemp hands its open
+/// after abspath; the rename target is the
+/// constructed path itself. An OS error unlinks
+/// the temp and refuses.
 fn write_atomically(path: &PathBuf, parent: &[u16], name: &[u16], bytes: &[u8]) -> WriteOutcome {
-    let temp = match make_temp(parent, name) {
+    let temp_parent = match lexical_abspath(&fsencode_bytes(parent)) {
+        Ok(bytes) => path_from_bytes(&bytes),
+        Err(_) => return WriteOutcome::Refused,
+    };
+    let temp = match make_temp(&temp_parent, name) {
         Ok(temp) => temp,
         Err(_) => return WriteOutcome::Refused,
     };
@@ -962,7 +972,82 @@ fn write_atomically(path: &PathBuf, parent: &[u16], name: &[u16], bytes: &[u8]) 
     }
 }
 
-fn make_temp(parent: &[u16], name: &[u16]) -> std::io::Result<PathBuf> {
+/// mkstemp's absolutization of the temp's
+/// directory (RF-42): an absolute parent is
+/// normalized as it stands and never consults the
+/// working directory; a relative parent is joined
+/// onto the working directory first, and a failed
+/// read of it fails the step, as mkstemp's own
+/// abspath raises in that spot (RF-43).
+fn lexical_abspath(parent: &[u8]) -> std::io::Result<Vec<u8>> {
+    if parent.first() == Some(&b'/') {
+        return Ok(normpath_bytes(parent));
+    }
+    let cwd = std::env::current_dir()?;
+    let mut joined = os_bytes(&cwd.as_os_str().to_owned());
+    if joined.last() != Some(&b'/') {
+        joined.push(b'/');
+    }
+    joined.extend_from_slice(parent);
+    Ok(normpath_bytes(&joined))
+}
+
+/// posixpath.normpath over raw bytes: redundant
+/// separators collapse (a leading pair stands as
+/// the anchor, a longer leading run collapses to
+/// one), "." components drop, and ".." pops the
+/// component standing before it, whatever it
+/// names; a pop with nothing standing before it
+/// drops at the root of an absolute spelling and
+/// stands in a relative one. No link is read
+/// anywhere in the step.
+fn normpath_bytes(path: &[u8]) -> Vec<u8> {
+    if path.is_empty() {
+        return b".".to_vec();
+    }
+    let leading = path.iter().take_while(|byte| **byte == b'/').count();
+    let (anchor, absolute): (&[u8], bool) = if leading == 2 {
+        (b"//", true)
+    } else if leading > 0 {
+        (b"/", true)
+    } else {
+        (b"", false)
+    };
+    let mut parts: Vec<&[u8]> = Vec::new();
+    for part in path.split(|byte| *byte == b'/') {
+        if part.is_empty() || part == b"." {
+            continue;
+        }
+        if part == b".." {
+            match parts.last() {
+                Some(last) if *last != b".." => {
+                    parts.pop();
+                }
+                _ if !absolute => parts.push(part),
+                _ => {}
+            }
+            continue;
+        }
+        parts.push(part);
+    }
+    if parts.is_empty() {
+        return if absolute {
+            anchor.to_vec()
+        } else {
+            b".".to_vec()
+        };
+    }
+    let mut out = anchor.to_vec();
+    for (index, part) in parts.iter().enumerate() {
+        if index > 0 {
+            out.push(b'/');
+        }
+        out.extend_from_slice(part);
+    }
+    out
+}
+
+fn make_temp(parent: &Path, name: &[u16]) -> std::io::Result<PathBuf> {
     use std::os::unix::fs::OpenOptionsExt;
     const ALPHABET: &[u8] = b"abcdefghijklmnopqrstuvwxyz0123456789_";
     let mut rng = std::time::SystemTime::now()
@@ -977,20 +1062,20 @@ fn make_temp(parent: &[u16], name: &[u16]) -> std::io::Result<PathBuf> {
             rng ^= rng << 17;
             random.push(ALPHABET[(rng % 36) as usize] as char);
         }
-        // The temp spelling is built in units, the
-        // way mkstemp joins the parent, the prefix,
-        // and the suffix: a separator between the
-        // parent and the name unless the parent
-        // already ends with one.
-        let mut candidate = parent.to_vec();
-        if candidate.last() != Some(&('/' as u16)) {
-            candidate.push('/' as u16);
+        // The temp spelling is built in bytes, the
+        // way mkstemp joins the dir, the prefix, and
+        // the suffix: a separator between the dir
+        // and the name unless the dir already ends
+        // with one.
+        let mut candidate = os_bytes(&parent.as_os_str().to_owned());
+        if candidate.last() != Some(&b'/') {
+            candidate.push(b'/');
         }
-        candidate.extend_from_slice(name);
-        candidate.push('.' as u16);
-        candidate.extend(random.bytes().map(|byte| byte as u16));
-        candidate.extend(".tmp".chars().map(|unit| unit as u16));
-        let path = os_path_from_units(&candidate);
+        candidate.extend_from_slice(&fsencode_bytes(name));
+        candidate.push(b'.');
+        candidate.extend(random.bytes());
+        candidate.extend_from_slice(b".tmp");
+        let path = path_from_bytes(&candidate);
         match std::fs::OpenOptions::new()
             .write(true)
             .create_new(true)
