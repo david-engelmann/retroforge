@@ -245,7 +245,7 @@ sentence is superseded for every round until that one.
   crate's timestamp grammar may move silently.
 - RF-24. The output guard's resolver peels the
   last component of any kind, as secondbill's
-  repair and wallofwrong's WW-25 do, and the
+  repair and tetlock's WW-25 do, and the
   harness gains the interleave cells on both
   guard sides (the owed file's item 2 shape).
 - RF-25. The round probes the resolver's loop
@@ -253,7 +253,7 @@ sentence is superseded for every round until that one.
   outcome the oracle dictates: if the Python
   counts an unresolvable output as naming an
   input, the resolver becomes ELOOP-fallible in
-  wallofwrong's WW-25a shape (the loop judged on
+  tetlock's WW-25a shape (the loop judged on
   the finished path's prefixes); if the Python
   crashes uncaught on a loop, the shape stands
   as the named crash class with harness cells
