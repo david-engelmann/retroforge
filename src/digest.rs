@@ -10,7 +10,7 @@
 //! digit long on exactly terminating expansions (the
 //! 2^-24 family) and tape digests and experiment ids
 //! are observable behavior: citations resolve by
-//! them and verdictloop consumes the ids. The
+//! them and touchstone consumes the ids. The
 //! Python this replaces was byte-identical to
 //! onrecord's digest module apart from its
 //! docstring; this module is that port's, re-voiced.
