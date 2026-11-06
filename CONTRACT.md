@@ -48,7 +48,7 @@ on it lands.
 - RF-6. Each proposal carries a registry stub, an
   experiment id derived deterministically from the
   proposal's own content and the baseline period it was
-  measured against, so the later verdictloop join is a
+  measured against, so the later touchstone join is a
   fill-in, not a redesign. Test, tests/test_proposals.py.
 - RF-7. The proposal file is deterministic: the same
   input set and rules file produce byte-identical output,
@@ -189,7 +189,7 @@ sentence is superseded for every round until that one.
   CPython repr-exact digits over the crate's
   value model, the onrecord port's pattern,
   because experiment ids are behavior
-  verdictloop consumes and the flighttape
+  touchstone consumes and the flighttape
   crate's renderer is ECMAScript-faithful and
   runs one digit long on exactly terminating
   expansions. A digest failure excludes the tape
