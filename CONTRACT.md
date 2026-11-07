@@ -535,3 +535,209 @@ sentence is superseded for every round until that one.
   pre-repair binary fail exactly the convicted
   cases' write steps, and the pins pass the
   control as regression coverage.
+- RF-45. The CodeRabbit disposition owed from
+  Round 6 discharges here on evidence: the
+  Round 6 pull request carries zero inline
+  findings and zero reviews on read-back, and
+  its summary shell stands finalized as
+  "Review failed, the pull request is closed"
+  over a findings-free walkthrough, the
+  failed-because-closed shape. There is
+  nothing to fix and the absence is the
+  disposition, as RF-40 held for Round 5.
+- RF-46. The temp suffix measured, the width
+  arm. This crate's generator is measured on
+  its own facts, never inherited from a
+  sibling's. The oracle's candidate is the
+  name, a dot, the eight characters mkstemp
+  draws, and ".tmp"; the port's candidate is
+  the same shape, eight characters drawn from
+  the same 36-symbol alphabet. The flip is
+  the byte count 242 writes and 243 refuses
+  on both sides, and it does not move with
+  the pid: the same flip stands at ambient
+  pids, at pid 1 in a pid namespace, and at a
+  three-digit pid reached by burning pids in
+  the namespace. The width is not a function
+  of the pid in either implementation. A
+  traced run shows the port's candidate
+  opened with O_EXCL at mode 0600, the
+  mkstemp posture. This arm is agreement,
+  not a defect, and no repair is made.
+- RF-47. The temp suffix measured, the byte
+  counting arm. The candidate is assembled
+  from raw bytes end to end on both sides,
+  the oracle's name reaching its temp through
+  its string's surrogateescape round trip and
+  the port's through its byte helpers, with
+  no lossy conversion on either path. A name
+  carrying one raw byte flips at the same
+  byte counts as a plain name, 242 writes and
+  243 refuses, at ambient pids and at pid 1.
+  A parent directory whose name carries a
+  raw byte lands the write at the exactly
+  spelled directory, and no sibling named
+  with the replacement character appears.
+  This arm is agreement, not a defect, and
+  no repair is made.
+- RF-48. The temp suffix measured, the
+  determinism arm. The port's draw is a
+  stream seeded from the sub-second wall
+  clock crossed with the process id, so it
+  is not a public function of the pid, and
+  nothing about the next draw is enumerable
+  from the pid alone. At a fixed pid, twenty
+  runs drew twenty distinct first candidates
+  on the port, as on the oracle; planting
+  every observed candidate in the output
+  directory did not block the next write on
+  either side, each drawing fresh. The plant
+  family that convicted the sibling
+  generators whose draws were public
+  functions of the pid does not arise here.
+  This arm is agreement, not a defect, and
+  no repair is made.
+- RF-49. The README is brought to the fleet
+  README standard in this round: the first
+  screen in the standard's order, the lede
+  identical to the repo description, one
+  badge whose rendered state is verified
+  against the workflow it reports, install
+  and quickstart blocks that run verbatim,
+  and usage carrying captured output. The
+  description identity is recorded exactly:
+  the repo description and the README lede
+  are one line, and Cargo.toml carries no
+  description field at all, so the package
+  metadata side of the identity holds no
+  third variant and nothing to align. The
+  absence is recorded here, not repaired;
+  this round's bound is the README only.
+- RF-50. The harness gains the boundary
+  battery as its own cases: plain names at
+  241, 242, and 243 and a name carrying one
+  raw byte at 242 and 243 at ambient pids,
+  plain names at 242 and 243 under a pidns
+  step form that runs each side as pid 1 in
+  a pid namespace, and the raw-byte parent
+  cell. The control against the pre-round
+  binary passes the battery whole, as it
+  must in a round that repairs nothing: the
+  battery pins a measured agreement, as
+  RF-43's pins did. A mutant whose draw is
+  widened from eight characters to eighteen
+  fails exactly the battery's write cells,
+  proving the battery convicts the width it
+  pins and is not vacuous.
+- RF-51. README records 7 of 100 only in the
+  closure commit written after this round's
+  three reviews, fixes, and owner
+  verification, as RF-41 held for Round 6.
+- RF-50a. Amendment to RF-50, recorded after
+  the runs it describes. The widened-draw
+  mutant's failures number fourteen in all:
+  five are stream mismatches at write steps,
+  and nine are state mismatches at the state
+  steps of the same cases, the echoes the
+  differing write outcomes leave behind
+  them, including at the state steps that
+  follow refusal steps. All fourteen sit
+  inside the four boundary cases the clause
+  pins, and none sits outside them. RF-50's
+  closing claim stands narrowed to this
+  count: the battery convicts the width it
+  pins at its write cells and at the state
+  those cells leave, and nowhere else.
+- RF-52. Amendment to RF-45 and RF-46,
+  recorded after the spec review of this
+  round. Two sentences are corrected by
+  reference; no measured number changes.
+  First, RF-46's alphabet sentence. The
+  oracle's name sequence draws over 37
+  symbols: the letters, the digits, and
+  the underscore. The port's alphabet
+  constant is the same 37-byte string,
+  but the draw indexes it modulo 36
+  (src/cli.rs), so the port never draws
+  the underscore the oracle can. The red
+  team's 200 draws at a fixed pid drew
+  only [0-9a-z] on the port against
+  [0-9a-z_] on the oracle. The pinned
+  width law, exactly eight drawn
+  characters and the flip at 242 writes
+  and 243 refuses, is unaffected, and no
+  battery cell observes alphabet
+  membership. RF-46's identity sentence
+  stands corrected to the effective
+  alphabets stated here. Second, RF-45's
+  quoted shell. The shell of record keeps
+  its two parts distinct, the heading
+  "Review failed" over the notice "The
+  pull request is closed", above a
+  findings-free walkthrough. RF-45's
+  disposition stands in that two-part
+  form, and the comma-joined quotation
+  is replaced by this restatement.
+- RF-53. The seed's pre-epoch fallback is
+  named here as a standing deviation, not
+  a repair. make_temp seeds its draw from
+  the sub-second wall clock crossed with
+  the process id, and when the clock
+  cannot be read, as on a pre-epoch clock,
+  the seed falls back to the constant
+  0x9e3779b9 (src/cli.rs). Under that
+  fallback every process draws the
+  identical first candidate at any pid,
+  the shape convicted as WW-57 in tetlock
+  and cured as BP-47a in bluepencil. It is
+  named rather than repaired here because
+  this round touches no source, being a
+  measured-agreement round; because the
+  branch is unreachable on any post-1970
+  clock; and because no measured cell in
+  this round touches it. The BP-47a
+  treatment, refusing the write when the
+  clock cannot be read, is filed for the
+  next source-touching round of this
+  crate.
+- RF-54. Two dispositions from the step 0
+  review of this round's pull request,
+  recorded after the three reviews closed.
+  First, the boundary qualification,
+  repairing a CodeRabbit finding. RF-46's
+  flip, 242 writes and 243 refuses, is the
+  value at a 255-byte component limit of a
+  general form, the output filesystem's
+  component limit minus the temp name's
+  13-byte overhead, one byte for the dot,
+  eight for the drawn characters, and four
+  for ".tmp". On a filesystem whose
+  component limit is smaller, the flip
+  sits lower by the same arithmetic.
+  RF-46's numbers stand as measured on the
+  filesystems in play, and this clause
+  states the form they instantiate.
+  Second, the zero seed, named here with
+  RF-53's filing and not repaired in this
+  round, on a second CodeRabbit finding.
+  The seed is the sub-second nanoseconds
+  crossed with the process id shifted left
+  17 (src/cli.rs), so for any given pid
+  exactly one nanoseconds reading zeroes
+  it, the pid 1 case being a reading of
+  exactly 131072. A zero xorshift state
+  never changes, so every one of the 64
+  attempts draws the same candidate, and
+  if that one name is planted in the
+  output directory the write refuses
+  though other names are free. The
+  reachability is stated plainly, one
+  exact nanoseconds value for a given pid,
+  and no measured cell in this round has
+  hit it. The oracle's draw carries no
+  degenerate state. The cure joins RF-53's
+  pre-epoch fallback in the same filing,
+  the next source-touching round of this
+  crate gives the draw a nonzero-state
+  guard alongside the
+  refuse-on-unreadable-clock treatment.
