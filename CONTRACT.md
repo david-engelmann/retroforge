@@ -700,3 +700,44 @@ sentence is superseded for every round until that one.
   clock cannot be read, is filed for the
   next source-touching round of this
   crate.
+- RF-54. Two dispositions from the step 0
+  review of this round's pull request,
+  recorded after the three reviews closed.
+  First, the boundary qualification,
+  repairing a CodeRabbit finding. RF-46's
+  flip, 242 writes and 243 refuses, is the
+  value at a 255-byte component limit of a
+  general form, the output filesystem's
+  component limit minus the temp name's
+  13-byte overhead, one byte for the dot,
+  eight for the drawn characters, and four
+  for ".tmp". On a filesystem whose
+  component limit is smaller, the flip
+  sits lower by the same arithmetic.
+  RF-46's numbers stand as measured on the
+  filesystems in play, and this clause
+  states the form they instantiate.
+  Second, the zero seed, named here with
+  RF-53's filing and not repaired in this
+  round, on a second CodeRabbit finding.
+  The seed is the sub-second nanoseconds
+  crossed with the process id shifted left
+  17 (src/cli.rs), so for any given pid
+  exactly one nanoseconds reading zeroes
+  it, the pid 1 case being a reading of
+  exactly 131072. A zero xorshift state
+  never changes, so every one of the 64
+  attempts draws the same candidate, and
+  if that one name is planted in the
+  output directory the write refuses
+  though other names are free. The
+  reachability is stated plainly, one
+  exact nanoseconds value for a given pid,
+  and no measured cell in this round has
+  hit it. The oracle's draw carries no
+  degenerate state. The cure joins RF-53's
+  pre-epoch fallback in the same filing,
+  the next source-touching round of this
+  crate gives the draw a nonzero-state
+  guard alongside the
+  refuse-on-unreadable-clock treatment.

@@ -24,7 +24,7 @@ The fixture tape carries no repeated failure, so its proposal list is empty. The
 
 ## Install
 
-A Rust toolchain is the only prerequisite. Clone the repo and install the command from it.
+A Rust toolchain and Git are the prerequisites. Clone the repo and install the command from it.
 
 ```console
 $ git clone https://github.com/david-engelmann/retroforge
@@ -32,7 +32,7 @@ $ cd retroforge
 $ cargo install --path .
 ```
 
-The crate is named retroforge. It reads flighttape tapes through the flighttape crate at a pinned revision, and cargo fetches that dependency during the install.
+The crate is named retroforge. It reads flighttape tapes through the flighttape crate at a pinned revision, and cargo fetches that dependency during the install. The installed command lands in Cargo's bin directory, $HOME/.cargo/bin by default, and the quickstart below assumes that directory is on the PATH.
 
 ## Quickstart
 
@@ -100,7 +100,7 @@ Two failed Read calls with the same input, and a third call after them, cross th
 
 ## Usage
 
-The command has one subcommand, propose. It takes the directory to read, and every tape file in it that fails to load is excluded with its reason named on stderr while the run proceeds on the tapes that remain. Without -o the proposal document goes to stdout. With -o it is written through a sibling temporary file and replaced into place, so a failed write leaves the earlier proposal file intact. A run with no valid tapes writes nothing and exits 1, and a directory that does not exist is refused by name.
+The command has one subcommand, propose. It takes the directory to read, and every tape file in it that fails to load is excluded with its reason named on stderr while the run proceeds on the tapes that remain. Without -o the proposal document goes to stdout. With -o it is written through a sibling temporary file and replaced into place, so a failed write leaves the earlier proposal file intact. A run with no valid tapes writes nothing and exits 1, and a directory that does not exist is refused by name. In the captured run below, the tapes directory also holds a file named broken.json whose contents are not valid JSON, which is why the run prints its exclusion line.
 
 ```console
 $ retroforge propose tapes -o proposals.json
@@ -116,7 +116,7 @@ $ retroforge propose tapes --target RULES.md | grep '"target"'
       "target": "RULES.md",
 ```
 
-Every proposal carries at least two citations, and each citation is resolved against the input set before anything is written. Retroforge never writes to the setup tree it reads, and its only output is the proposal file.
+Every proposal carries at least two citations, and each citation is resolved against the input set before anything is written. Retroforge never modifies the files it reads, its guard refuses an output path that names one of the input tapes, and the output path itself is the caller's choice.
 
 ## Status
 
