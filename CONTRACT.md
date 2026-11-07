@@ -648,3 +648,55 @@ sentence is superseded for every round until that one.
   count: the battery convicts the width it
   pins at its write cells and at the state
   those cells leave, and nowhere else.
+- RF-52. Amendment to RF-45 and RF-46,
+  recorded after the spec review of this
+  round. Two sentences are corrected by
+  reference; no measured number changes.
+  First, RF-46's alphabet sentence. The
+  oracle's name sequence draws over 37
+  symbols: the letters, the digits, and
+  the underscore. The port's alphabet
+  constant is the same 37-byte string,
+  but the draw indexes it modulo 36
+  (src/cli.rs), so the port never draws
+  the underscore the oracle can. The red
+  team's 200 draws at a fixed pid drew
+  only [0-9a-z] on the port against
+  [0-9a-z_] on the oracle. The pinned
+  width law, exactly eight drawn
+  characters and the flip at 242 writes
+  and 243 refuses, is unaffected, and no
+  battery cell observes alphabet
+  membership. RF-46's identity sentence
+  stands corrected to the effective
+  alphabets stated here. Second, RF-45's
+  quoted shell. The shell of record keeps
+  its two parts distinct, the heading
+  "Review failed" over the notice "The
+  pull request is closed", above a
+  findings-free walkthrough. RF-45's
+  disposition stands in that two-part
+  form, and the comma-joined quotation
+  is replaced by this restatement.
+- RF-53. The seed's pre-epoch fallback is
+  named here as a standing deviation, not
+  a repair. make_temp seeds its draw from
+  the sub-second wall clock crossed with
+  the process id, and when the clock
+  cannot be read, as on a pre-epoch clock,
+  the seed falls back to the constant
+  0x9e3779b9 (src/cli.rs). Under that
+  fallback every process draws the
+  identical first candidate at any pid,
+  the shape convicted as WW-57 in tetlock
+  and cured as BP-47a in bluepencil. It is
+  named rather than repaired here because
+  this round touches no source, being a
+  measured-agreement round; because the
+  branch is unreachable on any post-1970
+  clock; and because no measured cell in
+  this round touches it. The BP-47a
+  treatment, refusing the write when the
+  clock cannot be read, is filed for the
+  next source-touching round of this
+  crate.
