@@ -633,3 +633,18 @@ sentence is superseded for every round until that one.
   closure commit written after this round's
   three reviews, fixes, and owner
   verification, as RF-41 held for Round 6.
+- RF-50a. Amendment to RF-50, recorded after
+  the runs it describes. The widened-draw
+  mutant's failures number fourteen in all:
+  five are stream mismatches at write steps,
+  and nine are state mismatches at the state
+  steps of the same cases, the echoes the
+  differing write outcomes leave behind
+  them, including at the state steps that
+  follow refusal steps. All fourteen sit
+  inside the four boundary cases the clause
+  pins, and none sits outside them. RF-50's
+  closing claim stands narrowed to this
+  count: the battery convicts the width it
+  pins at its write cells and at the state
+  those cells leave, and nowhere else.
