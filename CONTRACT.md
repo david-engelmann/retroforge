@@ -915,3 +915,7 @@ sentence is superseded for every round until that one.
   pre-round tree and the three seed pins,
   with clippy at -D warnings clean and
   the formatter check clean.
+- RF-59. README records 8 of 100 only in
+  the closure commit written after this
+  round's three reviews, fixes, and owner
+  verification, as RF-51 held for Round 7.
