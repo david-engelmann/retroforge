@@ -877,10 +877,14 @@ sentence is superseded for every round until that one.
   write lands on a drawn name. The
   substitution is not RF-53's fallback
   returning. The zero point is one exact
-  reading for one pid, two live processes
-  never share a pid, and the substituted
-  stream is a single process's stream,
-  while the refusal of RF-56 is checked
+  reading for one pid. The substituted
+  stream is the constant's stream, drawn
+  identically by any process at its own
+  zero point, and pids repeat across
+  namespaces, so no privacy is claimed
+  for the stream and the bound is the
+  crossing pair alone, while the refusal
+  of RF-56 is checked
   on the read before any crossing, so an
   unreadable clock refuses and only a
   readable clock can reach the guard. The
@@ -919,3 +923,38 @@ sentence is superseded for every round until that one.
   the closure commit written after this
   round's three reviews, fixes, and owner
   verification, as RF-51 held for Round 7.
+- RF-60. The CodeRabbit review of this
+  round's pull request (review 5817730249,
+  posted after the three reviews) carried
+  two nitpicks in its body and no inline
+  findings. The first is repaired here.
+  RF-57's rationale and the matching
+  comment on the seed function claimed
+  the substituted stream is a single
+  process's stream because two live
+  processes never share a pid. That claim
+  does not hold. Pids repeat across
+  namespaces, and every process at its
+  own zero point draws the same constant
+  stream. Both texts now state the stream
+  is the constant's, shared by any
+  process at its zero point, with no
+  privacy claimed; the behavior is
+  unchanged, the amendment touching prose
+  and a comment only, and CI runs the
+  full suite on the amended head. The
+  second nitpick asks for a caller-level
+  test that a missing seed refuses at a
+  writable output path, inside cargo
+  test. It is dismissed. The refusal at
+  a writable path under a missing reading
+  is covered where the clock can be
+  governed, in the standing differential's
+  clock cases and in this round's red
+  team rig, both run at the gate; a crate
+  test cannot set the process clock
+  without a preload shim this suite does
+  not carry, and the seed factoring's
+  pins plus the one line flow through
+  the standing refusal arm are the
+  crate-level coverage.

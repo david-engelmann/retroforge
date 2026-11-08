@@ -1059,9 +1059,11 @@ fn normpath_bytes(path: &[u8]) -> Vec<u8> {
 /// the state, because a zero xorshift state
 /// never changes and would draw one
 /// candidate for all 64 attempts (RF-57).
-/// The substitution is a single process's
-/// stream, since two live processes never
-/// share a pid.
+/// The substituted stream is the
+/// constant's stream, the same for any
+/// process at its own zero point; pids
+/// repeat across namespaces, and no
+/// privacy is claimed for the stream.
 fn seed_from_reading(reading: Option<u64>, pid: u32) -> Option<u64> {
     let crossed = reading? ^ (pid as u64) << 17;
     Some(if crossed == 0 { 0x9e3779b9 } else { crossed })
