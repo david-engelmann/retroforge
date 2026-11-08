@@ -1047,13 +1047,38 @@ fn normpath_bytes(path: &[u8]) -> Vec<u8> {
     out
 }
 
+/// The draw's seed from one clock reading
+/// crossed with the process id, or no seed
+/// at all. A missing reading, the clock
+/// unreadable as on a pre-epoch clock,
+/// yields no seed, and the write refuses
+/// rather than fall back to a constant any
+/// process can compute (RF-56). A crossed
+/// value of zero, one exact reading for a
+/// given pid, substitutes the constant as
+/// the state, because a zero xorshift state
+/// never changes and would draw one
+/// candidate for all 64 attempts (RF-57).
+/// The substitution is a single process's
+/// stream, since two live processes never
+/// share a pid.
+fn seed_from_reading(reading: Option<u64>, pid: u32) -> Option<u64> {
+    let crossed = reading? ^ (pid as u64) << 17;
+    Some(if crossed == 0 { 0x9e3779b9 } else { crossed })
+}
+
+fn temp_seed() -> Option<u64> {
+    let reading = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .ok()
+        .map(|d| d.subsec_nanos() as u64);
+    seed_from_reading(reading, std::process::id())
+}
+
 fn make_temp(parent: &Path, name: &[u16]) -> std::io::Result<PathBuf> {
     use std::os::unix::fs::OpenOptionsExt;
     const ALPHABET: &[u8] = b"abcdefghijklmnopqrstuvwxyz0123456789_";
-    let mut rng = std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
-        .map(|d| d.subsec_nanos() as u64 ^ (std::process::id() as u64) << 17)
-        .unwrap_or(0x9e3779b9);
+    let mut rng = temp_seed().ok_or_else(|| std::io::Error::other("the clock cannot be read"))?;
     for _ in 0..64 {
         let mut random = String::new();
         for _ in 0..8 {
@@ -1317,4 +1342,24 @@ fn resolve_path(units: &[u16]) -> Option<Vec<u16>> {
         }
     }
     Some(fsdecode_units(&finished))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::seed_from_reading;
+
+    #[test]
+    fn a_missing_reading_yields_no_seed() {
+        assert_eq!(seed_from_reading(None, 1), None);
+    }
+
+    #[test]
+    fn the_zero_crossing_yields_the_constant() {
+        assert_eq!(seed_from_reading(Some(131072), 1), Some(0x9e3779b9));
+    }
+
+    #[test]
+    fn the_reading_above_the_zero_crossing_yields_one() {
+        assert_eq!(seed_from_reading(Some(131073), 1), Some(1));
+    }
 }
