@@ -120,7 +120,7 @@ Every proposal carries at least two citations, and each citation is resolved aga
 
 ## Status
 
-The propose command is complete at its contracted scope and runs as a Rust binary, with the Python of the first two rounds standing as its behavioral spec. Gate evidence citations are not wired yet, because the evidence pack format is not pinned for this line, and the adapter refuses by name until it is. Closed perfection rounds, 7 of 100. A round counts only when a full cycle of work, audit, review, red team, and approval has closed.
+The propose command is complete at its contracted scope and runs as a Rust binary, with the Python of the first two rounds standing as its behavioral spec. Gate evidence citations are not wired yet, because the evidence pack format is not pinned for this line, and the adapter refuses by name until it is. Closed perfection rounds, 8 of 100. A round counts only when a full cycle of work, audit, review, red team, and approval has closed.
 
 ## License
 

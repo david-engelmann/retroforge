@@ -741,3 +741,220 @@ sentence is superseded for every round until that one.
   crate gives the draw a nonzero-state
   guard alongside the
   refuse-on-unreadable-clock treatment.
+- RF-55. The dispositions of the last two
+  pull requests, read back whole for this
+  round, reviews and review bodies and
+  issue comments included. The CI shaping
+  pull request 10 merged first, and the
+  Round 7 pull request 11 merged on top of
+  it. On pull request 10, the step 0 shell
+  stands in its completed walkthrough
+  form, created about five minutes before
+  the merge and last updated about a
+  minute before it, carrying one findings
+  review with one inline finding and one
+  nitpick in the review body. The finding
+  asks that merge-queue branches be
+  excluded from the push trigger, since a
+  merge group also fires a push run, and
+  the nitpick asks for a pull-request
+  gated check that the merge_group
+  trigger stays. Both are disposed here
+  and not repaired. The workflow is the
+  fleet's uniform shaping step, merge
+  queues cannot be enabled on user-owned
+  repositories because the ruleset API
+  rejects the merge_queue rule there, so
+  no merge group can form and no duplicate
+  run can occur, and the exclusion belongs
+  to the fleet queue pass if queues ever
+  open. The finding stands unanswered on
+  its thread, and the answer is this item.
+  On pull request 11, the step 0 shell
+  stands in its final form as the
+  rate-limit banner over a complete
+  walkthrough of the round's commits,
+  created about twenty-eight minutes
+  before the merge and last updated about
+  eight minutes before it. Its findings
+  review carried seven inline findings,
+  six valid and repaired in Round 7 and
+  one dismissed, with six owner replies
+  and six bot acknowledgments standing on
+  the threads, and the landing comment
+  after the merge counts the seven in
+  that form. An eighth item stood in the
+  findings review's body, under
+  additional comments, and nothing in
+  Round 7 disposed of it. The item, a
+  minor claiming a test gap, holds that
+  the name battery of plain ASCII names
+  and a one-raw-byte name does not
+  exercise conversion of a supplementary
+  Unicode character, a UTF-16 surrogate
+  pair, and that a regression encoding
+  each half of a valid pair as a
+  replacement character would pass the
+  battery. This round measured the cell.
+  A tape whose tool call input path
+  carries U+1F600 and an output name
+  carrying U+1F600 both ran on the port
+  and on the oracle, and the two sides
+  agree byte for byte, the proposal
+  files identical at 1161 bytes and the
+  created name the character's raw UTF-8
+  on both sides, with no replacement
+  character anywhere. The disposition is
+  that the gap is closed by measurement,
+  no defect stands in the conversion, and
+  the harness gains a case pinning the
+  pair conversion so the battery itself
+  covers it from this round on.
+- RF-56. RF-53 is adjudicated and
+  repaired. The measurements, taken under
+  a clock shim on this machine against
+  the pre-round binary and the Python
+  oracle, are these. The oracle lands on
+  the pre-epoch cell and on the
+  erroring-clock cell, exit 0 with the
+  proposal file written, because its draw
+  is mkstemp and carries no clock seed.
+  The port on the pre-epoch cell draws
+  the constant's stream whole, shown by
+  planting all 64 names of the simulated
+  stream from the constant 0x9e3779b9, at
+  two ambient pids the write refused
+  against the full plant, and unplanted
+  the same cell lands. On the
+  erroring-clock cell the port dies in
+  the standard library's panic inside
+  SystemTime::now, exit 1 with nothing
+  written, where the oracle lands, and
+  the pair is stated unsmoothed. The
+  repair gives the seed a read that
+  yields no seed when the duration since
+  the epoch cannot be read, and make_temp
+  then fails, which the standing write
+  arm maps to the standing refusal, exit
+  1 with the standing message. The
+  refusal is a hardening past the oracle,
+  stated openly and not as fidelity. The
+  oracle lands on the cell and the port
+  now refuses it, because the port's draw
+  is clock-seeded by design and a
+  computable constant fallback is the
+  defect RF-53 filed. The erroring-clock
+  cell is unchanged by the repair, since
+  the panic fires inside the standard
+  library before any crate code can
+  refuse. The entropy shape settled at
+  tetlock in WW-69 was weighed for this
+  seam and not imported. This seam's
+  filed cure is the refusal, the draw's
+  ordinary stream stands on the measured
+  agreement of RF-52 and is unchanged,
+  and the degenerate states are closed by
+  this item and RF-57 together.
+- RF-57. RF-54's zero seed is adjudicated
+  and repaired. The measurements, taken
+  under the clock shim at pid 1 in a pid
+  namespace with the nanoseconds reading
+  pinned at 131072, are these. With the
+  zero state's one candidate planted, the
+  pre-round binary refuses the write with
+  the standing message and the plant
+  stands untouched, and with nothing
+  planted the same cell lands, so every
+  attempt draws the planted name and the
+  state never moves. The oracle at the
+  same cell lands, its draw carrying no
+  such state. The repair guards the
+  crossed seed. When the nanoseconds
+  crossed with the shifted pid come to
+  zero, the constant 0x9e3779b9 is
+  substituted as the state, so the draw
+  moves off the single candidate and the
+  write lands on a drawn name. The
+  substitution is not RF-53's fallback
+  returning. The zero point is one exact
+  reading for one pid. The substituted
+  stream is the constant's stream, drawn
+  identically by any process at its own
+  zero point, and pids repeat across
+  namespaces, so no privacy is claimed
+  for the stream and the bound is the
+  crossing pair alone, while the refusal
+  of RF-56 is checked
+  on the read before any crossing, so an
+  unreadable clock refuses and only a
+  readable clock can reach the guard. The
+  seed factoring is pinned by exact
+  values in the crate's tests. A missing
+  reading yields no seed, the pid 1
+  reading of 131072 yields the constant,
+  and the reading one above it yields the
+  crossed value 1.
+- RF-58. Amendment to RF-56 and RF-57,
+  recorded after the runs they describe.
+  The standing differential harness gains
+  the three clock cases and the two astral
+  cases, five cases in all, and stands at
+  113 cases and 239 steps. Against the
+  repaired binary the harness passes
+  whole, no failures. Against the
+  pre-round binary it fails in exactly
+  five places, three in the pre-epoch
+  clock case, where the old binary lands
+  and the repaired one refuses, and two
+  in the zero seed case, where the old
+  binary refuses against the planted sole
+  candidate and the repaired one lands.
+  The erroring clock case passes on both
+  binaries, as RF-56 states it unchanged.
+  No failure sits outside the two repaired
+  cells, so the new cases convict exactly
+  the states this round repaired and are
+  not vacuous. The gate on the repaired
+  tree runs 42 tests, the 39 of the
+  pre-round tree and the three seed pins,
+  with clippy at -D warnings clean and
+  the formatter check clean.
+- RF-59. README records 8 of 100 only in
+  the closure commit written after this
+  round's three reviews, fixes, and owner
+  verification, as RF-51 held for Round 7.
+- RF-60. The CodeRabbit review of this
+  round's pull request (review 5817730249,
+  posted after the three reviews) carried
+  two nitpicks in its body and no inline
+  findings. The first is repaired here.
+  RF-57's rationale and the matching
+  comment on the seed function claimed
+  the substituted stream is a single
+  process's stream because two live
+  processes never share a pid. That claim
+  does not hold. Pids repeat across
+  namespaces, and every process at its
+  own zero point draws the same constant
+  stream. Both texts now state the stream
+  is the constant's, shared by any
+  process at its zero point, with no
+  privacy claimed; the behavior is
+  unchanged, the amendment touching prose
+  and a comment only, and CI runs the
+  full suite on the amended head. The
+  second nitpick asks for a caller-level
+  test that a missing seed refuses at a
+  writable output path, inside cargo
+  test. It is dismissed. The refusal at
+  a writable path under a missing reading
+  is covered where the clock can be
+  governed, in the standing differential's
+  clock cases and in this round's red
+  team rig, both run at the gate; a crate
+  test cannot set the process clock
+  without a preload shim this suite does
+  not carry, and the seed factoring's
+  pins plus the one line flow through
+  the standing refusal arm are the
+  crate-level coverage.
