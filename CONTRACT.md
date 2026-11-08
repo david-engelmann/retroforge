@@ -890,3 +890,28 @@ sentence is superseded for every round until that one.
   reading of 131072 yields the constant,
   and the reading one above it yields the
   crossed value 1.
+- RF-58. Amendment to RF-56 and RF-57,
+  recorded after the runs they describe.
+  The standing differential harness gains
+  the three clock cases and the two astral
+  cases, five cases in all, and stands at
+  113 cases and 239 steps. Against the
+  repaired binary the harness passes
+  whole, no failures. Against the
+  pre-round binary it fails in exactly
+  five places, three in the pre-epoch
+  clock case, where the old binary lands
+  and the repaired one refuses, and two
+  in the zero seed case, where the old
+  binary refuses against the planted sole
+  candidate and the repaired one lands.
+  The erroring clock case passes on both
+  binaries, as RF-56 states it unchanged.
+  No failure sits outside the two repaired
+  cells, so the new cases convict exactly
+  the states this round repaired and are
+  not vacuous. The gate on the repaired
+  tree runs 42 tests, the 39 of the
+  pre-round tree and the three seed pins,
+  with clippy at -D warnings clean and
+  the formatter check clean.
