@@ -958,3 +958,134 @@ sentence is superseded for every round until that one.
   pins plus the one line flow through
   the standing refusal arm are the
   crate-level coverage.
+- RF-61. The standing read-back of the
+  last pull request, read whole for this
+  round, reviews and review bodies and
+  issue comments included. Pull request
+  12 carries one review, no review
+  comments, and four issue comments. The
+  review (5817730249) carried two
+  nitpicks, both disposed in RF-60, and
+  no inline findings. One item stood
+  undisposed. The review tool's Docstring
+  Coverage check failed the pull request
+  at 50.00 percent against its own 80.00
+  percent threshold, over functions of
+  cyclomatic complexity at least 2 that
+  the diff touched, naming no function,
+  and it stands in the summary comment's
+  failed checks table and in the review's
+  own failed list, while RF-60 and the
+  landing comment count only the two
+  nitpicks. It is dismissed here. The
+  check names no function, this
+  repository carries no docstring
+  configuration or threshold of its own,
+  and the check applies the review tool's
+  default profile, so there is no rule of
+  this repository for it to enforce. The
+  remaining comments are the review
+  trigger, the bot's auto-reply that the
+  last commit was already reviewed, and
+  the landing comment. Nothing else was
+  owed.
+- RF-62. The flighttape pin aligns to
+  the fleet. The crate stood at eebce0be,
+  flighttape's Round 12 merge, one rev
+  behind the fleet's 74a83298, its Round
+  13 merge, and the dependency stood
+  twice, under [dependencies] and again
+  under [dev-dependencies]. Cargo.toml
+  and Cargo.lock now carry 74a83298 and
+  the duplicate is removed, so the
+  dependency stands once. The revs differ
+  in the timestamp grammar (FT-60,
+  FT-60a, FT-63, FT-64, FT-65, FT-68), the
+  surface flighttape's own contract names
+  for consumers to re-pin against, so the
+  alignment was controlled before it was
+  believed, on the method of RF-23. The
+  standing differential harness ran
+  against the re-pinned binary before any
+  harness edit, over the same corpus the
+  old pin passes: 113 cases, 239 steps,
+  0 failures, the old pin's own numbers,
+  and no harness edit followed. Nothing
+  the older rev carried silently is lost,
+  and no deviation step was needed,
+  because no case this port exercises
+  reaches the moved grammar shapes. The
+  alignment and the dedup are contracted
+  as hygiene, with the control run as the
+  evidence. One run note: the box's file
+  quota refused the harness's standing
+  sandbox root through the whole round,
+  so the harness ran whole from a copy
+  whose only change relocates that root;
+  the diff is one line, and the cases,
+  steps, and comparisons are the standing
+  ones.
+- RF-63. The seed surface, measured
+  fresh at this round's binary against
+  the oracle, a battery of 13 cells. The
+  RF-56 and RF-57 cells stand as
+  contracted. Under the clock shim at
+  pid 1, the zero reading's cell lands
+  with the sole candidate planted and
+  lands unplanted. At a reading one
+  nanosecond before the epoch the port
+  refuses with the standing message,
+  planted with the constant's full
+  64-name stream and unplanted alike,
+  where the oracle lands. On the erroring
+  clock the port dies in the standard
+  library's panic inside SystemTime::now,
+  exit 1 with nothing written, where the
+  oracle lands, the pair stated unsmoothed
+  as before. The band past the crossings
+  is now measured at the command line,
+  not only derived. The crossing reading
+  for a pid is the pid shifted left 17,
+  and a sub-second reading is at most
+  999,999,999, so pid 7629, whose crossing
+  reading is 999,948,288, is the last pid
+  with a crossing and pid 7630 the first
+  with none. Under a shim pinning the
+  reading at 999,948,288, with the
+  constant's full stream planted, the
+  binary run at exactly pid 7629 refuses
+  and unplanted lands, while at exactly
+  pid 7630 and at pid 8000 the planted
+  cell lands, each run's pid proven by
+  the launcher's own report of the child
+  it exec'd. The factoring gains two
+  crate pins at the same reading, their
+  expected values computed outside the
+  crate: pid 7629 yields the constant
+  0x9e3779b9, and pid 7630 yields the
+  plain crossed value 393216.
+- RF-64. The suffix surface, measured
+  fresh at this round's binary against
+  the oracle, a battery of 20 cells and
+  400 draws. The width flip stands where
+  RF-46 and RF-47 put it. Output names of
+  241 and 242 bytes land and 243 refuses
+  on both sides, at ambient pids and at
+  pid 1 alike, and a name carrying one
+  raw byte flips at the same counts on
+  both sides. The alphabet law of RF-52
+  stands re-measured. Of 200 first
+  candidates drawn by the port under
+  strace, none carries an underscore and
+  the drawn set is exactly the 36 symbols
+  0 to 9 and a to z; of 200 drawn by the
+  oracle, 34 carry an underscore and the
+  drawn set is all 37 symbols. The port's
+  agreement with the oracle is agreement
+  of shape, width, and refusal, with the
+  one contracted alphabet difference
+  standing as measured.
+- RF-65. README records 9 of 100 only in
+  the closure commit written after this
+  round's three reviews, fixes, and owner
+  verification, as RF-59 held for Round 8.

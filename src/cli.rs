@@ -1364,4 +1364,14 @@ mod tests {
     fn the_reading_above_the_zero_crossing_yields_one() {
         assert_eq!(seed_from_reading(Some(131073), 1), Some(1));
     }
+
+    #[test]
+    fn the_last_crossing_pid_yields_the_constant() {
+        assert_eq!(seed_from_reading(Some(999_948_288), 7629), Some(0x9e3779b9));
+    }
+
+    #[test]
+    fn the_first_pid_past_the_band_yields_the_plain_xor() {
+        assert_eq!(seed_from_reading(Some(999_948_288), 7630), Some(393_216));
+    }
 }
