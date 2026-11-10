@@ -1085,3 +1085,7 @@ sentence is superseded for every round until that one.
   of shape, width, and refusal, with the
   one contracted alphabet difference
   standing as measured.
+- RF-65. README records 9 of 100 only in
+  the closure commit written after this
+  round's three reviews, fixes, and owner
+  verification, as RF-59 held for Round 8.
