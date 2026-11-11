@@ -1309,3 +1309,48 @@ sentence is superseded for every round until that one.
   identical to the -o cell, and an
   output name of 243 bytes refuses
   (exit 1). Every cell agreed.
+- RF-71. The gate on this round's
+  trees, all runs offline with an
+  isolated target directory and two
+  build jobs. On the base tree
+  c9f95fdb, cargo test passed 44 (5
+  library, 27 proposals, 12 rescue),
+  clippy with warnings denied was
+  clean, fmt was clean, and the
+  codepoint scan read 0 and 0. The
+  differential harness over the base
+  binary reproduced 113 cases, 239
+  steps, 0 failures, its sandbox
+  root relocated to /tmp by the
+  one-line in-memory substitution
+  disclosed in RF-62. The battery of
+  RF-67 to RF-69 ran 25 cells in one
+  cycle with every cell as expected.
+  The realistic pass of RF-70 ran 9
+  cells, 18 runs, in one cycle with
+  every cell equal. On the slice
+  tree, cargo test passed 48 (the
+  four new seed pins among the 9
+  library tests), clippy with
+  warnings denied was clean, fmt was
+  clean, and the codepoint scan read
+  0 and 0. The closure commit
+  carrying this item changes no
+  code. It carries RF-71, RF-72, and
+  the README Status counts. The
+  lane's worktree and instruments
+  were staged under /tmp this round
+  because the workspace file-count
+  cap refused new workspace files
+  and the box write fault refused
+  process writes in long waves. The
+  staging is disclosed on the lane
+  report's face, and workspace
+  copies are owed when a window
+  opens. Nothing in the wait is
+  evidence about the code.
+- RF-72. Closure. The README records
+  10 of 100 in the commit carrying
+  this item. This round's read-back,
+  measurements, pins, and realistic
+  pass are the whole of the change.
