@@ -1374,4 +1374,24 @@ mod tests {
     fn the_first_pid_past_the_band_yields_the_plain_xor() {
         assert_eq!(seed_from_reading(Some(999_948_288), 7630), Some(393_216));
     }
+
+    #[test]
+    fn the_penultimate_crossing_pid_yields_the_constant() {
+        assert_eq!(seed_from_reading(Some(999_817_216), 7628), Some(0x9e3779b9));
+    }
+
+    #[test]
+    fn the_reading_one_below_the_last_crossing_yields_262143() {
+        assert_eq!(seed_from_reading(Some(999_948_287), 7629), Some(262_143));
+    }
+
+    #[test]
+    fn the_reading_one_above_the_last_crossing_yields_one() {
+        assert_eq!(seed_from_reading(Some(999_948_289), 7629), Some(1));
+    }
+
+    #[test]
+    fn the_maximum_reading_past_the_band_yields_444927() {
+        assert_eq!(seed_from_reading(Some(999_999_999), 7630), Some(444_927));
+    }
 }
