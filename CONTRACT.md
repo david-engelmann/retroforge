@@ -1695,3 +1695,47 @@ sentence is superseded for every round until that one.
   RF-76. Every cell agreed, and the
   word gate occurs zero times in the
   period's proposal document.
+- RF-78. The gate on this round's
+  trees, all runs offline with an
+  isolated target directory and two
+  build jobs. On the base tree
+  40233bec, cargo test passed 48 (9
+  library, 27 proposals, 12 rescue),
+  clippy with warnings denied was
+  clean, fmt was clean, and the
+  codepoint scan read 0 and 0. The
+  battery of RF-74 ran 22 cells in
+  one cycle with every cell as
+  expected, and the battery of RF-75
+  ran 32 cells with every cell as
+  contracted, each side's form of
+  the crash class stated in RF-75.
+  The realistic pass of RF-77 ran 9
+  command cells, 18 runs, plus the
+  fixture cell, in one cycle with
+  every cell equal. On the slice
+  tree carrying RF-73 to RF-77,
+  cargo test passed 48, clippy with
+  warnings denied was clean, fmt was
+  clean, and the codepoint scan read
+  0 and 0. No source code changed in
+  this round, and no defect was
+  found to report. The closure
+  commit carrying this item changes
+  no code. It carries RF-78, RF-79,
+  and the README Status count. The
+  lane's worktree and instruments
+  were staged under /tmp this round
+  because the workspace file-count
+  cap refused new workspace files at
+  lane start (EDQUOT) and /tmp itself
+  filled once mid-round, cleared by
+  deleting a spent build target; the
+  staging is disclosed on the lane
+  report's face. Nothing in the wait
+  is evidence about the code.
+- RF-79. Closure. The README records
+  11 of 100 in the commit carrying
+  this item. This round's read-back,
+  measurements, and realistic pass
+  are the whole of the change.
