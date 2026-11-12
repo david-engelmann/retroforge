@@ -1434,3 +1434,85 @@ sentence is superseded for every round until that one.
   disposition is falsified by
   anything in the record, and nothing
   in it stands undisposed.
+- RF-74. The draw stream, the seed
+  band edge, and the clock refusals
+  were re-measured fresh at the
+  shipped binary against the oracle's
+  stream simulator, in one battery
+  cycle of 22 cells (this round's
+  battery part A). The seed is the
+  sub-second reading crossed with the
+  pid shifted left 17, a crossed
+  value of zero substituting the
+  constant 0x9e3779b9, with refusal
+  at a pre-epoch clock and the
+  erroring-clock panic in
+  SystemTime::now (RF-56, RF-57); no
+  privacy is claimed for the draw.
+  The oracle's identity was verified
+  before any cell was trusted: its
+  copy matches commit
+  09b4686518c643fad55398cd6d42ddac299393dc
+  blob for blob across all 14 of its
+  files, verified against the local
+  clone that holds that commit (the
+  API answers 422 for the short
+  identifier, as RF-69 records).
+  Seated at exact pids by the burn
+  launcher, each run's pid proven
+  from the child's own report, with
+  the clock shim pinning the reading:
+  pid 7628 at its own crossing
+  999,817,216 refuses with the
+  constant's full 64-name stream
+  planted and lands unplanted; pid
+  7628 at 999,948,288 draws crossed
+  seed 131,072, refusing with that
+  stream planted and landing with
+  the constant's stream planted; pid
+  7629 one nanosecond below the last
+  crossing, at 999,948,287, draws
+  262,143 and refuses with its stream
+  planted, landing with the
+  constant's; pid 7629 at the last
+  crossing 999,948,288 refuses with
+  the constant's stream planted and
+  lands unplanted; pid 7629 one
+  nanosecond above, at 999,948,289,
+  draws seed 1 and refuses with its
+  stream planted, landing with the
+  constant's; pid 7630 at 999,948,288
+  lands with the constant's stream
+  planted (its crossed seed is
+  393,216, not the constant); pid
+  7630 at the maximum reading
+  999,999,999 draws 444,927 and
+  refuses with its stream planted,
+  landing with the constant's. At pid
+  1, the binary run as the namespace
+  init, reading 131,072 refuses with
+  the constant's full stream planted
+  and lands with only the zero
+  state's sole candidate aaaaaaaa
+  planted, and reading 131,073 lands
+  with the constant's stream planted
+  and refuses with seed 1's stream
+  planted, so the guard holds at the
+  crossing and releases one
+  nanosecond above it. Under a
+  pre-epoch clock the port refuses
+  planted and unplanted, exit 1, no
+  output file, with the line "error,
+  cannot write the proposal file,
+  out.json" on stderr, and the oracle
+  lands. Under an erroring clock the
+  port dies in the standard library's
+  panic inside SystemTime::now, the
+  panic naming library/std/src/sys/
+  pal/unix/time.rs and an unwrap on
+  an Err value, Os code 22, kind
+  InvalidInput, its thread identifier
+  per-run, exit 1, nothing written,
+  and the oracle lands. RF-67 and
+  RF-68 stand as contracted at every
+  point re-measured.
