@@ -1516,3 +1516,74 @@ sentence is superseded for every round until that one.
   and the oracle lands. RF-67 and
   RF-68 stand as contracted at every
   point re-measured.
+- RF-75. The output guard's resolver
+  and walk were re-measured fresh at
+  the shipped binary against the
+  oracle, at this CLI's own measured
+  constants (the walk depth 990 of
+  RF-32, never inherited from another
+  repo), in one battery of 32 cells
+  (this round's battery part B). A
+  chain of N links plus its final
+  spelling makes N plus 1 splices.
+  In every chain cell the pre-existing
+  output link stands in the source
+  directory and is excluded as an
+  unreadable tape, with the same
+  exclusion line on both sides. The
+  dangling onto chain (the output
+  name links through c1 to cN, whose
+  target spelling missing/../a.json
+  resolves onto the tape) refuses at
+  the guard on both sides at 2 links,
+  at 41 links, and at 989 links (990
+  splices, the deepest resolution the
+  walk completes). At 990 links (991
+  splices) and at 991 links the cell
+  is the crash class on both sides:
+  the oracle dies uncaught with
+  RecursionError, and the port exits
+  1 silently with nothing written,
+  its failed resolution returning no
+  path. The dangling away chain (the
+  final spelling missing/../dest.json,
+  dest.json not a tape) lands on both
+  sides at 42 links and at 989 links,
+  the output link replaced by the
+  1,161-byte proposal document and
+  dest.json never created, and is the
+  crash class on both sides at 990
+  links. The existing-final onto
+  chain (cN naming a.json directly)
+  refuses at the guard on both sides
+  at 41 links. The prefix chain (the
+  output spelling p1/<name>, p1
+  through p41 resolving to the
+  sandbox directory itself) refuses
+  at the guard on both sides at 41
+  links when the name is a.json, and
+  when the name is out.json both
+  sides pass the guard and refuse at
+  the write with the cannot-write
+  line, the kernel's own 40-link
+  bound met in the write's path
+  resolution. An output name that is
+  a symlink to itself is the crash
+  class on both sides: the oracle
+  dies uncaught with a RuntimeError
+  naming the symlink loop, and the
+  port exits 1 silently. From a
+  deleted working directory, with an
+  absolute source, a relative output
+  is the crash class on both sides
+  onto a tape and away alike (the
+  oracle dies uncaught with
+  FileNotFoundError, the port exits
+  1 silently), an absolute output
+  onto a tape refuses at the guard
+  on both sides, and an absolute
+  output away lands on both sides
+  with the 1,161-byte document.
+  RF-31, RF-32, and RF-33 stand as
+  contracted at every point
+  re-measured.
