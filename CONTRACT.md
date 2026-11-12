@@ -1633,3 +1633,65 @@ sentence is superseded for every round until that one.
   format is not pinned for this line
   and the adapter refuses by name
   until it is.
+- RF-77. A realistic pass exercised
+  the forge over synthetic tapes at
+  flighttape's volume shapes, at a
+  scale larger than Round 10's on
+  every axis (29 files, 21,482
+  events, and 3,651,298 bytes there),
+  the whole period compared against
+  the oracle on every cell. The
+  period holds 31 tape files and
+  3,884,687 bytes. Its 28 valid tapes
+  carry 22,070 events, counting the
+  duplicate file's 2,600 events as
+  they stand in that file: a
+  long-haul tape of 8,000 events, a
+  redo storm of 2,600 events and its
+  byte-identical duplicate under a
+  second name (RF-14's one tape), a
+  wide and deep tape of 120 events
+  with a 400-key input object, an
+  input nested 120 deep, a result
+  text of 180,000 characters, and
+  float edge values (5e-324,
+  1.7976931348623157e308, -0.0) in an
+  input, three rescue-heavy tapes of
+  900 events each, eighteen ordinary
+  tapes of 300 events each, an empty
+  tape, a failed-outcome tape of 250
+  events, and a sidechain-only tape
+  of 400 events. Three defective
+  tapes stand mixed into the
+  directory (invalid JSON, a
+  tape_version of 2.0, and an input
+  nested 10,005 deep, past the
+  format's 9,994 depth cap), each
+  excluded with its named reason on
+  stderr, identically on both sides.
+  Nine command cells ran on each
+  side in a fresh copy of the
+  period, outputs compared byte for
+  byte or exit for exit, 18 runs in
+  all. Propose to stdout and propose
+  -o render the same 851,933-byte
+  proposal document. Propose with
+  --target TEAM-RULES.md renders
+  851,961 bytes. Propose onto an
+  input tape is refused at the guard
+  (exit 1), a nonexistent directory
+  is refused with the
+  no-such-directory line (exit 1),
+  an empty directory refuses with
+  the no-valid-tapes line (exit 1),
+  an output under a missing parent
+  refuses (exit 1), an output name
+  of 242 bytes lands with bytes
+  identical to the -o cell, and an
+  output name of 243 bytes refuses
+  (exit 1). A tenth cell ran the
+  shipped fixture alone on both
+  sides, the 147-byte document of
+  RF-76. Every cell agreed, and the
+  word gate occurs zero times in the
+  period's proposal document.
