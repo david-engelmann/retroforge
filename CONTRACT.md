@@ -1587,3 +1587,49 @@ sentence is superseded for every round until that one.
   RF-31, RF-32, and RF-33 stand as
   contracted at every point
   re-measured.
+- RF-76. The flighttape pin and the
+  evidence adapter were re-verified.
+  The pinned commit
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e
+  has tree
+  afd4d7d13520411e003762548fc79082a1b9cf6e
+  by the API, exactly 50 blobs, and
+  the local cargo checkout at that
+  revision matches all 50 blob for
+  blob. Cargo.toml's rev and
+  Cargo.lock's single flighttape
+  entry both carry the full pinned
+  revision (RF-62's single entry
+  stands). In a scratch copy of the
+  pinned tree the tree's own
+  digest_cli suite passes 5 of 5,
+  executed this round, including
+  cli_digest_prints_exactly_the_digest:
+  the built flighttape binary prints
+  exactly
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  for the golden fixture, and
+  cli_verify_accepts_and_rejects
+  passes with it. The adapter's
+  gate_citations refuses by name on
+  both implementations with the
+  message "the evidence pack format
+  is not pinned yet, no gate evidence
+  can be cited", the port's called
+  directly through a throwaway
+  integration test run once and
+  removed before this commit, the
+  oracle's called directly in Python,
+  on a real-looking path and on an
+  empty path alike on both sides.
+  Propose over tests/fixtures/
+  tape_synthetic.json reproduces the
+  README's captured output byte for
+  byte on the port and on the oracle
+  (the 147-byte document, in the
+  realistic pass of RF-77). The
+  README Status sentence stands as
+  contracted: the evidence pack
+  format is not pinned for this line
+  and the adapter refuses by name
+  until it is.
