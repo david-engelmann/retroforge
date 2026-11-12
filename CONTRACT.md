@@ -1354,3 +1354,388 @@ sentence is superseded for every round until that one.
   this item. This round's read-back,
   measurements, pins, and realistic
   pass are the whole of the change.
+- RF-73. Round 11 first read PR 14
+  whole, the Round 10 pull request, as
+  RF-66 read PR 13. The census is 0
+  reviews, 0 review comments, and 4
+  issue comments, every body read to
+  its end. The one review shell
+  (comment 6784269135, opened
+  2026-11-11T01:28:16Z) stands in an
+  edited final form (updated
+  2026-11-11T04:47:25Z), and this
+  census states the shell as it
+  finally stands. In that form it
+  carries no actionable comments and
+  no inline findings. Its walkthrough
+  stands under the head 76430df5. Its
+  pre-merge checks read 5 passed,
+  among them Docstring Coverage in a
+  Passed row of the skipped form, no
+  eligible functions found in the
+  changed files, 0 functions analyzed
+  across 1 file, 2 skipped as
+  unsupported. It records Merge Risk
+  Minimal on that head, run
+  configuration CHILL, run
+  99201502-bd7a-40ed-8987-bd8d691ce0bb,
+  and that no configuration file from
+  this repository was applied. A path
+  filter of the tool's own excludes
+  Cargo.lock from its walkthrough.
+  The remaining comments are the
+  owner's trigger (6784271405, at
+  01:28:24Z), the bot's auto-reply
+  (6784373532, at 01:34:39Z, the
+  review action not completed because
+  the last commit was already
+  reviewed), and the owner's landing
+  record (6788791953, at 06:26:50Z,
+  merged as 40233bec, the merge tree
+  equal to the reviewed head's tree).
+  Every Round 10 disposition is
+  graded against this record. The
+  step 0 shell generated no
+  actionable comments, so nothing
+  stood to fix or dismiss from it,
+  and its dispositions were carried
+  to this read-back under the line's
+  standing rhythm, as the landing
+  record states. The standards
+  review stands APPROVE with zero
+  findings. The spec fidelity review
+  returned NOT PASS with one Minor,
+  against the pull request body's
+  verified block (it claimed the
+  cargo gate on the closure tree and
+  the differential repeated against
+  the closure-built binary, where
+  RF-71 records the cargo gate on the
+  base and slice trees and the
+  differential over the base binary);
+  the owner narrowed the two phrases
+  in the body to exactly what RF-71
+  records, body only, no tree
+  changed, and the repaired body
+  stands in the record in that form.
+  The red team's first pass returned
+  NOT APPROVE on coverage grounds
+  with zero findings, and a finisher
+  lane discharged the three unrun
+  surfaces by execution and returned
+  APPROVE with zero findings. Round
+  10's spec and standards report
+  files were lost to a /tmp wipe;
+  their verdicts stand in the round's
+  dossier and the landing record, and
+  this read-back grades what the
+  record shows and claims nothing for
+  the lost files. No Round 10
+  disposition is falsified by
+  anything in the record, and nothing
+  in it stands undisposed.
+- RF-74. The draw stream, the seed
+  band edge, and the clock refusals
+  were re-measured fresh at the
+  shipped binary against the oracle's
+  stream simulator, in one battery
+  cycle of 22 cells (this round's
+  battery part A). The seed is the
+  sub-second reading crossed with the
+  pid shifted left 17, a crossed
+  value of zero substituting the
+  constant 0x9e3779b9, with refusal
+  at a pre-epoch clock and the
+  erroring-clock panic in
+  SystemTime::now (RF-56, RF-57); no
+  privacy is claimed for the draw.
+  The oracle's identity was verified
+  before any cell was trusted: its
+  copy matches commit
+  09b4686518c643fad55398cd6d42ddac299393dc
+  blob for blob across all 14 of its
+  files, verified against the local
+  clone that holds that commit (the
+  API answers 422 for the short
+  identifier, as RF-69 records).
+  Seated at exact pids by the burn
+  launcher, each run's pid proven
+  from the child's own report, with
+  the clock shim pinning the reading:
+  pid 7628 at its own crossing
+  999,817,216 refuses with the
+  constant's full 64-name stream
+  planted and lands unplanted; pid
+  7628 at 999,948,288 draws crossed
+  seed 131,072, refusing with that
+  stream planted and landing with
+  the constant's stream planted; pid
+  7629 one nanosecond below the last
+  crossing, at 999,948,287, draws
+  262,143 and refuses with its stream
+  planted, landing with the
+  constant's; pid 7629 at the last
+  crossing 999,948,288 refuses with
+  the constant's stream planted and
+  lands unplanted; pid 7629 one
+  nanosecond above, at 999,948,289,
+  draws seed 1 and refuses with its
+  stream planted, landing with the
+  constant's; pid 7630 at 999,948,288
+  lands with the constant's stream
+  planted (its crossed seed is
+  393,216, not the constant); pid
+  7630 at the maximum reading
+  999,999,999 draws 444,927 and
+  refuses with its stream planted,
+  landing with the constant's. At pid
+  1, the binary run as the namespace
+  init, reading 131,072 refuses with
+  the constant's full stream planted
+  and lands with only the zero
+  state's sole candidate aaaaaaaa
+  planted, and reading 131,073 lands
+  with the constant's stream planted
+  and refuses with seed 1's stream
+  planted, so the guard holds at the
+  crossing and releases one
+  nanosecond above it. Under a
+  pre-epoch clock the port refuses
+  planted and unplanted, exit 1, no
+  output file, with the line "error,
+  cannot write the proposal file,
+  out.json" on stderr, and the oracle
+  lands. Under an erroring clock the
+  port dies in the standard library's
+  panic inside SystemTime::now, the
+  panic naming library/std/src/sys/
+  pal/unix/time.rs and an unwrap on
+  an Err value, Os code 22, kind
+  InvalidInput, its thread identifier
+  per-run, exit 1, nothing written,
+  and the oracle lands. RF-67 and
+  RF-68 stand as contracted at every
+  point re-measured.
+- RF-75. The output guard's resolver
+  and walk were re-measured fresh at
+  the shipped binary against the
+  oracle, at this CLI's own measured
+  constants (the walk depth 990 of
+  RF-32, never inherited from another
+  repo), in one battery of 32 cells
+  (this round's battery part B). A
+  chain of N links plus its final
+  spelling makes N plus 1 splices.
+  In every chain cell the pre-existing
+  output link stands in the source
+  directory and is excluded as an
+  unreadable tape, with the same
+  exclusion line on both sides. The
+  dangling onto chain (the output
+  name links through c1 to cN, whose
+  target spelling missing/../a.json
+  resolves onto the tape) refuses at
+  the guard on both sides at 2 links,
+  at 41 links, and at 989 links (990
+  splices, the deepest resolution the
+  walk completes). At 990 links (991
+  splices) and at 991 links the cell
+  is the crash class on both sides:
+  the oracle dies uncaught with
+  RecursionError, and the port exits
+  1 silently with nothing written,
+  its failed resolution returning no
+  path. The dangling away chain (the
+  final spelling missing/../dest.json,
+  dest.json not a tape) lands on both
+  sides at 42 links and at 989 links,
+  the output link replaced by the
+  1,161-byte proposal document and
+  dest.json never created, and is the
+  crash class on both sides at 990
+  links. The existing-final onto
+  chain (cN naming a.json directly)
+  refuses at the guard on both sides
+  at 41 links. The prefix chain (the
+  output spelling p1/<name>, p1
+  through p41 resolving to the
+  sandbox directory itself) refuses
+  at the guard on both sides at 41
+  links when the name is a.json, and
+  when the name is out.json both
+  sides pass the guard and refuse at
+  the write with the cannot-write
+  line, the kernel's own 40-link
+  bound met in the write's path
+  resolution. An output name that is
+  a symlink to itself is the crash
+  class on both sides: the oracle
+  dies uncaught with a RuntimeError
+  naming the symlink loop, and the
+  port exits 1 silently. From a
+  deleted working directory, with an
+  absolute source, a relative output
+  is the crash class on both sides
+  onto a tape and away alike (the
+  oracle dies uncaught with
+  FileNotFoundError, the port exits
+  1 silently), an absolute output
+  onto a tape refuses at the guard
+  on both sides, and an absolute
+  output away lands on both sides
+  with the 1,161-byte document.
+  RF-31, RF-32, and RF-33 stand as
+  contracted at every point
+  re-measured.
+- RF-76. The flighttape pin and the
+  evidence adapter were re-verified.
+  The pinned commit
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e
+  has tree
+  afd4d7d13520411e003762548fc79082a1b9cf6e
+  by the API, exactly 50 blobs, and
+  the local cargo checkout at that
+  revision matches all 50 blob for
+  blob. Cargo.toml's rev and
+  Cargo.lock's single flighttape
+  entry both carry the full pinned
+  revision (RF-62's single entry
+  stands). In a scratch copy of the
+  pinned tree the tree's own
+  digest_cli suite passes 5 of 5,
+  executed this round, including
+  cli_digest_prints_exactly_the_digest:
+  the built flighttape binary prints
+  exactly
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  for the golden fixture, and
+  cli_verify_accepts_and_rejects
+  passes with it. The adapter's
+  gate_citations refuses by name on
+  both implementations with the
+  message "the evidence pack format
+  is not pinned yet, no gate evidence
+  can be cited", the port's called
+  directly through a throwaway
+  integration test run once and
+  removed before this commit, the
+  oracle's called directly in Python,
+  on a real-looking path and on an
+  empty path alike on both sides.
+  Propose over tests/fixtures/
+  tape_synthetic.json reproduces the
+  README's captured output byte for
+  byte on the port and on the oracle
+  (the 147-byte document, in the
+  realistic pass of RF-77). The
+  README Status sentence stands as
+  contracted: the evidence pack
+  format is not pinned for this line
+  and the adapter refuses by name
+  until it is.
+- RF-77. A realistic pass exercised
+  the forge over synthetic tapes at
+  flighttape's volume shapes, at a
+  scale larger than Round 10's on
+  every axis (29 files, 21,482
+  events, and 3,651,298 bytes there),
+  the whole period compared against
+  the oracle on every cell. The
+  period holds 31 tape files and
+  3,884,687 bytes. Its 28 valid tapes
+  carry 22,070 events, counting the
+  duplicate file's 2,600 events as
+  they stand in that file: a
+  long-haul tape of 8,000 events, a
+  redo storm of 2,600 events and its
+  byte-identical duplicate under a
+  second name (RF-14's one tape), a
+  wide and deep tape of 120 events
+  with a 400-key input object, an
+  input nested 120 deep, a result
+  text of 180,000 characters, and
+  float edge values (5e-324,
+  1.7976931348623157e308, -0.0) in an
+  input, three rescue-heavy tapes of
+  900 events each, eighteen ordinary
+  tapes of 300 events each, an empty
+  tape, a failed-outcome tape of 250
+  events, and a sidechain-only tape
+  of 400 events. Three defective
+  tapes stand mixed into the
+  directory (invalid JSON, a
+  tape_version of 2.0, and an input
+  nested 10,005 deep, past the
+  format's 9,994 depth cap), each
+  excluded with its named reason on
+  stderr, identically on both sides.
+  Nine command cells ran on each
+  side in a fresh copy of the
+  period, outputs compared byte for
+  byte or exit for exit, 18 runs in
+  all. Propose to stdout and propose
+  -o render the same 851,933-byte
+  proposal document. Propose with
+  --target TEAM-RULES.md renders
+  851,961 bytes. Propose onto an
+  input tape is refused at the guard
+  (exit 1), a nonexistent directory
+  is refused with the
+  no-such-directory line (exit 1),
+  an empty directory refuses with
+  the no-valid-tapes line (exit 1),
+  an output under a missing parent
+  refuses (exit 1), an output name
+  of 242 bytes lands with bytes
+  identical to the -o cell, and an
+  output name of 243 bytes refuses
+  (exit 1). A tenth cell ran the
+  shipped fixture alone on both
+  sides, the 147-byte document of
+  RF-76. Every cell agreed, and the
+  word gate occurs zero times in the
+  period's proposal document.
+- RF-78. The gate on this round's
+  trees, all runs offline with an
+  isolated target directory and two
+  build jobs. On the base tree
+  40233bec, cargo test passed 48 (9
+  library, 27 proposals, 12 rescue),
+  clippy with warnings denied was
+  clean, fmt was clean, and the
+  codepoint scan read 0 and 0. The
+  battery of RF-74 ran 22 cells in
+  one cycle with every cell as
+  expected, and the battery of RF-75
+  ran 32 cells with every cell as
+  contracted, each side's form of
+  the crash class stated in RF-75.
+  The realistic pass of RF-77 ran 9
+  command cells, 18 runs, plus the
+  fixture cell, in one cycle with
+  every cell equal. On the slice
+  tree carrying RF-73 to RF-77,
+  cargo test passed 48, clippy with
+  warnings denied was clean, fmt was
+  clean, and the codepoint scan read
+  0 and 0. No source code changed in
+  this round, and no defect was
+  found to report. The closure
+  commit carrying this item changes
+  no code. It carries RF-78, RF-79,
+  and the README Status count. The
+  lane's worktree and instruments
+  were staged under /tmp this round
+  because the workspace file-count
+  cap refused new workspace files at
+  lane start (EDQUOT) and /tmp itself
+  filled once mid-round, cleared by
+  deleting a spent build target; the
+  staging is disclosed on the lane
+  report's face. Nothing in the wait
+  is evidence about the code.
+- RF-79. Closure. The README records
+  11 of 100 in the commit carrying
+  this item. This round's read-back,
+  measurements, and realistic pass
+  are the whole of the change.
