@@ -3001,3 +3001,181 @@ sentence is superseded for every round until that one.
   gate attempts, landed form, and
   name measurements are the whole
   of the change.
+- RF-96. Round 15 first read PR 20 whole,
+  the Round 14 pull request. The
+  body stands at 15,614 characters,
+  15,614 UTF-8 bytes: the summary
+  and per-item account (RF-91 to
+  RF-95), the storefront readiness
+  list with item 3 not passing, the
+  Verified block naming the
+  pre-repair head and tree with the
+  final head and tree in the
+  closing block appended at the
+  gate, the spec reference, the
+  known deviations, the
+  disclosures, the owner completion
+  record, the CodeRabbit
+  release-notes appendix, and the
+  step 0 disposition appended after
+  the appendix. The census around
+  it: 4 issue comments, 1 review, 1
+  review comment, every body read
+  to its end. The owner's landing
+  census counted three issue
+  comments and no reviews; two
+  refinements of that count stand
+  at this read-back, neither moving
+  any disposition. The landing
+  record itself is the fourth issue
+  comment and the last, the same
+  tail shape as PR 18's; and the
+  one finding rides in a review
+  object, which the owner's count
+  folded into its review comment.
+  The issue comments are the
+  trunk-io submission comment
+  (6959960071, created
+  2026-11-17T20:24:09Z, last edited
+  2026-11-17T20:58:40Z, 113
+  characters, standing in its final
+  form as the merged notice with
+  the queue details link, the same
+  comment having carried the
+  submission notice from the pull
+  request's opening until the bot
+  edited it two seconds after the
+  landing); the CodeRabbit shell
+  (6959962731, below); the Round 14
+  lane's "/trunk merge"
+  (6960648345, 12 characters,
+  2026-11-17T20:51:17Z); and the
+  owner's landing record
+  (6960972011, 1,813 characters,
+  2026-11-17T21:04:43Z, carrying
+  this round's three charges). The
+  review is the bot's review object
+  (5946063944, COMMENTED, submitted
+  2026-11-17T20:28:31Z at the
+  pre-repair head 5b6d5f79, 3,746
+  characters, Run ID
+  f594de89-e56d-4ef3-970b-14afe0888949,
+  "Actionable comments posted: 1").
+  The review comment is its one
+  inline finding (4605361626,
+  created 2026-11-17T20:28:31Z,
+  1,940 characters, Minor, on
+  CONTRACT.md: RF-94's name claim
+  stood too broad, a tape that
+  fails to load being excluded with
+  its name in the loader's stderr
+  line; the bot's own final form
+  marks it "Addressed in commit
+  2ede6aa"). The shell in its true
+  final form at this lane's hand:
+  comment 6959962731, created
+  2026-11-17T20:24:15Z, last edited
+  2026-11-17T20:51:08Z, 9,015
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (9,027 UTF-8 bytes),
+  unchanged since 20:51:08Z, so
+  this lane's hand agrees with the
+  owner's stated true final form
+  exactly. The completion record's
+  first stated point stands
+  confirmed: the rate-limit notice
+  stands rotated out (no ef3e882a
+  reference anywhere in the shell
+  at this hand), and the review
+  content is unchanged in scope:
+  the walkthrough and the change
+  assessment stand under the
+  pre-repair head 5b6d5f79, the
+  coverage source and the covered
+  commit are both 5b6d5f79 with
+  kind reviewed, the Merge Risk row
+  reads Low, the pre-merge checks
+  table carries four rows passed
+  (Title, Linked Issues, Out of
+  Scope Changes, Description), the
+  Title check's full detail carries
+  the one advisory remark (the
+  title is long, lists many items,
+  and carries filler wording; the
+  check passed), the risk section
+  repeats the one actionable point
+  (the filename claim too broad,
+  the finding repaired in
+  2ede6aa6), the files selected for
+  processing stand as CONTRACT.md
+  and README.md, and the
+  finishing-touches and autopilot
+  checkboxes stand as offers, not
+  findings. No bot re-assessment of
+  the repair commit stands in the
+  shell. The completion record's
+  second stated point, the RF-94
+  scope note, stands confirmed: the
+  body's per-item RF-94 summary
+  states the name claim in its
+  pre-repair breadth ("the name is
+  observable in exactly two
+  places", with no scoping clause),
+  and the CONTRACT's repaired text
+  governs, scoped to the proposal
+  document and tapes that load,
+  with the loader's exclusion line
+  named as a further place outside
+  the measured cells; the repaired
+  passage itself stands verified in
+  main's CONTRACT at this lane's
+  hand, the base blob (569a222b)
+  reproduced byte for byte from the
+  Round 14 head copy and the
+  repair's wrapped passage alone.
+  The owner completion record in
+  the body (the three reviews each
+  APPROVE, the red team's
+  reproductions of RF-93's landed
+  form and RF-94's cells and its
+  third blob-hash proof of RF-92's
+  reliance, hosted runs
+  134357310176 and 134357369889
+  both success on the final head,
+  and the two Minors the record
+  states and repairs) is graded
+  against this record and stands
+  exact, the census refinement
+  above apart. The landing,
+  censused as part of the record:
+  the Round 14 lane submitted the
+  pull request to the Trunk merge
+  queue at the gate (the "/trunk
+  merge" at 20:51:17Z; the trunk
+  comment flipped to "Waiting to
+  start tests" at 20:51:33Z per the
+  lane's record), the queue tested
+  the merged state while the
+  owner's three reviews ran, and
+  the pull request landed
+  2026-11-17T20:58:38Z as squash
+  commit
+  ae1466e2fe6a1e8cf94a070de85a60fb736b2db1
+  on main, single parent 7261e78c,
+  its tree
+  a60c383a214e333eb8a231cf60b58727b40e85c4
+  identical to the reviewed head
+  tree, verified blob for blob by
+  the owner (24 blobs) before the
+  round was called, the README on
+  main reading 14 of 100. The six
+  commits on the pull request
+  (9ea3da97, cd0535b1, c5efa2b1,
+  b61f7d91, 5b6d5f79, 2ede6aa6)
+  match the body's account. Charge
+  1's tail, the post-landing
+  disposition: no comment stands
+  after the landing record, so
+  nothing stands to disposition
+  from after it.
