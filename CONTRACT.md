@@ -1739,3 +1739,196 @@ sentence is superseded for every round until that one.
   this item. This round's read-back,
   measurements, and realistic pass
   are the whole of the change.
+- RF-80. Completion and one repair,
+  recorded by the completion lane
+  that brought this round to its
+  gate after the building seat's
+  session ended. The branch stood
+  complete in substance at head
+  8fc286ed. The completion lane
+  re-read the pull request whole,
+  re-extracted the base and head
+  trees through the API (24 blobs
+  each, every blob id recomputed,
+  no mismatches), and re-executed
+  the round's measurements on its
+  own extractions. One sentence of
+  RF-73 is repaired here, RF-73
+  itself unrewritten. RF-73 states
+  that a path filter of the tool's
+  own excludes Cargo.lock from its
+  walkthrough. PR 14's shell in its
+  final form (11,993 characters,
+  last edited 2026-11-11T04:47:25Z)
+  carries no occurrence of
+  Cargo.lock and no path-filter
+  statement, and its files-selected
+  list (CONTRACT.md, README.md,
+  src/cli.rs) is exactly PR 14's
+  diff, in which Cargo.lock does
+  not stand. No exclusion event
+  stands in that record. The
+  corrected account is this: the
+  shell records no path filter and
+  no exclusion, and the absence of
+  Cargo.lock from the walkthrough
+  is the absence of the file from
+  the diff under review. Every
+  other limb of RF-73's account of
+  PR 14 was verified as stated.
+  The gate at the completion lane's
+  hand, all runs offline under the
+  line's build slot: on the base
+  tree 40233bec, cargo test passed
+  48 (9 library, 27 proposals, 12
+  rescue), clippy with warnings
+  denied was clean, fmt was clean,
+  and the codepoint scan read 0 and
+  0 against a planted control that
+  the scan provably catches. On the
+  head tree, cargo test passed 48
+  in the same split, fmt was clean,
+  and the scan read 0 and 0. The
+  head tree's clippy stands through
+  the hosted runs on the exact head
+  8fc286ed (43256942615 and
+  43257158455, both success), whose
+  workflow runs clippy with
+  warnings denied; the completion
+  lane's local clippy re-runs on
+  the head tree were refused by
+  the box write fault and are
+  counted in the attempt history
+  below, not in this gate. RF-74:
+  every crossed seed value was
+  re-derived in Python and matched,
+  the crate's own seed tests passed
+  inside both gates, the nine
+  planted-stream refusal arms were
+  re-executed as contracted (each
+  exit 1, the cannot-write line
+  naming the output, nothing
+  written), the pre-epoch clock
+  refused planted and unplanted
+  with the same line under both
+  spellings of the output, and the
+  erroring clock panicked inside
+  SystemTime::now as the item
+  states. The battery's seven
+  landing arms and the oracle's
+  two clock limbs were run in
+  three separate passes and
+  refused at the write step on
+  every run (exit 1, the
+  cannot-write line, nothing
+  written), the reading the box
+  write fault gives everywhere;
+  the write path itself landed
+  documents at this lane's hand in
+  the fixture cell and in the
+  landing cells of RF-75 and
+  RF-77, so those nine runs are
+  carried as environment-blocked,
+  not as verified and not as
+  contradicted.
+  RF-75: all fifteen shapes were
+  re-executed on twin sandboxes.
+  Under the item's chain counting
+  (N intermediate links plus the
+  output link), the guard fires at
+  989 links and the crash class
+  stands at 990 and 991 on both
+  sides, the self-loop crashes on
+  both sides, and the three
+  landing cells land on both sides
+  with byte-identical documents.
+  RF-76: the flighttape pin was
+  censused on both channels, the
+  local clone and the cargo
+  checkout agreeing blob for blob
+  over 50 files at tree afd4d7d1,
+  the lockfile's single flighttape
+  entry standing as RF-62 left it;
+  the oracle's gate_citations
+  refusal was executed on both
+  argument forms with the item's
+  exact line, the port's source
+  carries the identical refusal,
+  and the fixture cell rendered
+  147 bytes byte-identical on both
+  sides. RF-77: the arithmetic
+  re-derives (28 valid tapes,
+  22,070 events, a target delta of
+  28 bytes at seven occurrences of
+  the target name, four bytes per
+  occurrence, the mechanism itself
+  re-verified at one occurrence
+  and four bytes in the completion
+  lane's smaller period); the
+  quickstart cell is byte-identical
+  to the README's captured document
+  on both sides; the refusals
+  (onto a tape, a nonexistent
+  directory, an empty directory, an
+  output under a missing parent)
+  stand as contracted; the output
+  name boundary's mechanism stands
+  proven in this environment, the
+  temp form of a 243-byte name
+  refused with ENAMETOOLONG (the
+  temp name is the output name
+  plus 13 bytes against the
+  255-byte component limit, so 242
+  lands and 243 refuses), while
+  the 242-byte landing itself was
+  refused by the box write fault
+  on every attempt and is carried
+  as environment-blocked, not as
+  verified. The pass's own byte
+  totals (a period of 3,884,687
+  bytes and a document of 851,933
+  bytes) stand on the building
+  lane's record; its period
+  generator was staged under /tmp
+  and lost, as RF-78 discloses of
+  the staging. PR 15's shell stands
+  contracted in its true final
+  form: 11,199 characters, last
+  edited 2026-11-12T16:21:39Z, four
+  checks passed, no actionable
+  comments, no dismissal standing;
+  the body's moment-bounded account
+  matches it on every
+  disposition-bearing element. The
+  completion lane's attempt
+  history, counted nowhere: a
+  write-fault wave on 2026-11-16
+  zeroed two gate logs and refused
+  writes across the evening, and
+  every reading taken inside it
+  was discarded and retaken; the
+  fleet REST rate limit reached
+  zero twice and all API work
+  stopped until the recorded
+  reset, resuming on a single
+  probe; two queued build-slot
+  jobs were killed by runtime
+  cycling while they waited and
+  were re-queued; cargo's own
+  writes were refused with
+  Operation not permitted across
+  four pin-suite attempts and two
+  adapter-test attempts, which
+  stand locally unrun for that
+  reason and no other; the draw
+  battery's landing arms refused
+  at the write step in three
+  passes, each pass waited out
+  the build slot's queue behind
+  the line's other lanes. This item
+  is appended by the completion
+  lane as one Data API commit on
+  the round's own branch, its
+  pushed tree asserted equal to
+  the local tree, and the round
+  stops at the owner's gate.
