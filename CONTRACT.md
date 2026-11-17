@@ -2751,3 +2751,87 @@ sentence is superseded for every round until that one.
   comment stands after the landing
   record, so nothing stands to
   disposition from after it.
+- RF-92. The gate on this round's trees.
+  The base tree is main's tree
+  b4a335d1a51552484a07b84319a17b825a8ddb96,
+  blob-verified at this lane's hand
+  against the API manifest (24
+  blobs, no mismatches); the head
+  tree differs from it only in
+  CONTRACT.md (RF-91 to RF-94) and,
+  in the closure commit, one README
+  line, so the code under gate is
+  one tree, and that code is
+  byte-identical to the Round 11
+  head tree's code the owner's
+  discharge gated (the trees
+  between differ only in
+  CONTRACT.md and the README
+  count). On that tree the full
+  cargo gate stands discharged at
+  the owner's hand in the Round 11
+  discharge: cargo test exit 0 with
+  48 passed in the split 9 library
+  + 27 proposals + 12 rescue, cargo
+  clippy --all-targets with
+  warnings denied exit 0, cargo fmt
+  --check exit 0, and the pin
+  suite's digest_cli test 5 of 5
+  including the golden digest
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3.
+  This lane's own cargo re-run
+  stands locally unrun, for reasons
+  counted honestly: three
+  build-slot queues totaling about
+  two and a half hours, two on the
+  base tree (the first acquiring at
+  18:24 UTC after about forty
+  minutes and then standing
+  probe-blocked, its probe gate
+  timing out after 61 tries inside
+  a re-closed write-fault wave, so
+  no cargo stage started; the
+  second expiring after its full
+  one-hour wait unacquired) and one
+  on the head tree (expiring after
+  its full thirty-minute wait
+  unacquired), the slot held
+  throughout by the line's other
+  lanes. The hosted runs on this
+  round's head carry the gate from
+  here. Re-verified at this lane's
+  hand this round: the flighttape
+  pin (the tree
+  afd4d7d13520411e003762548fc79082a1b9cf6e
+  fetched through the API from the
+  flighttape repository holds
+  exactly 50 blobs, every one
+  matching the Round 11 pin tree
+  blob for blob, its extra local
+  files the cargo checkout's own
+  internals; Cargo.toml's rev and
+  Cargo.lock's flighttape entry
+  both carry
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e,
+  read from copies whose Cargo
+  blobs are this tree's own); the
+  oracle pairing (the oracle copy's
+  14 held files match commit
+  09b4686518c643fad55398cd6d42ddac299393dc
+  blob for blob against the local
+  clone, the commit's other four
+  blobs being files the copy never
+  carried, the same 14-file shape
+  RF-84 and RF-89 recorded); and
+  the codepoint scan on the base
+  tree and on this round's head
+  files, 0 em dashes and 0 en
+  dashes, the scan proven on a
+  planted control (a control file
+  carrying one of each read 1 and 1
+  with exit 1, then was removed and
+  the tree re-scanned clean). The
+  RF-93 and RF-94 batteries ran
+  against the owner's discharge
+  binary, built under the slot from
+  this same code.
