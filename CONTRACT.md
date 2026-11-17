@@ -2601,3 +2601,153 @@ sentence is superseded for every round until that one.
   capture, and spelling
   measurements are the whole of the
   change.
+- RF-91. Round 14 first read PR 18 whole,
+  the Round 13 pull request. The
+  body stands at 13,735 characters,
+  13,739 UTF-8 bytes: the summary
+  and per-item account (RF-86 to
+  RF-90), the storefront readiness
+  list with item 3 not passing, the
+  known deviations, the
+  disclosures, the CodeRabbit
+  release-notes appendix, the step
+  0 disposition appended after the
+  appendix, and the owner
+  completion record. The census
+  around it: 0 reviews, 0 review
+  comments, 6 issue comments, every
+  body read to its end. The owner's
+  landing census counted 5; the
+  landing record itself is the
+  sixth and last, and nothing
+  stands after it. The comments are
+  the trunk-io submission comment
+  (6954846964, created
+  2026-11-17T16:55:47Z, last edited
+  2026-11-17T17:10:37Z, 113
+  characters, standing in its final
+  form as the merged notice with
+  the queue details link, the same
+  comment having carried the
+  submission notice from the pull
+  request's opening until the bot
+  edited it three seconds after the
+  landing); the owner's trigger
+  (6954850398, "@coderabbitai
+  review", 20 characters,
+  2026-11-17T16:55:55Z); the
+  CodeRabbit shell (6954850158,
+  below); the bot's auto-reply
+  (6954966903, 573 characters,
+  created 2026-11-17T17:00:27Z,
+  action not completed because the
+  last commit was already
+  reviewed); the Round 13 lane's
+  "/trunk merge" (6955031142, 12
+  characters,
+  2026-11-17T17:02:55Z); and the
+  owner's landing record
+  (6955348740, 1,744 characters,
+  2026-11-17T17:15:14Z, carrying
+  this round's four charges). The
+  shell in its true final form at
+  this lane's hand: comment
+  6954850158, created
+  2026-11-17T16:55:54Z, last edited
+  2026-11-17T17:02:35Z, 10,920
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (10,931 UTF-8 bytes).
+  The drift stands in two forms:
+  10,918 characters at the Round 13
+  lane's disposition (the form last
+  edited 2026-11-17T16:58:58Z) and
+  10,920 at the owner's hand (last
+  edited 17:02:35Z, the form the
+  owner completion record states);
+  at this read-back the shell
+  stands at 10,920, unchanged since
+  17:02:35Z, so this lane's hand
+  agrees with the owner's stated
+  true final form, the move being
+  the same two-character
+  post-review edit this shell
+  family showed on this
+  repository's PRs 15 and 16. Every
+  disposition-bearing element is
+  identical in both forms: no
+  actionable comments were
+  generated in the recent review,
+  no inline findings, the
+  walkthrough and the change
+  assessment stand under the
+  closure head df2a1b0f, the
+  coverage source and the covered
+  commit are both df2a1b0f with
+  kind reviewed, the Merge Risk row
+  reads Minimal, the pre-merge
+  checks table carries four rows
+  passed (Title, Linked Issues, Out
+  of Scope Changes, Description),
+  the Title check's full detail
+  carries the one advisory remark
+  (the title is long and uses the
+  internal term "landing censused",
+  so it is hard to scan; it is
+  still related to the main change
+  and does not mislead), the run
+  configuration reads CHILL with
+  plan Advanced, Run ID
+  a8649a6d-c86e-47e5-b284-921551f23ee1,
+  no configuration file from this
+  repository applied, and the files
+  selected for processing stand as
+  CONTRACT.md and README.md.
+  Nothing stood to fix or dismiss
+  from the shell at either form;
+  the disposition's dismissal of
+  the Title remark (the check
+  passed and the title follows the
+  round's prescribed form) stands
+  exact. The owner completion
+  record in the body (the three
+  reviews each APPROVE, the red
+  team's reproductions of RF-87's
+  items and RF-88's cells and its
+  three-way blob-hash proof of
+  RF-89's reliance, hosted runs
+  44131211192 and 44131312204 both
+  success on the head, and the one
+  Minor censused above) is graded
+  against this record and stands
+  exact. The landing, censused as
+  part of the record: the Round 13
+  lane submitted the pull request
+  to the Trunk merge queue at the
+  gate (the "/trunk merge" at
+  17:02:55Z; the trunk comment
+  flipped to "Waiting to start
+  tests" at 17:03:12Z per the
+  lane's record), the queue tested
+  the merged state while the
+  owner's three reviews ran, and
+  the pull request landed
+  2026-11-17T17:10:34Z as squash
+  commit
+  7261e78cc087e35d31b4e26a30ee8bebfaffc978
+  on main, single parent 30a38bc0,
+  its tree
+  b4a335d1a51552484a07b84319a17b825a8ddb96
+  identical to the reviewed head
+  tree, verified blob for blob by
+  the owner (24 blobs) before the
+  round was called, the README on
+  main reading 13 of 100. The five
+  commits on the pull request
+  (e33ef126, e0aaeeb7, 285ec480,
+  737d3bd2, df2a1b0f) match the
+  body's account. Charge 1's tail,
+  the post-landing disposition: no
+  comment stands after the landing
+  record, so nothing stands to
+  disposition from after it.
