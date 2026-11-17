@@ -2960,24 +2960,41 @@ sentence is superseded for every round until that one.
   own content; with each proposal's
   citations sorted and the
   experiment id removed, the two
-  documents are equal. So the tape
-  file's name is observable in
-  exactly two places: the .json
-  suffix filter decides whether a
-  file is read at all, and in a
-  multi-tape directory the filename
-  order fixes the citation order
-  inside a shared tool's proposal,
-  with the derived experiment id
-  following it. The name itself
-  appears nowhere in the document,
-  and everything else the document
+  documents are equal. So, within
+  the proposal document and for
+  tapes that load, the tape file's
+  name is observable in exactly two
+  places: the .json suffix filter
+  decides whether a file is read at
+  all, and in a multi-tape
+  directory the filename order
+  fixes the citation order inside a
+  shared tool's proposal, with the
+  derived experiment id following
+  it. The name itself appears
+  nowhere in the document, and
+  everything else the document
   carries (the proposal set, the
   cited digests and seqs, the
   period, the counts) is
   name-independent, on both sides
-  alike. No disagreement anywhere;
-  no finding.
+  alike. One further place stands
+  outside the measured cells and is
+  named here so the claim is not
+  read wider than it was measured:
+  a tape that fails to load is
+  excluded with its name in the
+  loader's line on stderr (error,
+  bad.json is excluded, the file is
+  not valid JSON), and renaming the
+  file renames the line, verified
+  at this lane's hand on both arms
+  after the battery ran, the run
+  otherwise proceeding on the valid
+  tape with the 1,161-byte
+  document. No disagreement
+  anywhere in the measured cells;
+  no finding in them.
 - RF-95. Closure. The README records 14 of
   100 in the commit carrying this
   item. This round's read-back,
