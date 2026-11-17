@@ -2601,3 +2601,403 @@ sentence is superseded for every round until that one.
   capture, and spelling
   measurements are the whole of the
   change.
+- RF-91. Round 14 first read PR 18 whole,
+  the Round 13 pull request. The
+  body stands at 13,735 characters,
+  13,739 UTF-8 bytes: the summary
+  and per-item account (RF-86 to
+  RF-90), the storefront readiness
+  list with item 3 not passing, the
+  known deviations, the
+  disclosures, the CodeRabbit
+  release-notes appendix, the step
+  0 disposition appended after the
+  appendix, and the owner
+  completion record. The census
+  around it: 0 reviews, 0 review
+  comments, 6 issue comments, every
+  body read to its end. The owner's
+  landing census counted 5; the
+  landing record itself is the
+  sixth and last, and nothing
+  stands after it. The comments are
+  the trunk-io submission comment
+  (6954846964, created
+  2026-11-17T16:55:47Z, last edited
+  2026-11-17T17:10:37Z, 113
+  characters, standing in its final
+  form as the merged notice with
+  the queue details link, the same
+  comment having carried the
+  submission notice from the pull
+  request's opening until the bot
+  edited it three seconds after the
+  landing); the owner's trigger
+  (6954850398, "@coderabbitai
+  review", 20 characters,
+  2026-11-17T16:55:55Z); the
+  CodeRabbit shell (6954850158,
+  below); the bot's auto-reply
+  (6954966903, 573 characters,
+  created 2026-11-17T17:00:27Z,
+  action not completed because the
+  last commit was already
+  reviewed); the Round 13 lane's
+  "/trunk merge" (6955031142, 12
+  characters,
+  2026-11-17T17:02:55Z); and the
+  owner's landing record
+  (6955348740, 1,744 characters,
+  2026-11-17T17:15:14Z, carrying
+  this round's four charges). The
+  shell in its true final form at
+  this lane's hand: comment
+  6954850158, created
+  2026-11-17T16:55:54Z, last edited
+  2026-11-17T17:02:35Z, 10,920
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (10,931 UTF-8 bytes).
+  The drift stands in two forms:
+  10,918 characters at the Round 13
+  lane's disposition (the form last
+  edited 2026-11-17T16:58:58Z) and
+  10,920 at the owner's hand (last
+  edited 17:02:35Z, the form the
+  owner completion record states);
+  at this read-back the shell
+  stands at 10,920, unchanged since
+  17:02:35Z, so this lane's hand
+  agrees with the owner's stated
+  true final form, the move being
+  the same two-character
+  post-review edit this shell
+  family showed on this
+  repository's PRs 15 and 16. Every
+  disposition-bearing element is
+  identical in both forms: no
+  actionable comments were
+  generated in the recent review,
+  no inline findings, the
+  walkthrough and the change
+  assessment stand under the
+  closure head df2a1b0f, the
+  coverage source and the covered
+  commit are both df2a1b0f with
+  kind reviewed, the Merge Risk row
+  reads Minimal, the pre-merge
+  checks table carries four rows
+  passed (Title, Linked Issues, Out
+  of Scope Changes, Description),
+  the Title check's full detail
+  carries the one advisory remark
+  (the title is long and uses the
+  internal term "landing censused",
+  so it is hard to scan; it is
+  still related to the main change
+  and does not mislead), the run
+  configuration reads CHILL with
+  plan Advanced, Run ID
+  a8649a6d-c86e-47e5-b284-921551f23ee1,
+  no configuration file from this
+  repository applied, and the files
+  selected for processing stand as
+  CONTRACT.md and README.md.
+  Nothing stood to fix or dismiss
+  from the shell at either form;
+  the disposition's dismissal of
+  the Title remark (the check
+  passed and the title follows the
+  round's prescribed form) stands
+  exact. The owner completion
+  record in the body (the three
+  reviews each APPROVE, the red
+  team's reproductions of RF-87's
+  items and RF-88's cells and its
+  three-way blob-hash proof of
+  RF-89's reliance, hosted runs
+  44131211192 and 44131312204 both
+  success on the head, and the one
+  Minor censused above) is graded
+  against this record and stands
+  exact. The landing, censused as
+  part of the record: the Round 13
+  lane submitted the pull request
+  to the Trunk merge queue at the
+  gate (the "/trunk merge" at
+  17:02:55Z; the trunk comment
+  flipped to "Waiting to start
+  tests" at 17:03:12Z per the
+  lane's record), the queue tested
+  the merged state while the
+  owner's three reviews ran, and
+  the pull request landed
+  2026-11-17T17:10:34Z as squash
+  commit
+  7261e78cc087e35d31b4e26a30ee8bebfaffc978
+  on main, single parent 30a38bc0,
+  its tree
+  b4a335d1a51552484a07b84319a17b825a8ddb96
+  identical to the reviewed head
+  tree, verified blob for blob by
+  the owner (24 blobs) before the
+  round was called, the README on
+  main reading 13 of 100. The five
+  commits on the pull request
+  (e33ef126, e0aaeeb7, 285ec480,
+  737d3bd2, df2a1b0f) match the
+  body's account. Charge 1's tail,
+  the post-landing disposition: no
+  comment stands after the landing
+  record, so nothing stands to
+  disposition from after it.
+- RF-92. The gate on this round's trees.
+  The base tree is main's tree
+  b4a335d1a51552484a07b84319a17b825a8ddb96,
+  blob-verified at this lane's hand
+  against the API manifest (24
+  blobs, no mismatches); the head
+  tree differs from it only in
+  CONTRACT.md (RF-91 to RF-94) and,
+  in the closure commit, one README
+  line, so the code under gate is
+  one tree, and that code is
+  byte-identical to the Round 11
+  head tree's code the owner's
+  discharge gated (the trees
+  between differ only in
+  CONTRACT.md and the README
+  count). On that tree the full
+  cargo gate stands discharged at
+  the owner's hand in the Round 11
+  discharge: cargo test exit 0 with
+  48 passed in the split 9 library
+  + 27 proposals + 12 rescue, cargo
+  clippy --all-targets with
+  warnings denied exit 0, cargo fmt
+  --check exit 0, and the pin
+  suite's digest_cli test 5 of 5
+  including the golden digest
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3.
+  This lane's own cargo re-run
+  stands locally unrun, for reasons
+  counted honestly: three
+  build-slot queues totaling about
+  two and a half hours, two on the
+  base tree (the first acquiring at
+  18:24 UTC after about forty
+  minutes and then standing
+  probe-blocked, its probe gate
+  timing out after 61 tries inside
+  a re-closed write-fault wave, so
+  no cargo stage started; the
+  second expiring after its full
+  one-hour wait unacquired) and one
+  on the head tree (expiring after
+  its full thirty-minute wait
+  unacquired), the slot held
+  throughout by the line's other
+  lanes. The hosted runs on this
+  round's head carry the gate from
+  here. Re-verified at this lane's
+  hand this round: the flighttape
+  pin (the tree
+  afd4d7d13520411e003762548fc79082a1b9cf6e
+  fetched through the API from the
+  flighttape repository holds
+  exactly 50 blobs, every one
+  matching the Round 11 pin tree
+  blob for blob, its extra local
+  files the cargo checkout's own
+  internals; Cargo.toml's rev and
+  Cargo.lock's flighttape entry
+  both carry
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e,
+  read from copies whose Cargo
+  blobs are this tree's own); the
+  oracle pairing (the oracle copy's
+  14 held files match commit
+  09b4686518c643fad55398cd6d42ddac299393dc
+  blob for blob against the local
+  clone, the commit's other four
+  blobs being files the copy never
+  carried, the same 14-file shape
+  RF-84 and RF-89 recorded); and
+  the codepoint scan on the base
+  tree and on this round's head
+  files, 0 em dashes and 0 en
+  dashes, the scan proven on a
+  planted control (a control file
+  carrying one of each read 1 and 1
+  with exit 1, then was removed and
+  the tree re-scanned clean). The
+  RF-93 and RF-94 batteries ran
+  against the owner's discharge
+  binary, built under the slot from
+  this same code.
+- RF-93. The Quickstart landed form,
+  landed. The form (propose with
+  the output flag naming
+  proposals.json beside the tape,
+  then cat) stood refused across
+  Rounds 12 and 13 by the box write
+  fault; Round 13's sitting counted
+  the first run and fifteen retries
+  per side, both sides exiting 1
+  with the identical line "error,
+  cannot write the proposal file,
+  proposals.json" and nothing
+  landing. This round the sitting
+  came in an open write window,
+  over the same byte-exact heredoc
+  tape RF-87 verified (995 bytes,
+  sha256
+  80390bc65a8951f5b05644881c84d880b33ffd99c428e4e3f67113b21564a8dc).
+  The setup runs first reproduced
+  the README's captured quickstart
+  document on stdout on both arms
+  (exit 0, stdout byte-identical to
+  the 1,161-byte document, stderr
+  empty). The landed form then
+  landed on attempt 1 on the port
+  and attempt 1 on the oracle: the
+  proposals.json written beside the
+  tape is 1,161 bytes on each arm,
+  byte-identical to the README
+  document and to each other
+  (sha256
+  04498387230611e5c6e8a3b1e5d58de82e3d474e50e0619fbdd192eca877ce85).
+  The form the Quickstart names is
+  now exercised end to end on both
+  implementations, and the refusal
+  carried since Round 12 is
+  retired.
+- RF-94. The tape file's name was measured
+  fresh at the propose CLI against
+  the oracle, in one battery of 6
+  cells (12 runs), with RF-88's C4
+  cell re-run alongside for the tie
+  (2 further runs), propose to
+  stdout over one directory per
+  cell, the surface proposed in the
+  lane's record before any cell
+  ran. RF-88 celled the tape file's
+  spelling (the value's bytes); no
+  round had celled the name the
+  tape is filed under. Both loaders
+  scan the directory's entries in
+  filename order and load only
+  names carrying the .json suffix,
+  and the proposal document cites
+  tapes by digest only (the builder
+  takes (name, tape, digest)
+  triples and discards the name;
+  the citations name digests; the
+  registry derives each experiment
+  id from the proposal's own
+  content), so the name was
+  expected to be observable only at
+  the suffix filter, with one
+  question left open by the
+  sources: the builder accumulates
+  each tool's moments in filename
+  order, so in a two-tape directory
+  the citation order inside a
+  shared tool's proposal might
+  follow the names. The cells: N0,
+  the control, the quickstart tape
+  (995 bytes, sha256 80390bc6...)
+  alone under its README name
+  run1.json, its document the
+  1,161-byte quickstart document of
+  RF-87; N1, the same tape bytes
+  alone as zzz.json; N2, the same
+  bytes alone as tape.txt; N3, the
+  same bytes alone under the
+  extensionless name tape; N4a and
+  N4b, RF-88's C4 pair (the
+  quickstart tape and its b.py
+  twin, 995 bytes, sha256
+  562e79e7...) filed under C4's
+  names (run1.json the original,
+  twin2.json the twin) and under
+  the swapped names (run1.json the
+  twin, twin2.json the original).
+  In every cell the two sides' exit
+  codes, stdout bytes, and stderr
+  bytes agree exactly. N1's
+  document is byte-identical to
+  N0's on both sides: a rename
+  inside the .json suffix changes
+  nothing the document carries. N2
+  and N3 exit 1 on both sides,
+  stdout empty, stderr the one line
+  "error, no valid tapes in the
+  directory": the suffix filter
+  skips the file silently, and
+  alone it leaves no valid tapes.
+  N4a's document (1,475 bytes) is
+  byte-identical to the re-run C4
+  cell's, differs from N0's, and
+  cites both digests (47f1b05b...
+  and 3c5c77e9...), so the pair
+  cells have teeth. N4b's document
+  (1,475 bytes) cites both digests
+  and is not byte-identical to
+  N4a's; the whole difference,
+  walked field by field, is five
+  paths: the four citations inside
+  the one proposal
+  (rules-edit-Read) swap their tape
+  order (N4a cites 47f1b05b at seq
+  2 and 4 before 3c5c77e9 at seq 2
+  and 4, N4b the reverse, the seqs
+  and kinds unchanged), and the
+  proposal's experiment id follows
+  (exp-af481a2d5fbc151a in N4a,
+  exp-e1481ae6d8e989d4 in N4b), the
+  id deriving from the proposal's
+  own content; with each proposal's
+  citations sorted and the
+  experiment id removed, the two
+  documents are equal. So, within
+  the proposal document and for
+  tapes that load, the tape file's
+  name is observable in exactly two
+  places: the .json suffix filter
+  decides whether a file is read at
+  all, and in a multi-tape
+  directory the filename order
+  fixes the citation order inside a
+  shared tool's proposal, with the
+  derived experiment id following
+  it. The name itself appears
+  nowhere in the document, and
+  everything else the document
+  carries (the proposal set, the
+  cited digests and seqs, the
+  period, the counts) is
+  name-independent, on both sides
+  alike. One further place stands
+  outside the measured cells and is
+  named here so the claim is not
+  read wider than it was measured:
+  a tape that fails to load is
+  excluded with its name in the
+  loader's line on stderr (error,
+  bad.json is excluded, the file is
+  not valid JSON), and renaming the
+  file renames the line, verified
+  at this lane's hand on both arms
+  after the battery ran, the run
+  otherwise proceeding on the valid
+  tape with the 1,161-byte
+  document. No disagreement
+  anywhere in the measured cells;
+  no finding in them.
+- RF-95. Closure. The README records 14 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  gate attempts, landed form, and
+  name measurements are the whole
+  of the change.
