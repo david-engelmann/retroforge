@@ -1932,3 +1932,101 @@ sentence is superseded for every round until that one.
   pushed tree asserted equal to
   the local tree, and the round
   stops at the owner's gate.
+- RF-81. PR 15 read back whole at this
+  round's opening. The body stands
+  at 12,163 characters, 12,167
+  UTF-8 bytes, the figure the owner
+  measured at landing, unchanged
+  since; it carries the round's
+  summary and per-item account
+  (RF-73 to RF-79), the storefront
+  readiness list with item 3 not
+  passing, the Verified block at
+  the build lane's head 8fc286ed
+  and tree 7d143525 with hosted
+  runs 43256942615 and 43257158455,
+  the step 0 disposition in its
+  moment-bounded form, the
+  CodeRabbit release-notes
+  appendix, the completion note,
+  and the owner completion record
+  with its Correction to RF-80. The
+  census around it: 0 reviews, 0
+  review comments, 4 issue
+  comments, every body read to its
+  end (the CodeRabbit shell
+  6829172306; the owner's trigger
+  comment 6829174526,
+  "@coderabbitai review", 20
+  characters, posted
+  2026-11-12T16:18:25Z; the bot's
+  auto-reply 6829233844, 573
+  characters, posted
+  2026-11-12T16:20:31Z, action not
+  completed because the last commit
+  was already reviewed; the owner's
+  landing record 6942764810, 2,460
+  characters, posted
+  2026-11-17T08:25:27Z), so the
+  landing charge's count of three
+  issue comments standing before
+  the landing comment verifies
+  exact. The shell in its true
+  final form at this lane's hand:
+  comment 6829172306, created
+  2026-11-12T16:18:20Z, last edited
+  2026-11-17T08:22:59Z, 11,802
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (11,819 UTF-8 bytes).
+  No actionable comments, no inline
+  findings. The walkthrough and the
+  change assessment stand under the
+  closure head 8110411f, the
+  coverage source and the covered
+  commit are both 8110411f with
+  kind reviewed, the Merge Risk row
+  reads Minimal, the pre-merge
+  checks table carries four rows
+  passed (Title, Linked Issues, Out
+  of Scope Changes, Description)
+  and no Docstring Coverage row,
+  the run configuration reads CHILL
+  with plan Advanced, Run ID
+  3d2157e3-b3eb-481e-b529-c2333eecc4a4,
+  no configuration file from this
+  repository applied, and the files
+  selected for processing stand as
+  CONTRACT.md alone, which is also
+  listed as skipped as similar to
+  files already processed. The
+  correction to RF-80's census,
+  recorded plainly as a correction:
+  RF-80 contracted the shell as
+  11,199 characters, last edited
+  2026-11-12T16:21:39Z, and that
+  was wrong as a final form; it
+  described the shell as it stood
+  when the completion lane read it
+  during its build. The owner
+  completion record on the body
+  corrected the census to 11,800
+  characters, last edited
+  2026-11-17T03:27:21Z, and the
+  shell then moved once more,
+  edited 2026-11-17T08:22:59Z,
+  minutes before the merge at
+  08:24:13Z, into the form this
+  item censuses. Every
+  disposition-bearing element is
+  identical across all three forms:
+  no actionable comments, Minimal,
+  four checks passed, coverage at
+  the closure head 8110411f, and
+  the same Run ID in the two later
+  forms. Charge 3 of the landing
+  record: no CodeRabbit comment was
+  posted after the landing record;
+  the shell's last edit precedes
+  it, so nothing post-landing
+  stands owed.
