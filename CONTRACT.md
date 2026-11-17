@@ -2030,3 +2030,48 @@ sentence is superseded for every round until that one.
   the shell's last edit precedes
   it, so nothing post-landing
   stands owed.
+- RF-82. The 242-byte output-name landing,
+  carried from RF-77 through RF-80
+  as environment-blocked, was
+  executed again in an open write
+  window, in RF-77's own cell
+  shape: a small period of the
+  quickstart tape, the shipped
+  fixture, a broken tape, and a
+  future-version tape, rendering a
+  1,161-byte proposal document to
+  stdout, byte-identical on both
+  sides with stderr identical, and
+  propose -o under an output name
+  of exactly 242 bytes as one path
+  component. The 242-byte name
+  lands on both sides (exit 0), and
+  the landed document is
+  byte-identical to the stdout
+  document on each side. The
+  243-byte name refuses on both
+  sides (exit 1) with stderr
+  identical, and the boundary
+  arithmetic re-derives: the temp
+  name is the output name plus 13
+  bytes against the 255-byte
+  component limit, so 242 lands and
+  243 refuses. RF-77's record of
+  the landing now stands verified
+  at a second hand, and RF-80's
+  environment-blocked carry is
+  discharged. One construction note
+  stands in the record: this
+  battery's first pass, like the
+  completion lane's Round 11
+  reconstruction before it,
+  appended the side name to the
+  output name, making 247-byte and
+  248-byte names that refuse on
+  both sides for that reason alone;
+  the results above are the
+  corrected construction's, the
+  name exactly n bytes, passed bare
+  from a per-side directory so the
+  cannot-write line names the
+  identical string on both sides.
