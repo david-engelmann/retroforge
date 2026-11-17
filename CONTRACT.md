@@ -2377,3 +2377,59 @@ sentence is superseded for every round until that one.
   changes nothing in the record,
   and nothing stands to fix or
   dismiss from it.
+- RF-87. The Quickstart capture, carried
+  from Round 11 through Round 12 as
+  refused by the box write fault,
+  was attempted again, and its
+  documents stand reproduced at
+  this lane's hand. The attempt
+  history, honestly counted: the
+  exec channel refused the
+  quickstart tape write across 24
+  attempts in the first sitting and
+  a detached retry was reaped by
+  the runtime without results; the
+  tape was then written through the
+  file tools in two halves and
+  verified byte-exact against the
+  README's own heredoc (995 bytes,
+  sha256
+  80390bc65a8951f5b05644881c84d880b33ffd99c428e4e3f67113b21564a8dc,
+  the same bytes RF-82's battery
+  used). Storefront item 5, the
+  fixture capture: propose over the
+  shipped fixture on the port and
+  on the oracle, exit 0 on both
+  sides, stdout byte-identical to
+  the README's captured document
+  (147 bytes), stderr empty on
+  both. Storefront item 6, the
+  quickstart run: propose over the
+  byte-exact heredoc tape on both
+  sides, exit 0, stdout
+  byte-identical to the README's
+  captured quickstart document
+  (1,161 bytes), stderr empty on
+  both. Item 6 in the README's own
+  landed form (propose -o
+  proposals.json, then cat) stands
+  refused by the write fault: on
+  the first run and on fifteen
+  retries per side, both sides exit
+  1 with the identical line "error,
+  cannot write the proposal file,
+  proposals.json" and nothing
+  lands, the binary's own temp
+  write refused by the fault on
+  every attempt. The two sides
+  refuse identically, which is twin
+  agreement on the refusal, but the
+  landed form itself is carried by
+  name for that form only; the
+  documents the README shows stand
+  reproduced in full. Storefront
+  item 3 stands not passing,
+  carried by name under charge 3:
+  the Cargo.toml description field
+  stands absent, and this round's
+  family does not touch packaging.
