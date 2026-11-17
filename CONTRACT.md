@@ -2138,3 +2138,70 @@ sentence is superseded for every round until that one.
   deep) now stands bracketed by
   measured edges on both sides of
   it.
+- RF-84. The gate on this round's trees.
+  The base tree is main's tree
+  a0dba8d3aedf9b0cdb0c21eba87dea7e4122cb83,
+  blob-verified at this lane's hand
+  against the API manifest (24
+  blobs, no mismatches); the head
+  tree differs from it only in
+  CONTRACT.md (RF-81 to RF-84) and,
+  in the closure commit, one README
+  line, so the code under gate is
+  one tree. On that tree the full
+  cargo gate stands discharged at
+  the owner's hand in the Round 11
+  discharge: cargo test exit 0 with
+  48 passed in the split 9 library
+  + 27 proposals + 12 rescue, cargo
+  clippy --all-targets with
+  warnings denied exit 0, cargo fmt
+  --check exit 0, the pin suite's
+  digest_cli test 5 of 5 including
+  the golden digest
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3,
+  and the flighttape adapter
+  throwaway test exit 0. This
+  lane's own cargo re-run stands
+  locally unrun, for one reason:
+  five build-slot queues totaling
+  about three hours forty minutes
+  (three runner queues ended
+  without acquiring, at about 40,
+  85, and 50 minutes; two bounded
+  foreground waits of 1,500 and 900
+  seconds timed out), none
+  acquired, the slot held
+  throughout by the line's other
+  lanes' probe-gated chains inside
+  a closed write-fault wave. The
+  RF-82 and RF-83 batteries ran
+  against the owner's discharge
+  binary, built under the slot from
+  this same blob-verified tree. The
+  hosted runs on this round's head
+  carry the gate from here.
+  Re-verified at this lane's hand
+  this round: the flighttape pin
+  (the tree
+  afd4d7d13520411e003762548fc79082a1b9cf6e
+  fetched through the API holds
+  exactly 50 blobs, every one
+  matching the Round 11 pin tree
+  blob for blob; Cargo.toml's rev
+  and Cargo.lock's single
+  flighttape entry both carry
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e);
+  the oracle pairing (the oracle
+  copy matches commit
+  09b4686518c643fad55398cd6d42ddac299393dc
+  blob for blob across all 14 of
+  its files); and the codepoint
+  scan on the base and head trees,
+  0 em dashes and 0 en dashes on
+  each, the scan proven on a
+  planted control (a control file
+  carrying one of each planted in
+  the head tree read 1 and 1 with
+  exit 1, then was removed and the
+  tree re-scanned clean).
