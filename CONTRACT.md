@@ -2835,3 +2835,40 @@ sentence is superseded for every round until that one.
   against the owner's discharge
   binary, built under the slot from
   this same code.
+- RF-93. The Quickstart landed form,
+  landed. The form (propose with
+  the output flag naming
+  proposals.json beside the tape,
+  then cat) stood refused across
+  Rounds 12 and 13 by the box write
+  fault; Round 13's sitting counted
+  the first run and fifteen retries
+  per side, both sides exiting 1
+  with the identical line "error,
+  cannot write the proposal file,
+  proposals.json" and nothing
+  landing. This round the sitting
+  came in an open write window,
+  over the same byte-exact heredoc
+  tape RF-87 verified (995 bytes,
+  sha256
+  80390bc65a8951f5b05644881c84d880b33ffd99c428e4e3f67113b21564a8dc).
+  The setup runs first reproduced
+  the README's captured quickstart
+  document on stdout on both arms
+  (exit 0, stdout byte-identical to
+  the 1,161-byte document, stderr
+  empty). The landed form then
+  landed on attempt 1 on the port
+  and attempt 1 on the oracle: the
+  proposals.json written beside the
+  tape is 1,161 bytes on each arm,
+  byte-identical to the README
+  document and to each other
+  (sha256
+  04498387230611e5c6e8a3b1e5d58de82e3d474e50e0619fbdd192eca877ce85).
+  The form the Quickstart names is
+  now exercised end to end on both
+  implementations, and the refusal
+  carried since Round 12 is
+  retired.
