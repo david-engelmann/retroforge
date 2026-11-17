@@ -2075,3 +2075,66 @@ sentence is superseded for every round until that one.
   from a per-side directory so the
   cannot-write line names the
   identical string on both sides.
+- RF-83. The tape depth edges were
+  measured fresh at the propose CLI
+  against the oracle, in one
+  battery of 11 cells (22 runs),
+  each cell a directory holding one
+  known-good tape and one deep
+  tape, propose to stdout, the deep
+  tape's depth verified before the
+  run by a harness mirror of the
+  port's countings. Two edges stand
+  between a deep tape and the run,
+  and the battery cells both. The
+  digest edge (the tape digest
+  budget (993, 991) of the port's
+  cli.rs, probed at RF-17 for the
+  load path and never celled at the
+  CLI): in shape A, an array chain
+  under run, the tape digests and
+  loads at deepest node 992 and at
+  993, and at deepest node 994 it
+  is excluded on both sides with
+  the line "error, deep.json is
+  excluded, the tape cannot be
+  digested, the value is nested
+  beyond the interpreter limit"; in
+  shape B, an object chain in a
+  tool_call event's input, the tape
+  digests and loads at deepest
+  object 990 and at 991, and at 992
+  it is excluded on both sides with
+  the same line. The loader edge
+  (the depth cap of the port's
+  tapes.rs, value_depth 9,994): a
+  tape at value_depth 9,994 still
+  parses on both sides and meets
+  the digest exclusion above, and a
+  tape at value_depth 9,995 is
+  excluded on both sides at the
+  load with the line "error,
+  deep.json is excluded, the file
+  is not valid JSON", in shape A
+  and shape B alike, so the
+  oracle's reader refuses at the
+  same point as the port's cap. The
+  past-cap tape alone in its
+  directory draws the same load
+  exclusion and the no-valid-tapes
+  line, exit 1, on both sides.
+  Every loaded deep tape added no
+  proposals: in every companion
+  cell the document is
+  byte-identical to the control
+  cell's 1,161-byte document on
+  both sides, and in every cell the
+  two sides' exit codes, stderr
+  bytes, and document bytes agree
+  exactly. RF-17's probed points
+  stand confirmed at the CLI, and
+  the far-past point of RF-70 and
+  RF-77 (an input nested 10,005
+  deep) now stands bracketed by
+  measured edges on both sides of
+  it.
