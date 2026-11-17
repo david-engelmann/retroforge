@@ -2872,3 +2872,109 @@ sentence is superseded for every round until that one.
   implementations, and the refusal
   carried since Round 12 is
   retired.
+- RF-94. The tape file's name was measured
+  fresh at the propose CLI against
+  the oracle, in one battery of 6
+  cells (12 runs), with RF-88's C4
+  cell re-run alongside for the tie
+  (2 further runs), propose to
+  stdout over one directory per
+  cell, the surface proposed in the
+  lane's record before any cell
+  ran. RF-88 celled the tape file's
+  spelling (the value's bytes); no
+  round had celled the name the
+  tape is filed under. Both loaders
+  scan the directory's entries in
+  filename order and load only
+  names carrying the .json suffix,
+  and the proposal document cites
+  tapes by digest only (the builder
+  takes (name, tape, digest)
+  triples and discards the name;
+  the citations name digests; the
+  registry derives each experiment
+  id from the proposal's own
+  content), so the name was
+  expected to be observable only at
+  the suffix filter, with one
+  question left open by the
+  sources: the builder accumulates
+  each tool's moments in filename
+  order, so in a two-tape directory
+  the citation order inside a
+  shared tool's proposal might
+  follow the names. The cells: N0,
+  the control, the quickstart tape
+  (995 bytes, sha256 80390bc6...)
+  alone under its README name
+  run1.json, its document the
+  1,161-byte quickstart document of
+  RF-87; N1, the same tape bytes
+  alone as zzz.json; N2, the same
+  bytes alone as tape.txt; N3, the
+  same bytes alone under the
+  extensionless name tape; N4a and
+  N4b, RF-88's C4 pair (the
+  quickstart tape and its b.py
+  twin, 995 bytes, sha256
+  562e79e7...) filed under C4's
+  names (run1.json the original,
+  twin2.json the twin) and under
+  the swapped names (run1.json the
+  twin, twin2.json the original).
+  In every cell the two sides' exit
+  codes, stdout bytes, and stderr
+  bytes agree exactly. N1's
+  document is byte-identical to
+  N0's on both sides: a rename
+  inside the .json suffix changes
+  nothing the document carries. N2
+  and N3 exit 1 on both sides,
+  stdout empty, stderr the one line
+  "error, no valid tapes in the
+  directory": the suffix filter
+  skips the file silently, and
+  alone it leaves no valid tapes.
+  N4a's document (1,475 bytes) is
+  byte-identical to the re-run C4
+  cell's, differs from N0's, and
+  cites both digests (47f1b05b...
+  and 3c5c77e9...), so the pair
+  cells have teeth. N4b's document
+  (1,475 bytes) cites both digests
+  and is not byte-identical to
+  N4a's; the whole difference,
+  walked field by field, is five
+  paths: the four citations inside
+  the one proposal
+  (rules-edit-Read) swap their tape
+  order (N4a cites 47f1b05b at seq
+  2 and 4 before 3c5c77e9 at seq 2
+  and 4, N4b the reverse, the seqs
+  and kinds unchanged), and the
+  proposal's experiment id follows
+  (exp-af481a2d5fbc151a in N4a,
+  exp-e1481ae6d8e989d4 in N4b), the
+  id deriving from the proposal's
+  own content; with each proposal's
+  citations sorted and the
+  experiment id removed, the two
+  documents are equal. So the tape
+  file's name is observable in
+  exactly two places: the .json
+  suffix filter decides whether a
+  file is read at all, and in a
+  multi-tape directory the filename
+  order fixes the citation order
+  inside a shared tool's proposal,
+  with the derived experiment id
+  following it. The name itself
+  appears nowhere in the document,
+  and everything else the document
+  carries (the proposal set, the
+  cited digests and seqs, the
+  period, the counts) is
+  name-independent, on both sides
+  alike. No disagreement anywhere;
+  no finding.
