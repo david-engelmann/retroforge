@@ -2210,3 +2210,170 @@ sentence is superseded for every round until that one.
   item. This round's read-back,
   landing, and depth measurements
   are the whole of the change.
+- RF-86. Round 13 first read PR 16 whole,
+  the Round 12 pull request. The
+  body stands at 11,289 characters,
+  11,289 UTF-8 bytes: the summary
+  and per-item account (RF-81 to
+  RF-85), the storefront readiness
+  list with item 3 not passing, the
+  disclosures, the review-readiness
+  block at the head
+  64b49a9646c46f03597e664b446eb1766adf5eaa
+  and tree
+  7dd38933afde94943fb1cb89905e376731c1a3a4
+  with the five slice commits, the
+  owner completion record, the
+  CodeRabbit release-notes
+  appendix, and the step 0
+  disposition appended after the
+  appendix. The census around it: 0
+  reviews, 0 review comments, 8
+  issue comments, every body read
+  to its end. The comments are the
+  trunk-io submission comment
+  (6949393105, created
+  2026-11-17T13:27:02Z, last edited
+  2026-11-17T14:42:41Z, 113
+  characters, standing in its final
+  form as the merged notice, the
+  same comment having carried the
+  submission notice from the pull
+  request's opening until the bot
+  edited it three seconds after the
+  landing); the owner's trigger
+  (6949394205, "@coderabbitai
+  review", 20 characters,
+  2026-11-17T13:27:04Z); the
+  CodeRabbit shell (6949396231,
+  below); the bot's auto-reply
+  (6949501732, 573 characters,
+  created 2026-11-17T13:31:40Z,
+  action not completed because the
+  last commit was already
+  reviewed); the owner's first
+  "/trunk merge" (6949994415, 12
+  characters, 2026-11-17T13:51:42Z,
+  posted during the fleet landing
+  outage); the owner's fresh
+  "/trunk merge" (6951100777, 12
+  characters, 2026-11-17T14:35:16Z,
+  the submission that forced the
+  queue's re-evaluation); the
+  owner's landing record
+  (6951348253, 1,811 characters,
+  2026-11-17T14:44:44Z, carrying
+  this round's three charges); and
+  one trunk-io error notice after
+  the landing record (6951349842,
+  below). The shell in its true
+  final form at this lane's hand:
+  comment 6949396231, created
+  2026-11-17T13:27:10Z, last edited
+  2026-11-17T13:43:07Z, 11,082
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (11,097 UTF-8 bytes).
+  The drift chain stands in three
+  forms: 11,078 characters at the
+  Round 12 lane's disposition (last
+  edited 2026-11-17T13:30:06Z),
+  11,080 at the red team's hand
+  (2026-11-17T13:33:20Z, the form
+  the owner completion record
+  states, superseding the
+  disposition's census), and 11,082
+  at this read-back, each move the
+  same two-character post-review
+  edit this shell family showed on
+  PR 15 and again on this pull
+  request. Every
+  disposition-bearing element is
+  identical in all three forms: no
+  actionable comments were
+  generated in the recent review,
+  no inline findings, the
+  walkthrough and the change
+  assessment stand under the
+  closure head 64b49a96, the
+  coverage source and the covered
+  commit are both 64b49a96 with
+  kind reviewed, the Merge Risk row
+  reads Minimal, the pre-merge
+  checks table carries four rows
+  passed (Title, Linked Issues, Out
+  of Scope Changes, Description),
+  the run configuration reads CHILL
+  with plan Advanced, Run ID
+  358845de-e44e-469f-81b3-b357952155dd,
+  no configuration file from this
+  repository applied, and the files
+  selected for processing stand as
+  CONTRACT.md and README.md.
+  Nothing stood to fix or dismiss
+  from the shell at any form. The
+  owner completion record in the
+  body (the three reviews each
+  APPROVE, the red team's
+  reproductions of RF-82 and RF-83
+  and its tree-hash proof of RF-84,
+  hosted runs 44092732911 and
+  44092834410 both success on the
+  head, and the one correction
+  censused above) is graded against
+  this record and stands exact. The
+  landing, censused as part of the
+  record: this pull request was the
+  fleet's first landing under the
+  fleet-trunk-updates ruleset, its
+  queue entry held at notReady on
+  the restrict-updates rule until
+  that ruleset's enforcement was
+  disabled in a controlled test on
+  this repository, whereupon
+  GitHub's mergeable_state flipped
+  from blocked to clean and the
+  fresh "/trunk merge" forced the
+  queue's re-evaluation; the entry
+  flipped to pending and mergeable,
+  the queue tested the merged
+  state, and the pull request
+  landed 2026-11-17T14:42:38Z as
+  squash commit
+  30a38bc06753fd12bff9ca1766a3d0cbf2e39d60
+  on main, single parent 132f8363,
+  its tree
+  7dd38933afde94943fb1cb89905e376731c1a3a4
+  identical to the reviewed head
+  tree, verified by the owner
+  before the round was called, the
+  README on main reading 12 of 100.
+  The five commits on the pull
+  request (ca89dc1d, e4402536,
+  87877a60, d1ef6318, 64b49a96)
+  match the body's account. Charge
+  1's tail, the post-landing
+  disposition: one comment stands
+  after the landing record, the
+  trunk-io error notice 6951349842
+  (142 characters,
+  2026-11-17T14:44:48Z, four
+  seconds after the record),
+  reporting that a Trunk command
+  failed, "Unexpected argument
+  'forced'. This command does not
+  take positional arguments". The
+  landing record's own prose names
+  the mechanism (one fresh /trunk
+  merge forced the re-evaluation),
+  and the bot's command parser read
+  that prose mention as a command
+  carrying the positional argument
+  "forced". The notice is the bot's
+  parsing artifact on the record's
+  prose, posted after the landing
+  had already completed; it carries
+  no finding about the round,
+  changes nothing in the record,
+  and nothing stands to fix or
+  dismiss from it.
