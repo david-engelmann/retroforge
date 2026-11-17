@@ -2978,3 +2978,9 @@ sentence is superseded for every round until that one.
   name-independent, on both sides
   alike. No disagreement anywhere;
   no finding.
+- RF-95. Closure. The README records 14 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  gate attempts, landed form, and
+  name measurements are the whole
+  of the change.
