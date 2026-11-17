@@ -2433,3 +2433,88 @@ sentence is superseded for every round until that one.
   the Cargo.toml description field
   stands absent, and this round's
   family does not touch packaging.
+- RF-88. The tape digest's spelling
+  independence was measured fresh
+  at the propose CLI against the
+  oracle, in one battery of 5 cells
+  (10 runs), propose to stdout over
+  one directory per cell, the
+  surface proposed in the lane's
+  record before any cell ran. The
+  digest a citation names is
+  computed over the canonical
+  rendering of the tape's parsed
+  value (RF-18), never over the
+  file bytes (the quickstart tape's
+  file sha256, 80390bc6..., is not
+  the digest 47f1b05b... its
+  proposals cite), and no earlier
+  round celled whether the file's
+  spelling changes anything
+  observable: RF-14's dedup is
+  stated over canonical digests,
+  but the only duplicate ever
+  celled was the identical file
+  filed twice. The cells: C0, the
+  control, the quickstart tape in
+  its README spelling alone, its
+  document the 1,161-byte
+  quickstart document of RF-87; C1,
+  the same tape value with every
+  object's keys permuted into
+  reverse-sorted order and
+  four-space indentation (1,637
+  bytes, generated from the
+  verified tape and verified
+  byte-exact, sha256 78fcea9b...);
+  C2, the same value in compact
+  separators with string values
+  respelled in escape form (the
+  harness, session, tool, path, and
+  error strings carrying \uXXXX
+  escapes, 924 bytes, sha256
+  83397ec3..., likewise verified);
+  C3, the README spelling and the
+  C1 respelling filed together
+  under two names; C4, the teeth,
+  the README spelling beside a twin
+  whose value differs in one input
+  path (a.py becomes b.py in every
+  event, 995 bytes, sha256
+  562e79e7...). In every cell the
+  two sides' exit codes, stdout
+  bytes, and stderr bytes agree
+  exactly, every cell exiting 0
+  with stderr empty. C1's document
+  is byte-identical to C0's on both
+  sides, and C2's likewise: the
+  citation digest and the
+  experiment id are
+  spelling-independent. C3's
+  document is byte-identical to
+  C0's, exit 0, no exclusion lines:
+  under RF-14 the respelled twin's
+  canonical digest repeats the
+  first tape's, so it adds no
+  moments, and the dedup extends to
+  a respelled twin exactly as it
+  holds for the identical file.
+  C4's document differs from C0's
+  (1,475 bytes) with the sides
+  agreeing on it: one rules-edit
+  proposal for Read citing four
+  redo moments across both tapes'
+  digests (47f1b05b... and
+  3c5c77e9...), with its own
+  experiment id, so the battery
+  distinguishes values and the C1
+  to C3 equalities are measured,
+  not vacuous. Number spellings
+  stand excluded by design: the
+  value model distinguishes an
+  integer from a float spelling by
+  construction (RF-18's repr-exact
+  digits), so those are different
+  tapes, not respellings. No
+  disagreement anywhere; no
+  finding.
