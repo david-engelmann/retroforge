@@ -2205,3 +2205,8 @@ sentence is superseded for every round until that one.
   the head tree read 1 and 1 with
   exit 1, then was removed and the
   tree re-scanned clean).
+- RF-85. Closure. The README records 12 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  landing, and depth measurements
+  are the whole of the change.
