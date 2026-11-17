@@ -1932,3 +1932,281 @@ sentence is superseded for every round until that one.
   pushed tree asserted equal to
   the local tree, and the round
   stops at the owner's gate.
+- RF-81. PR 15 read back whole at this
+  round's opening. The body stands
+  at 12,163 characters, 12,167
+  UTF-8 bytes, the figure the owner
+  measured at landing, unchanged
+  since; it carries the round's
+  summary and per-item account
+  (RF-73 to RF-79), the storefront
+  readiness list with item 3 not
+  passing, the Verified block at
+  the build lane's head 8fc286ed
+  and tree 7d143525 with hosted
+  runs 43256942615 and 43257158455,
+  the step 0 disposition in its
+  moment-bounded form, the
+  CodeRabbit release-notes
+  appendix, the completion note,
+  and the owner completion record
+  with its Correction to RF-80. The
+  census around it: 0 reviews, 0
+  review comments, 4 issue
+  comments, every body read to its
+  end (the CodeRabbit shell
+  6829172306; the owner's trigger
+  comment 6829174526,
+  "@coderabbitai review", 20
+  characters, posted
+  2026-11-12T16:18:25Z; the bot's
+  auto-reply 6829233844, 573
+  characters, posted
+  2026-11-12T16:20:31Z, action not
+  completed because the last commit
+  was already reviewed; the owner's
+  landing record 6942764810, 2,460
+  characters, posted
+  2026-11-17T08:25:27Z), so the
+  landing charge's count of three
+  issue comments standing before
+  the landing comment verifies
+  exact. The shell in its true
+  final form at this lane's hand:
+  comment 6829172306, created
+  2026-11-12T16:18:20Z, last edited
+  2026-11-17T08:22:59Z, 11,802
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (11,819 UTF-8 bytes).
+  No actionable comments, no inline
+  findings. The walkthrough and the
+  change assessment stand under the
+  closure head 8110411f, the
+  coverage source and the covered
+  commit are both 8110411f with
+  kind reviewed, the Merge Risk row
+  reads Minimal, the pre-merge
+  checks table carries four rows
+  passed (Title, Linked Issues, Out
+  of Scope Changes, Description)
+  and no Docstring Coverage row,
+  the run configuration reads CHILL
+  with plan Advanced, Run ID
+  3d2157e3-b3eb-481e-b529-c2333eecc4a4,
+  no configuration file from this
+  repository applied, and the files
+  selected for processing stand as
+  CONTRACT.md alone, which is also
+  listed as skipped as similar to
+  files already processed. The
+  correction to RF-80's census,
+  recorded plainly as a correction:
+  RF-80 contracted the shell as
+  11,199 characters, last edited
+  2026-11-12T16:21:39Z, and that
+  was wrong as a final form; it
+  described the shell as it stood
+  when the completion lane read it
+  during its build. The owner
+  completion record on the body
+  corrected the census to 11,800
+  characters, last edited
+  2026-11-17T03:27:21Z, and the
+  shell then moved once more,
+  edited 2026-11-17T08:22:59Z,
+  minutes before the merge at
+  08:24:13Z, into the form this
+  item censuses. Every
+  disposition-bearing element is
+  identical across all three forms:
+  no actionable comments, Minimal,
+  four checks passed, coverage at
+  the closure head 8110411f, and
+  the same Run ID in the two later
+  forms. Charge 3 of the landing
+  record: no CodeRabbit comment was
+  posted after the landing record;
+  the shell's last edit precedes
+  it, so nothing post-landing
+  stands owed.
+- RF-82. The 242-byte output-name landing,
+  carried from RF-77 through RF-80
+  as environment-blocked, was
+  executed again in an open write
+  window, in RF-77's own cell
+  shape: a small period of the
+  quickstart tape, the shipped
+  fixture, a broken tape, and a
+  future-version tape, rendering a
+  1,161-byte proposal document to
+  stdout, byte-identical on both
+  sides with stderr identical, and
+  propose -o under an output name
+  of exactly 242 bytes as one path
+  component. The 242-byte name
+  lands on both sides (exit 0), and
+  the landed document is
+  byte-identical to the stdout
+  document on each side. The
+  243-byte name refuses on both
+  sides (exit 1) with stderr
+  identical, and the boundary
+  arithmetic re-derives: the temp
+  name is the output name plus 13
+  bytes against the 255-byte
+  component limit, so 242 lands and
+  243 refuses. RF-77's record of
+  the landing now stands verified
+  at a second hand, and RF-80's
+  environment-blocked carry is
+  discharged. One construction note
+  stands in the record: this
+  battery's first pass, like the
+  completion lane's Round 11
+  reconstruction before it,
+  appended the side name to the
+  output name, making 247-byte and
+  248-byte names that refuse on
+  both sides for that reason alone;
+  the results above are the
+  corrected construction's, the
+  name exactly n bytes, passed bare
+  from a per-side directory so the
+  cannot-write line names the
+  identical string on both sides.
+- RF-83. The tape depth edges were
+  measured fresh at the propose CLI
+  against the oracle, in one
+  battery of 11 cells (22 runs),
+  each cell a directory holding one
+  known-good tape and one deep
+  tape, propose to stdout, the deep
+  tape's depth verified before the
+  run by a harness mirror of the
+  port's countings. Two edges stand
+  between a deep tape and the run,
+  and the battery cells both. The
+  digest edge (the tape digest
+  budget (993, 991) of the port's
+  cli.rs, probed at RF-17 for the
+  load path and never celled at the
+  CLI): in shape A, an array chain
+  under run, the tape digests and
+  loads at deepest node 992 and at
+  993, and at deepest node 994 it
+  is excluded on both sides with
+  the line "error, deep.json is
+  excluded, the tape cannot be
+  digested, the value is nested
+  beyond the interpreter limit"; in
+  shape B, an object chain in a
+  tool_call event's input, the tape
+  digests and loads at deepest
+  object 990 and at 991, and at 992
+  it is excluded on both sides with
+  the same line. The loader edge
+  (the depth cap of the port's
+  tapes.rs, value_depth 9,994): a
+  tape at value_depth 9,994 still
+  parses on both sides and meets
+  the digest exclusion above, and a
+  tape at value_depth 9,995 is
+  excluded on both sides at the
+  load with the line "error,
+  deep.json is excluded, the file
+  is not valid JSON", in shape A
+  and shape B alike, so the
+  oracle's reader refuses at the
+  same point as the port's cap. The
+  past-cap tape alone in its
+  directory draws the same load
+  exclusion and the no-valid-tapes
+  line, exit 1, on both sides.
+  Every loaded deep tape added no
+  proposals: in every companion
+  cell the document is
+  byte-identical to the control
+  cell's 1,161-byte document on
+  both sides, and in every cell the
+  two sides' exit codes, stderr
+  bytes, and document bytes agree
+  exactly. RF-17's probed points
+  stand confirmed at the CLI, and
+  the far-past point of RF-70 and
+  RF-77 (an input nested 10,005
+  deep) now stands bracketed by
+  measured edges on both sides of
+  it.
+- RF-84. The gate on this round's trees.
+  The base tree is main's tree
+  a0dba8d3aedf9b0cdb0c21eba87dea7e4122cb83,
+  blob-verified at this lane's hand
+  against the API manifest (24
+  blobs, no mismatches); the head
+  tree differs from it only in
+  CONTRACT.md (RF-81 to RF-84) and,
+  in the closure commit, one README
+  line, so the code under gate is
+  one tree. On that tree the full
+  cargo gate stands discharged at
+  the owner's hand in the Round 11
+  discharge: cargo test exit 0 with
+  48 passed in the split 9 library
+  + 27 proposals + 12 rescue, cargo
+  clippy --all-targets with
+  warnings denied exit 0, cargo fmt
+  --check exit 0, the pin suite's
+  digest_cli test 5 of 5 including
+  the golden digest
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3,
+  and the flighttape adapter
+  throwaway test exit 0. This
+  lane's own cargo re-run stands
+  locally unrun, for one reason:
+  five build-slot queues totaling
+  about three hours forty minutes
+  (three runner queues ended
+  without acquiring, at about 40,
+  85, and 50 minutes; two bounded
+  foreground waits of 1,500 and 900
+  seconds timed out), none
+  acquired, the slot held
+  throughout by the line's other
+  lanes' probe-gated chains inside
+  a closed write-fault wave. The
+  RF-82 and RF-83 batteries ran
+  against the owner's discharge
+  binary, built under the slot from
+  this same blob-verified tree. The
+  hosted runs on this round's head
+  carry the gate from here.
+  Re-verified at this lane's hand
+  this round: the flighttape pin
+  (the tree
+  afd4d7d13520411e003762548fc79082a1b9cf6e
+  fetched through the API holds
+  exactly 50 blobs, every one
+  matching the Round 11 pin tree
+  blob for blob; Cargo.toml's rev
+  and Cargo.lock's single
+  flighttape entry both carry
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e);
+  the oracle pairing (the oracle
+  copy matches commit
+  09b4686518c643fad55398cd6d42ddac299393dc
+  blob for blob across all 14 of
+  its files); and the codepoint
+  scan on the base and head trees,
+  0 em dashes and 0 en dashes on
+  each, the scan proven on a
+  planted control (a control file
+  carrying one of each planted in
+  the head tree read 1 and 1 with
+  exit 1, then was removed and the
+  tree re-scanned clean).
+- RF-85. Closure. The README records 12 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  landing, and depth measurements
+  are the whole of the change.
