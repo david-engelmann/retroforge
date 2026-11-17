@@ -2210,3 +2210,394 @@ sentence is superseded for every round until that one.
   item. This round's read-back,
   landing, and depth measurements
   are the whole of the change.
+- RF-86. Round 13 first read PR 16 whole,
+  the Round 12 pull request. The
+  body stands at 11,289 characters,
+  11,289 UTF-8 bytes: the summary
+  and per-item account (RF-81 to
+  RF-85), the storefront readiness
+  list with item 3 not passing, the
+  disclosures, the review-readiness
+  block at the head
+  64b49a9646c46f03597e664b446eb1766adf5eaa
+  and tree
+  7dd38933afde94943fb1cb89905e376731c1a3a4
+  with the five slice commits, the
+  owner completion record, the
+  CodeRabbit release-notes
+  appendix, and the step 0
+  disposition appended after the
+  appendix. The census around it: 0
+  reviews, 0 review comments, 8
+  issue comments, every body read
+  to its end. The comments are the
+  trunk-io submission comment
+  (6949393105, created
+  2026-11-17T13:27:02Z, last edited
+  2026-11-17T14:42:41Z, 113
+  characters, standing in its final
+  form as the merged notice, the
+  same comment having carried the
+  submission notice from the pull
+  request's opening until the bot
+  edited it three seconds after the
+  landing); the owner's trigger
+  (6949394205, "@coderabbitai
+  review", 20 characters,
+  2026-11-17T13:27:04Z); the
+  CodeRabbit shell (6949396231,
+  below); the bot's auto-reply
+  (6949501732, 573 characters,
+  created 2026-11-17T13:31:40Z,
+  action not completed because the
+  last commit was already
+  reviewed); the owner's first
+  "/trunk merge" (6949994415, 12
+  characters, 2026-11-17T13:51:42Z,
+  posted during the fleet landing
+  outage); the owner's fresh
+  "/trunk merge" (6951100777, 12
+  characters, 2026-11-17T14:35:16Z,
+  the submission that forced the
+  queue's re-evaluation); the
+  owner's landing record
+  (6951348253, 1,811 characters,
+  2026-11-17T14:44:44Z, carrying
+  this round's three charges); and
+  one trunk-io error notice after
+  the landing record (6951349842,
+  below). The shell in its true
+  final form at this lane's hand:
+  comment 6949396231, created
+  2026-11-17T13:27:10Z, last edited
+  2026-11-17T13:43:07Z, 11,082
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (11,097 UTF-8 bytes).
+  The drift chain stands in three
+  forms: 11,078 characters at the
+  Round 12 lane's disposition (last
+  edited 2026-11-17T13:30:06Z),
+  11,080 at the red team's hand
+  (2026-11-17T13:33:20Z, the form
+  the owner completion record
+  states, superseding the
+  disposition's census), and 11,082
+  at this read-back, each move the
+  same two-character post-review
+  edit this shell family showed on
+  PR 15 and again on this pull
+  request. Every
+  disposition-bearing element is
+  identical in all three forms: no
+  actionable comments were
+  generated in the recent review,
+  no inline findings, the
+  walkthrough and the change
+  assessment stand under the
+  closure head 64b49a96, the
+  coverage source and the covered
+  commit are both 64b49a96 with
+  kind reviewed, the Merge Risk row
+  reads Minimal, the pre-merge
+  checks table carries four rows
+  passed (Title, Linked Issues, Out
+  of Scope Changes, Description),
+  the run configuration reads CHILL
+  with plan Advanced, Run ID
+  358845de-e44e-469f-81b3-b357952155dd,
+  no configuration file from this
+  repository applied, and the files
+  selected for processing stand as
+  CONTRACT.md and README.md.
+  Nothing stood to fix or dismiss
+  from the shell at any form. The
+  owner completion record in the
+  body (the three reviews each
+  APPROVE, the red team's
+  reproductions of RF-82 and RF-83
+  and its tree-hash proof of RF-84,
+  hosted runs 44092732911 and
+  44092834410 both success on the
+  head, and the one correction
+  censused above) is graded against
+  this record and stands exact. The
+  landing, censused as part of the
+  record: this pull request was the
+  fleet's first landing under the
+  fleet-trunk-updates ruleset, its
+  queue entry held at notReady on
+  the restrict-updates rule until
+  that ruleset's enforcement was
+  disabled in a controlled test on
+  this repository, whereupon
+  GitHub's mergeable_state flipped
+  from blocked to clean and the
+  fresh "/trunk merge" forced the
+  queue's re-evaluation; the entry
+  flipped to pending and mergeable,
+  the queue tested the merged
+  state, and the pull request
+  landed 2026-11-17T14:42:38Z as
+  squash commit
+  30a38bc06753fd12bff9ca1766a3d0cbf2e39d60
+  on main, single parent 132f8363,
+  its tree
+  7dd38933afde94943fb1cb89905e376731c1a3a4
+  identical to the reviewed head
+  tree, verified by the owner
+  before the round was called, the
+  README on main reading 12 of 100.
+  The five commits on the pull
+  request (ca89dc1d, e4402536,
+  87877a60, d1ef6318, 64b49a96)
+  match the body's account. Charge
+  1's tail, the post-landing
+  disposition: one comment stands
+  after the landing record, the
+  trunk-io error notice 6951349842
+  (142 characters,
+  2026-11-17T14:44:48Z, four
+  seconds after the record),
+  reporting that a Trunk command
+  failed, "Unexpected argument
+  'forced'. This command does not
+  take positional arguments". The
+  landing record's own prose names
+  the mechanism (one fresh /trunk
+  merge forced the re-evaluation),
+  and the bot's command parser read
+  that prose mention as a command
+  carrying the positional argument
+  "forced". The notice is the bot's
+  parsing artifact on the record's
+  prose, posted after the landing
+  had already completed; it carries
+  no finding about the round,
+  changes nothing in the record,
+  and nothing stands to fix or
+  dismiss from it.
+- RF-87. The Quickstart capture, carried
+  from Round 11 through Round 12 as
+  refused by the box write fault,
+  was attempted again, and its
+  documents stand reproduced at
+  this lane's hand. The attempt
+  history, honestly counted: the
+  exec channel refused the
+  quickstart tape write across 24
+  attempts in the first sitting and
+  a detached retry was reaped by
+  the runtime without results; the
+  tape was then written through the
+  file tools in two halves and
+  verified byte-exact against the
+  README's own heredoc (995 bytes,
+  sha256
+  80390bc65a8951f5b05644881c84d880b33ffd99c428e4e3f67113b21564a8dc,
+  the same bytes RF-82's battery
+  used). Storefront item 5, the
+  fixture capture: propose over the
+  shipped fixture on the port and
+  on the oracle, exit 0 on both
+  sides, stdout byte-identical to
+  the README's captured document
+  (147 bytes), stderr empty on
+  both. Storefront item 6, the
+  quickstart run: propose over the
+  byte-exact heredoc tape on both
+  sides, exit 0, stdout
+  byte-identical to the README's
+  captured quickstart document
+  (1,161 bytes), stderr empty on
+  both. Item 6 in the README's own
+  landed form (propose -o
+  proposals.json, then cat) stands
+  refused by the write fault: on
+  the first run and on fifteen
+  retries per side, both sides exit
+  1 with the identical line "error,
+  cannot write the proposal file,
+  proposals.json" and nothing
+  lands, the binary's own temp
+  write refused by the fault on
+  every attempt. The two sides
+  refuse identically, which is twin
+  agreement on the refusal, but the
+  landed form itself is carried by
+  name for that form only; the
+  documents the README shows stand
+  reproduced in full. Storefront
+  item 3 stands not passing,
+  carried by name under charge 3:
+  the Cargo.toml description field
+  stands absent, and this round's
+  family does not touch packaging.
+- RF-88. The tape digest's spelling
+  independence was measured fresh
+  at the propose CLI against the
+  oracle, in one battery of 5 cells
+  (10 runs), propose to stdout over
+  one directory per cell, the
+  surface proposed in the lane's
+  record before any cell ran. The
+  digest a citation names is
+  computed over the canonical
+  rendering of the tape's parsed
+  value (RF-18), never over the
+  file bytes (the quickstart tape's
+  file sha256, 80390bc6..., is not
+  the digest 47f1b05b... its
+  proposals cite), and no earlier
+  round celled whether the file's
+  spelling changes anything
+  observable: RF-14's dedup is
+  stated over canonical digests,
+  but the only duplicate ever
+  celled was the identical file
+  filed twice. The cells: C0, the
+  control, the quickstart tape in
+  its README spelling alone, its
+  document the 1,161-byte
+  quickstart document of RF-87; C1,
+  the same tape value with every
+  object's keys permuted into
+  reverse-sorted order and
+  four-space indentation (1,637
+  bytes, generated from the
+  verified tape and verified
+  byte-exact, sha256 78fcea9b...);
+  C2, the same value in compact
+  separators with string values
+  respelled in escape form (the
+  harness, session, tool, path, and
+  error strings carrying \uXXXX
+  escapes, 924 bytes, sha256
+  83397ec3..., likewise verified);
+  C3, the README spelling and the
+  C1 respelling filed together
+  under two names; C4, the teeth,
+  the README spelling beside a twin
+  whose value differs in one input
+  path (a.py becomes b.py in every
+  event, 995 bytes, sha256
+  562e79e7...). In every cell the
+  two sides' exit codes, stdout
+  bytes, and stderr bytes agree
+  exactly, every cell exiting 0
+  with stderr empty. C1's document
+  is byte-identical to C0's on both
+  sides, and C2's likewise: the
+  citation digest and the
+  experiment id are
+  spelling-independent. C3's
+  document is byte-identical to
+  C0's, exit 0, no exclusion lines:
+  under RF-14 the respelled twin's
+  canonical digest repeats the
+  first tape's, so it adds no
+  moments, and the dedup extends to
+  a respelled twin exactly as it
+  holds for the identical file.
+  C4's document differs from C0's
+  (1,475 bytes) with the sides
+  agreeing on it: one rules-edit
+  proposal for Read citing four
+  redo moments across both tapes'
+  digests (47f1b05b... and
+  3c5c77e9...), with its own
+  experiment id, so the battery
+  distinguishes values and the C1
+  to C3 equalities are measured,
+  not vacuous. Number spellings
+  stand excluded by design: the
+  value model distinguishes an
+  integer from a float spelling by
+  construction (RF-18's repr-exact
+  digits), so those are different
+  tapes, not respellings. No
+  disagreement anywhere; no
+  finding.
+- RF-89. The gate on this round's trees.
+  The base tree is main's tree
+  7dd38933afde94943fb1cb89905e376731c1a3a4,
+  blob-verified at this lane's hand
+  against the API manifest (24
+  blobs, no mismatches); the head
+  tree differs from it only in
+  CONTRACT.md (RF-86 to RF-89) and,
+  in the closure commit, one README
+  line, so the code under gate is
+  one tree, and that code is
+  byte-identical to the Round 11
+  head tree's code the owner's
+  discharge gated (the trees
+  between differ only in
+  CONTRACT.md and the README
+  count). On that tree the full
+  cargo gate stands discharged at
+  the owner's hand in the Round 11
+  discharge: cargo test exit 0 with
+  48 passed in the split 9 library
+  + 27 proposals + 12 rescue, cargo
+  clippy --all-targets with
+  warnings denied exit 0, cargo fmt
+  --check exit 0, and the pin
+  suite's digest_cli test 5 of 5
+  including the golden digest
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3.
+  This lane's own cargo re-run
+  stands locally unrun, for one
+  reason: three build-slot queues
+  totaling about one hour
+  thirty-three minutes (the first
+  killed by a runtime restart at
+  about fifteen minutes, the second
+  expiring after its full 23-minute
+  wait, the third after its full
+  55-minute wait), none acquired,
+  the slot held throughout by the
+  line's other lanes' probe-gated
+  chains inside a closed
+  write-fault wave. The hosted runs
+  on this round's head carry the
+  gate from here. Re-verified at
+  this lane's hand this round: the
+  flighttape pin (the tree
+  afd4d7d13520411e003762548fc79082a1b9cf6e
+  fetched through the API from the
+  flighttape repository holds
+  exactly 50 blobs, every one
+  matching the Round 11 pin tree
+  blob for blob, its extra local
+  files the cargo checkout's own
+  internals; Cargo.toml's rev and
+  Cargo.lock's flighttape entry
+  both carry
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e);
+  the oracle pairing (the oracle
+  copy's 14 held files match commit
+  09b4686518c643fad55398cd6d42ddac299393dc
+  blob for blob against the local
+  clone, the commit's other four
+  blobs being files the copy never
+  carried, the same 14-file shape
+  RF-84 recorded); and the
+  codepoint scan on the base tree
+  and on this round's head files, 0
+  em dashes and 0 en dashes, the
+  scan proven on a planted control
+  (a control file carrying one of
+  each read 1 and 1 with exit 1,
+  then was removed and the tree
+  re-scanned clean). The RF-87 and
+  RF-88 batteries ran against the
+  owner's discharge binary, built
+  under the slot from this same
+  code.
+- RF-90. Closure. The README records 13 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  capture, and spelling
+  measurements are the whole of the
+  change.
