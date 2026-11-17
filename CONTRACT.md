@@ -2595,3 +2595,9 @@ sentence is superseded for every round until that one.
   owner's discharge binary, built
   under the slot from this same
   code.
+- RF-90. Closure. The README records 13 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  capture, and spelling
+  measurements are the whole of the
+  change.
