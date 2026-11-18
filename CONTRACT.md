@@ -3353,14 +3353,28 @@ sentence is superseded for every round until that one.
   disagreement anywhere in the
   measured cells; no finding in
   them.
-- RF-99. The README's two captures were
+- RF-99. The README's captures were
   re-verified at the propose CLI
   against the oracle. Item 5's form
-  (the Usage section's captured
-  propose output over the synthetic
-  fixture) reproduced on stdout on
-  both arms: the 147-byte document,
-  exit 0, stderr empty. Item 6's
+  (the introduction's captured
+  propose run over the synthetic
+  fixture, the stdout run the
+  storefront list's item 5 covers)
+  reproduced on stdout on both
+  arms: the 147-byte document, exit
+  0, stderr empty. The Usage
+  section's own capture is a
+  separate one, the output-flag run
+  over the tapes directory holding
+  the synthetic fixture and a
+  broken.json, its exclusion line
+  printed on stderr; it was not
+  separately re-run this round, its
+  exclusion line's form stands
+  measured in RF-98's X1 cell (the
+  same line naming bad.json), and
+  its landed form stands under the
+  refusal counted next. Item 6's
   stdout form (the Quickstart's
   propose run) reproduced on both
   arms: the 1,161-byte quickstart
@@ -3399,9 +3413,3 @@ sentence is superseded for every round until that one.
   environment and counted, not as
   landed this round. The two stdout
   forms stand re-verified whole.
-- RF-100. Closure. The README records 15 of
-  100 in the commit carrying this
-  item. This round's read-back,
-  gate, rollup measurements, and
-  Quickstart regression are the
-  whole of the change.
