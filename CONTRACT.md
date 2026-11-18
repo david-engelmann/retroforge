@@ -3399,3 +3399,9 @@ sentence is superseded for every round until that one.
   environment and counted, not as
   landed this round. The two stdout
   forms stand re-verified whole.
+- RF-100. Closure. The README records 15 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  gate, rollup measurements, and
+  Quickstart regression are the
+  whole of the change.
