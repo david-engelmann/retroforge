@@ -3353,3 +3353,49 @@ sentence is superseded for every round until that one.
   disagreement anywhere in the
   measured cells; no finding in
   them.
+- RF-99. The README's two captures were
+  re-verified at the propose CLI
+  against the oracle. Item 5's form
+  (the Usage section's captured
+  propose output over the synthetic
+  fixture) reproduced on stdout on
+  both arms: the 147-byte document,
+  exit 0, stderr empty. Item 6's
+  stdout form (the Quickstart's
+  propose run) reproduced on both
+  arms: the 1,161-byte quickstart
+  document, exit 0, stderr empty.
+  Item 6's landed form (the same
+  run with the output flag naming
+  proposals.json beside the tape)
+  stands attempted and refused in
+  this round's sittings: 31 counted
+  attempts per side (one in the
+  first pass and thirty in a
+  bounded sitting run after it),
+  every attempt on both arms
+  exiting 1 with the one line
+  "error, cannot write the proposal
+  file, proposals.json" and no file
+  written; a third sitting was
+  killed by a runtime restart at
+  about nine minutes with its
+  output lost, and its attempts are
+  not counted. The refusal is the
+  box write fault's, identical on
+  both arms, in a wave that refused
+  this lane's scratch writes
+  through the same hours; no code
+  file in this round's trees
+  differs from Round 14's tree, and
+  the landed form itself stands
+  landed in Round 14 (RF-93, on
+  attempt 1 on both arms,
+  reproduced by that round's red
+  team), so the form is contracted
+  here as standing on its Round 14
+  landing, with this round's
+  re-verification refused by the
+  environment and counted, not as
+  landed this round. The two stdout
+  forms stand re-verified whole.
