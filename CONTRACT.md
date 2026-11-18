@@ -3179,3 +3179,79 @@ sentence is superseded for every round until that one.
   after the landing record, so
   nothing stands to disposition
   from after it.
+- RF-97. The gate on this round's trees.
+  The base tree is main's tree
+  a60c383a214e333eb8a231cf60b58727b40e85c4;
+  its contents stand verified
+  against the API manifest at
+  construction and again at this
+  round's first slice push, whose
+  tree the API returned asserted
+  equal to the intended contents
+  blob for blob (24 blobs). The
+  head tree differs from the base
+  only in CONTRACT.md (RF-96 to
+  RF-100) and, in the closure
+  commit, one README line, so the
+  code under gate is one tree; that
+  tree is Round 14's head tree
+  itself, and its code stands
+  byte-identical through Round 14's
+  blob hashing to the code the
+  Round 11 discharge ran. On this
+  round's trees the full cargo gate
+  stands discharged at the owner's
+  hand in the Round 11 discharge of
+  byte-identical code: cargo test
+  exit 0 with 48 passed in the
+  split 9 library + 27 proposals +
+  12 rescue, cargo clippy
+  --all-targets with warnings
+  denied exit 0, cargo fmt --check
+  exit 0, and the pin suite's
+  digest_cli test 5 of 5 including
+  the golden digest
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3.
+  This lane's own cargo re-run
+  stands locally unrun, for reasons
+  counted honestly: three
+  build-slot queues on the base
+  tree totaling about two hours
+  forty minutes, crossed by three
+  runtime restarts. The first queue
+  (about 21:28 UTC) died unacquired
+  in the restart at about 22:03 UTC
+  after about thirty-five minutes.
+  The second (about 22:06 UTC)
+  acquired the slot at 23:49:31 UTC
+  after about one hour forty-four
+  minutes and wrote its start line,
+  then was killed about two minutes
+  in by the next restart, before
+  its probe gate recorded a pass
+  and before any cargo stage
+  started. The third (about 23:53
+  UTC) was killed unacquired by the
+  next restart after about twenty
+  minutes. The slot was held
+  throughout by the fleet's other
+  lanes. The hosted runs on this
+  round's head carry the gate from
+  here. Re-verified this round: the
+  flighttape pin (tree afd4d7d1, 50
+  blobs matching the Round 11 pin
+  tree blob for blob, both Cargo
+  files carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, and RF-92
+  recorded), and the codepoint scan
+  on the base tree and on the head
+  tree (0 em dashes and 0 en dashes
+  in each, each scan proven on a
+  planted control reading 1 and 1).
+  The reliance RF-84, RF-89, and
+  RF-92 carried stands carried a
+  fourth time by name.
