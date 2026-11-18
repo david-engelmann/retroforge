@@ -3255,3 +3255,101 @@ sentence is superseded for every round until that one.
   The reliance RF-84, RF-89, and
   RF-92 carried stands carried a
   fourth time by name.
+- RF-98. The exclusion rollup at the
+  propose CLI was measured fresh
+  against the oracle, in one
+  battery of 10 cells (20 runs),
+  propose to stdout over one
+  directory per cell, the surface
+  proposed in the lane's record
+  before any cell ran. Prior rounds
+  measured single exclusions only
+  in passing (the invalid-JSON line
+  in the README's Usage capture and
+  RF-94's fixcheck; the
+  no-valid-tapes line standing
+  alone behind the suffix filter in
+  RF-94's N2 and N3); no round had
+  celled the rollup itself. Both
+  loaders return the same five
+  reasons, and both CLIs print one
+  exclusion line per refused tape
+  in filename order, then one
+  defect line per defect in the
+  loader's order, the run
+  proceeding on the tapes that
+  remain. The cells: X0, the
+  control, the quickstart tape (995
+  bytes, sha256 80390bc6...) alone
+  under its README name run1.json,
+  its document the 1,161-byte
+  quickstart document, stderr
+  empty, exit 0; X1 adds bad.json
+  (invalid JSON), stderr exactly
+  the one line "error, bad.json is
+  excluded, the file is not valid
+  JSON"; X2 adds ver.json (the
+  quickstart tape with tape_version
+  "2.0", its only defect), stderr
+  the exclusion line with reason
+  "not a valid tape" and the one
+  line "defect, tape_version is not
+  1.0"; X3 adds multi.json, a tape
+  carrying five defects by
+  construction, and its measured
+  defect list matches the
+  derivation recorded before the
+  run defect for defect in order:
+  "events[0].seq is not 0",
+  "events[1].kind is not in the
+  format enum", "events[3].call_id
+  'c1' is used twice",
+  "events[4].call_id 'ghost'
+  answers no earlier tool_call",
+  "events[4].is_error must be a
+  boolean", the repr shape inside
+  both call_id defects landing on
+  the same bytes on both arms; X4
+  adds arr.json (a JSON array, [1,
+  2, 3]), stderr the exclusion line
+  with reason "not a valid tape"
+  and the one line "defect, the
+  tape is not an object"; X5 adds
+  utf.json (bytes that are not
+  valid UTF-8, staged as a hardlink
+  to the port binary, the
+  contracted property being the
+  exclusion reason and not the
+  specific bytes), stderr the one
+  line "error, utf.json is
+  excluded, the file is not valid
+  UTF-8"; X6 adds big.json (a tape
+  whose note event carries a
+  5,000-digit integer), stderr the
+  one line "error, big.json is
+  excluded, the file holds a number
+  too large to read"; X7 adds
+  sub.json (a directory under that
+  name), stderr the one line
+  "error, sub.json is excluded,
+  cannot read the tape file"; X8
+  orders aaa.json (invalid JSON),
+  run1.json (valid), and zzz.json
+  (the one-defect version tape),
+  and the rollup stands in filename
+  order, aaa's exclusion line
+  first, then zzz's exclusion and
+  defect lines; X9 holds bad.json
+  and ver.json only, and after
+  their exclusion and defect lines
+  the run prints "error, no valid
+  tapes in the directory", exit 1,
+  stdout empty. In every cell the
+  two sides' exit codes, stdout
+  bytes, and stderr bytes agree
+  exactly, and the surviving
+  document at X1 to X8 is
+  byte-identical to X0's. No
+  disagreement anywhere in the
+  measured cells; no finding in
+  them.
