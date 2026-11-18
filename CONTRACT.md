@@ -3001,3 +3001,421 @@ sentence is superseded for every round until that one.
   gate attempts, landed form, and
   name measurements are the whole
   of the change.
+- RF-96. Round 15 first read PR 20 whole,
+  the Round 14 pull request. The
+  body stands at 15,614 characters,
+  15,614 UTF-8 bytes: the summary
+  and per-item account (RF-91 to
+  RF-95), the storefront readiness
+  list with item 3 not passing, the
+  Verified block naming the
+  pre-repair head and tree with the
+  final head and tree in the
+  closing block appended at the
+  gate, the spec reference, the
+  known deviations, the
+  disclosures, the owner completion
+  record, the CodeRabbit
+  release-notes appendix, and the
+  step 0 disposition appended after
+  the appendix. The census around
+  it: 4 issue comments, 1 review, 1
+  review comment, every body read
+  to its end. The owner's landing
+  census counted three issue
+  comments and no reviews; two
+  refinements of that count stand
+  at this read-back, neither moving
+  any disposition. The landing
+  record itself is the fourth issue
+  comment and the last, the same
+  tail shape as PR 18's; and the
+  one finding rides in a review
+  object, which the owner's count
+  folded into its review comment.
+  The issue comments are the
+  trunk-io submission comment
+  (6959960071, created
+  2026-11-17T20:24:09Z, last edited
+  2026-11-17T20:58:40Z, 113
+  characters, standing in its final
+  form as the merged notice with
+  the queue details link, the same
+  comment having carried the
+  submission notice from the pull
+  request's opening until the bot
+  edited it two seconds after the
+  landing); the CodeRabbit shell
+  (6959962731, below); the Round 14
+  lane's "/trunk merge"
+  (6960648345, 12 characters,
+  2026-11-17T20:51:17Z); and the
+  owner's landing record
+  (6960972011, 1,813 characters,
+  2026-11-17T21:04:43Z, carrying
+  this round's three charges). The
+  review is the bot's review object
+  (5946063944, COMMENTED, submitted
+  2026-11-17T20:28:31Z at the
+  pre-repair head 5b6d5f79, 3,746
+  characters, Run ID
+  f594de89-e56d-4ef3-970b-14afe0888949,
+  "Actionable comments posted: 1").
+  The review comment is its one
+  inline finding (4605361626,
+  created 2026-11-17T20:28:31Z,
+  1,940 characters, Minor, on
+  CONTRACT.md: RF-94's name claim
+  stood too broad, a tape that
+  fails to load being excluded with
+  its name in the loader's stderr
+  line; the bot's own final form
+  marks it "Addressed in commit
+  2ede6aa"). The shell in its true
+  final form at this lane's hand:
+  comment 6959962731, created
+  2026-11-17T20:24:15Z, last edited
+  2026-11-17T20:51:08Z, 9,015
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (9,027 UTF-8 bytes),
+  unchanged since 20:51:08Z, so
+  this lane's hand agrees with the
+  owner's stated true final form
+  exactly. The completion record's
+  first stated point stands
+  confirmed: the rate-limit notice
+  stands rotated out (no ef3e882a
+  reference anywhere in the shell
+  at this hand), and the review
+  content is unchanged in scope:
+  the walkthrough and the change
+  assessment stand under the
+  pre-repair head 5b6d5f79, the
+  coverage source and the covered
+  commit are both 5b6d5f79 with
+  kind reviewed, the Merge Risk row
+  reads Low, the pre-merge checks
+  table carries four rows passed
+  (Title, Linked Issues, Out of
+  Scope Changes, Description), the
+  Title check's full detail carries
+  the one advisory remark (the
+  title is long, lists many items,
+  and carries filler wording; the
+  check passed), the risk section
+  repeats the one actionable point
+  (the filename claim too broad,
+  the finding repaired in
+  2ede6aa6), the files selected for
+  processing stand as CONTRACT.md
+  and README.md, and the
+  finishing-touches and autopilot
+  checkboxes stand as offers, not
+  findings. No bot re-assessment of
+  the repair commit stands in the
+  shell. The completion record's
+  second stated point, the RF-94
+  scope note, stands confirmed: the
+  body's per-item RF-94 summary
+  states the name claim in its
+  pre-repair breadth ("the name is
+  observable in exactly two
+  places", with no scoping clause),
+  and the CONTRACT's repaired text
+  governs, scoped to the proposal
+  document and tapes that load,
+  with the loader's exclusion line
+  named as a further place outside
+  the measured cells; the repaired
+  passage itself stands verified in
+  main's CONTRACT at this lane's
+  hand, the base blob (569a222b)
+  reproduced byte for byte from the
+  Round 14 head copy and the
+  repair's wrapped passage alone.
+  The owner completion record in
+  the body (the three reviews each
+  APPROVE, the red team's
+  reproductions of RF-93's landed
+  form and RF-94's cells and its
+  third blob-hash proof of RF-92's
+  reliance, hosted runs
+  134357310176 and 134357369889
+  both success on the final head,
+  and the two Minors the record
+  states and repairs) is graded
+  against this record and stands
+  exact, the census refinement
+  above apart. The landing,
+  censused as part of the record:
+  the Round 14 lane submitted the
+  pull request to the Trunk merge
+  queue at the gate (the "/trunk
+  merge" at 20:51:17Z; the trunk
+  comment flipped to "Waiting to
+  start tests" at 20:51:33Z per the
+  lane's record), the queue tested
+  the merged state while the
+  owner's three reviews ran, and
+  the pull request landed
+  2026-11-17T20:58:38Z as squash
+  commit
+  ae1466e2fe6a1e8cf94a070de85a60fb736b2db1
+  on main, single parent 7261e78c,
+  its tree
+  a60c383a214e333eb8a231cf60b58727b40e85c4
+  identical to the reviewed head
+  tree, verified blob for blob by
+  the owner (24 blobs) before the
+  round was called, the README on
+  main reading 14 of 100. The six
+  commits on the pull request
+  (9ea3da97, cd0535b1, c5efa2b1,
+  b61f7d91, 5b6d5f79, 2ede6aa6)
+  match the body's account. Charge
+  1's tail, the post-landing
+  disposition: no comment stands
+  after the landing record, so
+  nothing stands to disposition
+  from after it.
+- RF-97. The gate on this round's trees.
+  The base tree is main's tree
+  a60c383a214e333eb8a231cf60b58727b40e85c4;
+  its contents stand verified
+  against the API manifest at
+  construction and again at this
+  round's first slice push, whose
+  tree the API returned asserted
+  equal to the intended contents
+  blob for blob (24 blobs). The
+  head tree differs from the base
+  only in CONTRACT.md (RF-96 to
+  RF-100) and, in the closure
+  commit, one README line, so the
+  code under gate is one tree; that
+  tree is Round 14's head tree
+  itself, and its code stands
+  byte-identical through Round 14's
+  blob hashing to the code the
+  Round 11 discharge ran. On this
+  round's trees the full cargo gate
+  stands discharged at the owner's
+  hand in the Round 11 discharge of
+  byte-identical code: cargo test
+  exit 0 with 48 passed in the
+  split 9 library + 27 proposals +
+  12 rescue, cargo clippy
+  --all-targets with warnings
+  denied exit 0, cargo fmt --check
+  exit 0, and the pin suite's
+  digest_cli test 5 of 5 including
+  the golden digest
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3.
+  This lane's own cargo re-run
+  stands locally unrun, for reasons
+  counted honestly: three
+  build-slot queues on the base
+  tree totaling about two hours
+  forty minutes, crossed by three
+  runtime restarts. The first queue
+  (about 21:28 UTC) died unacquired
+  in the restart at about 22:03 UTC
+  after about thirty-five minutes.
+  The second (about 22:06 UTC)
+  acquired the slot at 23:49:31 UTC
+  after about one hour forty-four
+  minutes and wrote its start line,
+  then was killed about two minutes
+  in by the next restart, before
+  its probe gate recorded a pass
+  and before any cargo stage
+  started. The third (about 23:53
+  UTC) was killed unacquired by the
+  next restart after about twenty
+  minutes. The slot was held
+  throughout by the fleet's other
+  lanes. The hosted runs on this
+  round's head carry the gate from
+  here. Re-verified this round: the
+  flighttape pin (tree afd4d7d1, 50
+  blobs matching the Round 11 pin
+  tree blob for blob, both Cargo
+  files carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, and RF-92
+  recorded), and the codepoint scan
+  on the base tree and on the head
+  tree (0 em dashes and 0 en dashes
+  in each, each scan proven on a
+  planted control reading 1 and 1).
+  The reliance RF-84, RF-89, and
+  RF-92 carried stands carried a
+  fourth time by name.
+- RF-98. The exclusion rollup at the
+  propose CLI was measured fresh
+  against the oracle, in one
+  battery of 10 cells (20 runs),
+  propose to stdout over one
+  directory per cell, the surface
+  proposed in the lane's record
+  before any cell ran. Prior rounds
+  measured single exclusions only
+  in passing (the invalid-JSON line
+  in the README's Usage capture and
+  RF-94's fixcheck; the
+  no-valid-tapes line standing
+  alone behind the suffix filter in
+  RF-94's N2 and N3); no round had
+  celled the rollup itself. Both
+  loaders return the same five
+  reasons, and both CLIs print one
+  exclusion line per refused tape
+  in filename order, then one
+  defect line per defect in the
+  loader's order, the run
+  proceeding on the tapes that
+  remain. The cells: X0, the
+  control, the quickstart tape (995
+  bytes, sha256 80390bc6...) alone
+  under its README name run1.json,
+  its document the 1,161-byte
+  quickstart document, stderr
+  empty, exit 0; X1 adds bad.json
+  (invalid JSON), stderr exactly
+  the one line "error, bad.json is
+  excluded, the file is not valid
+  JSON"; X2 adds ver.json (the
+  quickstart tape with tape_version
+  "2.0", its only defect), stderr
+  the exclusion line with reason
+  "not a valid tape" and the one
+  line "defect, tape_version is not
+  1.0"; X3 adds multi.json, a tape
+  carrying five defects by
+  construction, and its measured
+  defect list matches the
+  derivation recorded before the
+  run defect for defect in order:
+  "events[0].seq is not 0",
+  "events[1].kind is not in the
+  format enum", "events[3].call_id
+  'c1' is used twice",
+  "events[4].call_id 'ghost'
+  answers no earlier tool_call",
+  "events[4].is_error must be a
+  boolean", the repr shape inside
+  both call_id defects landing on
+  the same bytes on both arms; X4
+  adds arr.json (a JSON array, [1,
+  2, 3]), stderr the exclusion line
+  with reason "not a valid tape"
+  and the one line "defect, the
+  tape is not an object"; X5 adds
+  utf.json (bytes that are not
+  valid UTF-8, staged as a hardlink
+  to the port binary, the
+  contracted property being the
+  exclusion reason and not the
+  specific bytes), stderr the one
+  line "error, utf.json is
+  excluded, the file is not valid
+  UTF-8"; X6 adds big.json (a tape
+  whose note event carries a
+  5,000-digit integer), stderr the
+  one line "error, big.json is
+  excluded, the file holds a number
+  too large to read"; X7 adds
+  sub.json (a directory under that
+  name), stderr the one line
+  "error, sub.json is excluded,
+  cannot read the tape file"; X8
+  orders aaa.json (invalid JSON),
+  run1.json (valid), and zzz.json
+  (the one-defect version tape),
+  and the rollup stands in filename
+  order, aaa's exclusion line
+  first, then zzz's exclusion and
+  defect lines; X9 holds bad.json
+  and ver.json only, and after
+  their exclusion and defect lines
+  the run prints "error, no valid
+  tapes in the directory", exit 1,
+  stdout empty. In every cell the
+  two sides' exit codes, stdout
+  bytes, and stderr bytes agree
+  exactly, and the surviving
+  document at X1 to X8 is
+  byte-identical to X0's. No
+  disagreement anywhere in the
+  measured cells; no finding in
+  them.
+- RF-99. The README's captures were
+  re-verified at the propose CLI
+  against the oracle. Item 5's form
+  (the introduction's captured
+  propose run over the synthetic
+  fixture, the stdout run the
+  storefront list's item 5 covers)
+  reproduced on stdout on both
+  arms: the 147-byte document, exit
+  0, stderr empty. The Usage
+  section's own capture is a
+  separate one, the output-flag run
+  over the tapes directory holding
+  the synthetic fixture and a
+  broken.json, its exclusion line
+  printed on stderr; it was not
+  separately re-run this round, its
+  exclusion line's form stands
+  measured in RF-98's X1 cell (the
+  same line naming bad.json), and
+  its landed form stands under the
+  refusal counted next. Item 6's
+  stdout form (the Quickstart's
+  propose run) reproduced on both
+  arms: the 1,161-byte quickstart
+  document, exit 0, stderr empty.
+  Item 6's landed form (the same
+  run with the output flag naming
+  proposals.json beside the tape)
+  stands attempted and refused in
+  this round's sittings: 31 counted
+  attempts per side (one in the
+  first pass and thirty in a
+  bounded sitting run after it),
+  every attempt on both arms
+  exiting 1 with the one line
+  "error, cannot write the proposal
+  file, proposals.json" and no file
+  written; a third sitting was
+  killed by a runtime restart at
+  about nine minutes with its
+  output lost, and its attempts are
+  not counted. The refusal is the
+  box write fault's, identical on
+  both arms, in a wave that refused
+  this lane's scratch writes
+  through the same hours; no code
+  file in this round's trees
+  differs from Round 14's tree, and
+  the landed form itself stands
+  landed in Round 14 (RF-93, on
+  attempt 1 on both arms,
+  reproduced by that round's red
+  team), so the form is contracted
+  here as standing on its Round 14
+  landing, with this round's
+  re-verification refused by the
+  environment and counted, not as
+  landed this round. The two stdout
+  forms stand re-verified whole.
+- RF-100. Closure. The README records 15 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  gate, rollup measurements, and
+  Quickstart regression are the
+  whole of the change.
