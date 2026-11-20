@@ -4108,3 +4108,9 @@ sentence is superseded for every round until that one.
   sandbox. No disagreement anywhere
   in the measured cells; no finding
   in them.
+- RF-109. Closure. The README records 17 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  standing regression, and output
+  destination measurements are the
+  whole of the change.
