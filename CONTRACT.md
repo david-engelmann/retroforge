@@ -3784,3 +3784,9 @@ sentence is superseded for every round until that one.
   disagreement anywhere in the
   measured cells; no finding in
   them.
+- RF-105. Closure. The README records 16 of
+  100 in the commit carrying this
+  item. This round's gate,
+  read-back, Quickstart regression,
+  and invocation measurements are
+  the whole of the change.
