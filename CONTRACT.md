@@ -4370,3 +4370,95 @@ sentence is superseded for every round until that one.
   dashes and 0 en dashes in each,
   each scan proven on a planted
   control reading 1 and 1).
+- RF-112. The target surface of the propose
+  CLI was measured fresh against
+  the oracle, in one battery of 10
+  cells (20 runs), the surface
+  proposed in the lane's record
+  before any cell ran. Prior rounds
+  celled the invocation shapes
+  (RF-104, whose only target cells
+  were the prefix and full
+  spellings of one RULES.md run),
+  the output destination's
+  semantics (RF-108), the tape
+  file's spelling (RF-88) and name
+  (RF-94), and the exclusion rollup
+  (RF-98); no round had celled the
+  target value's own semantics.
+  Each run went to stdout over one
+  fixed tape directory (the
+  quickstart tape alone, run1.json,
+  995 bytes, sha256 80390bc6...),
+  whose control document is the
+  1,161-byte quickstart document
+  carrying one proposal whose
+  target reads AGENTS.md. The
+  contract at every cell is exact
+  agreement on exit code, stdout
+  bytes, and stderr bytes, plus the
+  cross-cell equalities and
+  parsed-document checks stated per
+  cell. The cells: T0, the control,
+  no target option, exit 0, stdout
+  byte-identical to the control
+  document, stderr empty; T1, the
+  explicit default (--target
+  AGENTS.md), exit 0, stdout
+  byte-identical to T0 on each arm;
+  T2, a named target (--target
+  RULES.md), exit 0, stderr empty,
+  the document 1,160 bytes, its one
+  proposal carrying target RULES.md
+  and the document equal to T0's
+  except at the target value and
+  the registry experiment id, which
+  derives from a payload carrying
+  the target; T3, the glued
+  spelling (--target=RULES.md),
+  stdout byte-identical to T2 on
+  each arm; T4, a prefix spelling
+  (--targ RULES.md), stdout
+  byte-identical to T2 on each arm;
+  T5, a repeated option (--target
+  FIRST.md --target SECOND.md),
+  stdout byte-identical to T6 on
+  each arm, the last value winning;
+  T6, the last value alone
+  (--target SECOND.md), exit 0, the
+  document 1,161 bytes, its target
+  reading SECOND.md; T7, an empty
+  value (--target with an empty
+  string), exit 1, stdout empty,
+  stderr exactly 98 bytes on both
+  arms (the 43-byte line "error,
+  the proposal file does not
+  validate" and the 55-byte line
+  "defect, proposals[0].target must
+  be a non-empty string", in that
+  order): the builder carries the
+  empty target into the proposal
+  and the validator refuses it, as
+  derived from the sources before
+  the run; T8, a verbatim spelling
+  (--target docs/MY RULES.md, a
+  slash and a space), exit 0, the
+  document 1,168 bytes, its target
+  reading docs/MY RULES.md exactly
+  and the document equal to T0's
+  except at the target value and
+  the experiment id; T9, a
+  non-ASCII value (a target
+  carrying U+00E9), exit 0, the
+  document 1,164 bytes, the two
+  arms agreeing byte for byte and
+  the parsed document's target on
+  each arm equal to the spelled
+  string exactly. In every cell the
+  two sides' exit codes, stdout
+  bytes, and stderr bytes agree
+  exactly, and every cross-cell
+  equality and parsed check holds.
+  No disagreement anywhere in the
+  measured cells; no finding in
+  them.
