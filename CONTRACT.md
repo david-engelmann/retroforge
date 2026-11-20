@@ -4004,3 +4004,107 @@ sentence is superseded for every round until that one.
   and 0 en dashes in each, each
   scan proven on a planted control
   reading 1 and 1).
+- RF-108. The output destination surface of
+  the propose CLI was measured
+  fresh against the oracle, in one
+  battery of 11 cells (22 runs),
+  the surface proposed in the
+  lane's record before any cell
+  ran. Prior rounds celled the
+  invocation shapes (RF-104, whose
+  file-writing cells wrote fresh
+  files in the working directory
+  only), the output name's length
+  boundary (RF-82, one path
+  component at 242 and 243 bytes),
+  the tape file's name (RF-94), the
+  exclusion rollup (RF-98), and the
+  README captures (RF-99, RF-103);
+  no round had celled the
+  destination's own semantics. Each
+  cell ran in a fresh per-arm
+  sandbox with the same relative
+  layout (the tape directory named
+  tapes, holding the quickstart
+  tape alone, run1.json, 995 bytes,
+  sha256 80390bc6..., the run from
+  the sandbox root as propose
+  tapes), whose control document is
+  the 1,161-byte quickstart
+  document. The contract at every
+  cell is exact agreement on exit
+  code, stdout bytes, and stderr
+  bytes, and on the post-state: a
+  written file byte-identical to
+  the control document where the
+  cell writes one, seeded and tape
+  bytes unchanged where the cell
+  protects them, and no temporary
+  file left anywhere in the sandbox
+  after any cell. The cells: W0,
+  the control, propose tapes -o
+  out.json, exit 0, stdout and
+  stderr empty, out.json
+  byte-identical to the control
+  document on both arms; W1, the
+  overwrite, out.json seeded with
+  sentinel bytes first, exit 0, the
+  file replaced byte-identical to
+  the control document; W2, the
+  guard under the direct spelling
+  (-o tapes/run1.json), exit 1 with
+  the 93-byte guard line on stderr,
+  stdout empty, the tape's bytes
+  unchanged; W3, the guard under
+  the dot spelling (-o
+  tapes/./run1.json), the same
+  refusal, byte-identical stderr,
+  the tape unchanged, the guard
+  comparing resolved paths and not
+  spellings; W4, the guard under
+  the absolute spelling, the same
+  refusal, byte-identical stderr
+  (the guard line names no path),
+  the tape unchanged; W5, a missing
+  parent (-o missing-dir/out.json),
+  exit 1 with the 60-byte
+  cannot-write line naming the raw
+  spelling, no file written and the
+  parent still absent; W6, the
+  destination is a directory (-o
+  tapes), exit 1 with the 45-byte
+  cannot-write line naming tapes,
+  the tape unchanged; W7, inside
+  the source directory (-o
+  tapes/proposals.json), exit 0,
+  the file written beside the tape,
+  byte-identical to the control
+  document, the tape unchanged; W8,
+  a redundant spelling (-o
+  ./out.json), exit 0, out.json
+  written at the sandbox root,
+  byte-identical to the control
+  document, path construction
+  dropping the dot component on
+  both arms; W9, an empty output
+  value (-o with an empty string),
+  treated as no output at all, exit
+  0, the control document on
+  stdout, stderr empty, no file
+  created; W10, a failed run leaves
+  the earlier file intact, the tape
+  directory holding only a broken
+  tape and out.json seeded with
+  sentinel bytes, exit 1 with 98
+  bytes on stderr (the 59-byte
+  exclusion line naming broken.json
+  and the 39-byte no-valid-tapes
+  line), the sentinel bytes intact.
+  In every cell the two sides' exit
+  codes, stdout bytes, and stderr
+  bytes agree exactly, every
+  post-state holds, and no
+  temporary file stands in any
+  sandbox. No disagreement anywhere
+  in the measured cells; no finding
+  in them.
