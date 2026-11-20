@@ -3638,3 +3638,49 @@ sentence is superseded for every round until that one.
   their queues counted) are graded
   against this record and stand
   exact.
+- RF-103. The README's captures were
+  re-verified at the propose CLI
+  against the oracle, the port arm
+  being this round's own gate build
+  from the gated tree (RF-101).
+  Item 5's form (the introduction's
+  captured propose run over the
+  synthetic fixture) reproduced on
+  stdout on both arms: the 147-byte
+  document, exit 0, stderr empty.
+  The Usage section's own capture
+  is a separate one, the
+  output-flag run over the tapes
+  directory holding the synthetic
+  fixture and a broken.json, its
+  exclusion line printed on stderr;
+  it was not separately re-run this
+  round, and its exclusion line's
+  form stands measured in RF-98's
+  X1 cell (the same line naming
+  bad.json). Item 6's stdout form
+  (the Quickstart's propose run)
+  reproduced on both arms: the
+  1,161-byte quickstart document,
+  exit 0, stderr empty. Item 6's
+  landed form (the same run with
+  the output flag naming
+  proposals.json beside the tape)
+  stands landed at this lane's hand
+  this round, on the first attempt
+  on both arms: exit 0 on each arm,
+  the written file 1,161 bytes
+  byte-identical to the README
+  document, in the open write
+  window that followed the
+  morning's restart. This stands
+  against Round 15's sittings,
+  where the same form was refused
+  31 counted attempts per side by
+  the box write fault and the form
+  stood on its Round 14 landing;
+  the form is contracted here as
+  re-verified landed this round.
+  The two stdout forms and the
+  landed form stand re-verified
+  whole.
