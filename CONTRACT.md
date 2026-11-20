@@ -3684,3 +3684,103 @@ sentence is superseded for every round until that one.
   The two stdout forms and the
   landed form stand re-verified
   whole.
+- RF-104. The invocation surface of the
+  propose CLI was measured fresh
+  against the oracle, in one
+  battery of 18 cells (36 runs),
+  the surface proposed in the
+  lane's record before any cell
+  ran. Prior rounds celled the tape
+  content surfaces (RF-94 the tape
+  file's name, RF-98 the exclusion
+  rollup) and the README captures
+  (RF-99, RF-103); no round had
+  celled the invocation shapes
+  themselves: the argument parser's
+  observable behavior, varied over
+  argv against one fixed tape
+  directory holding the quickstart
+  tape alone, whose control
+  document is the 1,161-byte
+  quickstart document. The contract
+  at every cell is exact agreement
+  on exit code, stdout bytes, and
+  stderr bytes, on the written
+  file's bytes at the cells that
+  write one, and the prefix and
+  full forms of --target agreeing
+  within each arm. The cells: V0,
+  the control, propose over the
+  directory, exit 0, the 1,161-byte
+  document on stdout, stderr empty,
+  on both arms; V1, no arguments at
+  all, exit 2 with the 102-byte
+  top-level usage error on stderr;
+  V2, propose with no source_dir,
+  exit 2 with the 148-byte usage
+  error; V3, --help, exit 0 with
+  the 225-byte top-level help text
+  on stdout; V4, propose --help,
+  exit 0 with the 221-byte propose
+  help text; V5, an unknown command
+  (frobnicate), exit 2 with the
+  127-byte invalid-choice error;
+  V6, propose --bogus with the
+  directory, exit 2 with the
+  88-byte unrecognized-argument
+  error; V7, propose with the
+  directory twice (an extra
+  positional), exit 2 with the
+  143-byte error; V8, propose -o
+  with no value, exit 2 with the
+  143-byte expected-one-argument
+  error; V9, propose --out FILE
+  with the directory (the unique
+  prefix of --output, argparse's
+  prefix matching standing
+  reproduced), exit 0, stdout
+  empty, the written file
+  byte-identical to the control
+  document; V10, propose naming a
+  directory that does not exist,
+  exit 1 with the 93-byte refusal
+  naming it; V11, propose naming a
+  tape file where the directory
+  goes, exit 1 with the 97-byte
+  not-a-directory refusal; V12,
+  propose with the directory first
+  and -o FILE after the positional,
+  exit 0, the written file
+  byte-identical to the control
+  document; V13, propose -- with
+  the directory, exit 0, the
+  document on stdout; V14, propose
+  --target with no value, exit 2
+  with the 140-byte error; V15,
+  propose --tar RULES.md with the
+  directory (the unique prefix of
+  --target), exit 0 with a
+  1,160-byte document on stdout;
+  V16, propose --target RULES.md
+  with the directory (the full
+  form), exit 0, its stdout
+  byte-identical to V15's on each
+  arm, and each cell agreeing
+  across the arms; V17, a
+  source_dir argument carrying
+  bytes that are not valid UTF-8,
+  exit 1 on both arms with
+  byte-identical stderr, the one
+  line "error, not a directory,
+  missing-\udcff\udcfe-dir", the
+  name's undecodable bytes rendered
+  as literal escape text on both
+  arms alike. In every cell the two
+  sides' exit codes, stdout bytes,
+  and stderr bytes agree exactly,
+  and the written files at V9 and
+  V12 are byte-identical to the
+  control document on both arms. No
+  disagreement anywhere in the
+  measured cells; no finding in
+  them.
