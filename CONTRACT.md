@@ -3419,3 +3419,78 @@ sentence is superseded for every round until that one.
   gate, rollup measurements, and
   Quickstart regression are the
   whole of the change.
+- RF-101. The local cargo gate stands run
+  at this lane's hand on the
+  current main tree, and the
+  reliance RF-84, RF-89, RF-92, and
+  RF-97 carried stands retired. The
+  tree under gate is main's tree
+  07ea82dbe6f934fe7540d10530d8826fc5e89f8a
+  at commit
+  4f4fc8242b8fb33aecddeebd57079b9ba9e0c577,
+  staged from the owner discharge
+  lane's verified copy and
+  re-verified at this lane's hand
+  blob for blob (24 blobs against
+  the discharge manifest), then
+  copied fresh inside the hold and
+  verified again (24 files, no
+  mismatches). The run of record
+  stood in one hold of the line
+  build slot taken inside this
+  lane's own sitting in the
+  retry-hold shape: the probe gate
+  opened after 2 tries; cargo test
+  passed 48 with 0 failed in the
+  contracted split (9 library, 27
+  proposals, 12 rescue), exit 0 on
+  its first in-hold attempt; cargo
+  clippy --all-targets with
+  warnings denied, exit 0 on its
+  first in-hold attempt; cargo fmt
+  --check, exit 0 on its first
+  in-hold attempt; and the
+  flighttape pin's digest_cli suite
+  passed 5 with 0 failed, exit 0 on
+  its first in-hold attempt, the
+  golden digest constant
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  standing in the suite's source.
+  Two earlier holds in this sitting
+  are counted and produced no
+  stage: the first queued about 49
+  minutes, acquired, and its probe
+  gate timed out after 90 tries
+  inside a closed write-fault wave
+  (about 22 minutes), every one of
+  its log writes refused or zeroed
+  by the same fault, its zeroed
+  exits file standing as its
+  evidence; the second queued about
+  one minute and was killed
+  unacquired by a runtime restart's
+  SIGTERM. The third hold was taken
+  after that restart cleared the
+  wave and the queue, acquired
+  about a minute and a half after
+  its launch, and ran whole. The
+  head tree of this round differs
+  from the gated tree only in
+  CONTRACT.md (RF-101 to RF-105)
+  and, in the closure commit, one
+  README line, so the code under
+  gate is the gated tree itself.
+  Re-verified this round: the
+  flighttape pin (tree afd4d7d1, 50
+  blobs matching the Round 11 pin
+  tree blob for blob, both Cargo
+  files carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, RF-92, and RF-97
+  recorded), and the codepoint scan
+  on the base tree (0 em dashes and
+  0 en dashes, the scan proven on a
+  planted control reading 1 and 1).
