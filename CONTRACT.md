@@ -3494,3 +3494,147 @@ sentence is superseded for every round until that one.
   on the base tree (0 em dashes and
   0 en dashes, the scan proven on a
   planted control reading 1 and 1).
+- RF-102. Round 16 first read PR 22 whole,
+  the Round 15 pull request. The
+  body stands at 15,990 characters:
+  the Round 15 lane's body (the
+  summary and per-item account
+  RF-96 to RF-100, the storefront
+  readiness list with item 3 not
+  passing, the Verified block, the
+  spec reference, the known
+  deviations, the disclosures, the
+  step 0 disposition, and the
+  hosted CI block) with the owner
+  completion record appended to it.
+  The census around it at this
+  lane's hand: 4 issue comments, 1
+  review, 1 review comment, every
+  body read to its end. The issue
+  comments are the trunk-io merged
+  notice (6964930172, 113
+  characters); the CodeRabbit shell
+  (6964932735, below); the Round 15
+  lane's "/trunk merge"
+  (6965129919, 12 characters); and
+  the owner's landing record
+  (7030335171, 2,341 characters,
+  carrying this round's five
+  charges), which stands last, so
+  nothing stands after it to
+  disposition. The owner completion
+  record counted 3 issue comments
+  at its writing, before the
+  landing record posted; the count
+  at this hand is 4 with the
+  landing record last, the same
+  tail shape RF-96 recorded for PR
+  20. The review is the bot's
+  walkthrough review (5948865697,
+  COMMENTED, 3,854 characters, Run
+  ID
+  05518144-e02d-4712-80c5-e87f933d366b,
+  "Actionable comments posted: 1").
+  The review comment is its one
+  inline finding (4607591620, 2,384
+  characters, Minor, on
+  CONTRACT.md: RF-99 had attributed
+  the 147-byte stdout run to the
+  Usage section where that run is
+  the README introduction's
+  capture; the bot's own final form
+  marks it addressed in commit
+  15f2d86a). The shell in its true
+  final form at this lane's hand:
+  comment 6964932735, last edited
+  2026-11-18T00:26:40Z, 9,022
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (9,038 UTF-8 bytes);
+  its walkthrough, change
+  assessment, and coverage stand
+  under the pre-repair head
+  bd9f3138, the repaired head
+  23bad86d is nowhere named in it,
+  the rate-limit notice stands
+  rotated out (no ef3e882a
+  reference anywhere in the shell
+  at this hand), the Merge Risk row
+  reads Low, and no new review and
+  no new findings stand after the
+  repair. The landing is censused:
+  PR 22 landed through the Trunk
+  queue on 2026-11-18 as squash
+  commit
+  4f4fc8242b8fb33aecddeebd57079b9ba9e0c577
+  on main, single parent
+  ae1466e2fe6a1e8cf94a070de85a60fb736b2db1,
+  its tree
+  07ea82dbe6f934fe7540d10530d8826fc5e89f8a
+  identical to the reviewed head
+  tree, the README on main reading
+  15 of 100; main's ref at this
+  lane's hand stands at 4f4fc824,
+  and the seven commits on the pull
+  request (b18f2419, cdfe4b45,
+  2b4bb8fd, dfba98b2, bd9f3138,
+  15f2d86a, 23bad86d) match the
+  body's account. The two audit
+  Minors the completion record
+  charges to this round are
+  contracted here by name. First,
+  the intermediate-tree Minor: the
+  step 0 repair commit 15f2d86a,
+  parented on the closure commit
+  bd9f3138, was composed on a tree
+  carrying the pre-closure README
+  (14 of 100) and a CONTRACT
+  holding the repaired RF-96 to
+  RF-99 without RF-100, so for that
+  one intermediate head the pull
+  request stood with the CONTRACT
+  closed and the rounds line
+  reverted, until the final head
+  23bad86d restored both; the
+  body's "closure re-pushed" label
+  disclosed the mechanism in
+  outline but never stated the
+  intermediate tree's two
+  reversions; the landed tree was
+  correct and unaffected, and no
+  count was ever overstated. The
+  hygiene rule that Minor carries
+  is contracted for this round and
+  stands in this item: any repair
+  commit on this round is composed
+  on the closure head's full tree,
+  and any intermediate revert of a
+  closure file is stated in the
+  pull request body in so many
+  words. Second, the
+  proposal-heading Minor: RF-98's
+  lane-record proposal heading
+  ("recorded before running
+  anything") is broader than the
+  record's own log, which shows the
+  X0 control measured clean during
+  setup, before the setup redesign
+  and before the proposal section
+  was banked; the
+  derivation-bearing cells X1 to X9
+  and the battery of record all ran
+  after the proposal was banked,
+  and no contracted figure is
+  affected; the heading stands
+  corrected to that scope here. The
+  completion record's remaining
+  statements (the three reviews'
+  verdicts, the red team's
+  reproductions of RF-98's cells
+  and RF-99's forms and its
+  blob-hash proof of the RF-97
+  reliance, and the gate
+  discharge's three attempts with
+  their queues counted) are graded
+  against this record and stand
+  exact.
