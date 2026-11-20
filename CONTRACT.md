@@ -3790,3 +3790,327 @@ sentence is superseded for every round until that one.
   read-back, Quickstart regression,
   and invocation measurements are
   the whole of the change.
+- RF-106. Round 17 first read PR 24 whole,
+  the Round 16 pull request. The
+  body stands at 17,259 characters
+  (17,259 UTF-8 bytes): the Round
+  16 lane's body (the summary and
+  per-item account RF-101 to
+  RF-105, the storefront readiness
+  list with item 3 not passing, the
+  Verified block, the spec
+  reference, the known deviations,
+  the disclosures, the step 0
+  disposition, and the hosted CI
+  block) with the owner completion
+  record appended to it. The census
+  around it at this lane's hand: 4
+  issue comments, 0 reviews, 0
+  review comments, every body read
+  to its end. The issue comments
+  are the trunk-io notice
+  (7031837485, 113 characters,
+  created 2026-11-20T06:00:50Z as
+  the queue submission and updated
+  2026-11-20T06:12:46Z to the
+  merged notice); the CodeRabbit
+  shell (7031839925, below); the
+  Round 16 lane's "/trunk merge"
+  (7031915805, 12 characters); and
+  the owner's landing record
+  (7046290931, 1,661 characters,
+  carrying this round's four
+  charges), which stands last, so
+  nothing stands after it to
+  disposition. The owner completion
+  record counted 3 issue comments
+  at its writing, before the
+  landing record posted; the count
+  at this hand is 4 with the
+  landing record last, the same
+  tail shape RF-102 recorded for PR
+  22. No review and no review
+  comment stand on the pull
+  request: the bot's Round 16
+  review took the form of its shell
+  alone. The shell in its true
+  final form at this lane's hand:
+  comment 7031839925, last edited
+  2026-11-20T06:05:50Z, 11,449
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (11,462 UTF-8 bytes),
+  Run ID
+  7bac9f8b-f32b-4bb3-a8c3-5ec079bb7e71;
+  its walkthrough and coverage
+  stand at the final head 6ff7885c
+  (the coverage block names the
+  source and covered commit
+  6ff7885cd284a74f45362a40d09b609266176a1e
+  alike), it carries no actionable
+  comments, its Merge Risk reads
+  Minimal, and its four pre-merge
+  checks pass. The Round 16 lane's
+  finished-form reading in the body
+  was 11,447 characters and the
+  owner's final census read 11,449;
+  this hand reads 11,449 exactly,
+  so the two-character drift the
+  owner recorded stands closed at
+  the owner's figure, and no
+  content in the shell changed with
+  it. The landing is censused: PR
+  24 landed through the Trunk queue
+  on 2026-11-20 as squash commit
+  f8bf7224059ca477f8a9735ba3e8a34bcbdee65e
+  on main, single parent
+  4f4fc8242b8fb33aecddeebd57079b9ba9e0c577,
+  merged at 2026-11-20T06:12:43Z,
+  its tree
+  d88d4dbbb0c7620d369ca65f6c8b7d320fad4863
+  identical to the reviewed head
+  tree, the README on main reading
+  16 of 100; main's ref at this
+  lane's hand stands at f8bf7224,
+  and the five commits on the pull
+  request (e18ec661, 32b866a6,
+  dd540224, 36a99462, 6ff7885c)
+  match the body's account. The
+  owner completion record's
+  remaining statements (the three
+  reviews' APPROVE verdicts with no
+  findings, and the red team's
+  reproduction of the full local
+  cargo gate at its own hand on
+  main's tree 07ea82db, so RF-101's
+  retirement of the four-round
+  reliance stands at two hands,
+  with its spot re-runs of RF-104
+  cells and RF-103 whole in exact
+  agreement) are graded against
+  this record and stand exact.
+- RF-107. The standing regression stands
+  re-verified whole at this lane's
+  hand, the port arm being this
+  round's own gate build from the
+  gated tree. The local cargo gate
+  stands run on the current main
+  tree (tree d88d4dbb at commit
+  f8bf7224, staged from the Round
+  16 lane's head-tree copy and
+  re-verified at this lane's hand
+  blob for blob against the API
+  manifest, 24 blobs, then copied
+  fresh inside the hold and
+  verified again, 24 files with no
+  mismatches) in one hold of the
+  line build slot taken inside this
+  lane's own sitting in the
+  retry-hold shape: the probe gate
+  opened after 2 tries; cargo test
+  passed 48 with 0 failed in the
+  contracted split (9 library, 27
+  proposals, 12 rescue), exit 0 on
+  its first in-hold attempt; cargo
+  clippy --all-targets with
+  warnings denied, exit 0 on its
+  first in-hold attempt; cargo fmt
+  --check, exit 0 on its first
+  in-hold attempt; and the
+  flighttape pin's digest_cli suite
+  passed 5 with 0 failed, exit 0 on
+  its first in-hold attempt, the
+  golden digest constant
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  standing in the suite's source.
+  The head tree of this round
+  differs from the gated tree only
+  in CONTRACT.md (RF-106 to RF-109)
+  and, in the closure commit, one
+  README line, so the code under
+  gate is the gated tree itself.
+  The Quickstart captures on both
+  arms: item 5's form (the
+  introduction's captured propose
+  run over the synthetic fixture)
+  reproduced on stdout on both
+  arms, the 147-byte document, exit
+  0, stderr empty; item 6's stdout
+  form (the Quickstart's propose
+  run) reproduced on both arms, the
+  1,161-byte quickstart document,
+  exit 0, stderr empty; item 6's
+  landed form (the same run with
+  the output flag naming
+  proposals.json beside the tape)
+  stands landed at this lane's hand
+  this round on both arms, exit 0
+  on each arm, the written file
+  1,161 bytes byte-identical to the
+  README document. The Usage
+  section's own capture is a
+  separate one, the output-flag run
+  over the tapes directory holding
+  the synthetic fixture and a
+  broken.json, its exclusion line
+  printed on stderr; it was not
+  separately re-run this round, and
+  its exclusion line's form stands
+  measured in RF-98's X1 cell (the
+  same line naming bad.json) and in
+  RF-108's W10 cell. The RF-104
+  invocation battery stands re-run
+  whole at its contracted
+  dispositions: 18 cells and 36
+  runs, exact agreement on exit
+  code, stdout bytes, and stderr
+  bytes at every cell, the byte
+  counts identical to RF-104's
+  contract at every cell (the
+  102-byte top-level usage error at
+  V1, the 148-byte usage error at
+  V2, the 225-byte top-level help
+  at V3, the 221-byte propose help
+  at V4, the 127-byte
+  invalid-choice error at V5, the
+  88-byte unrecognized-argument
+  error at V6, the 143-byte errors
+  at V7 and V8, the 93-byte refusal
+  at V10, the 97-byte
+  not-a-directory refusal at V11,
+  the 140-byte error at V14, the
+  1,160-byte documents at V15 and
+  V16), the written files at V9 and
+  V12 byte-identical to the control
+  document on both arms, the V15
+  and V16 pair agreeing within each
+  arm, and V17's stderr
+  byte-identical on both arms with
+  the name's undecodable bytes
+  rendered as literal escape text.
+  Re-verified this round: the
+  flighttape pin (tree afd4d7d1, 50
+  blobs matching the Round 11 pin
+  tree blob for blob, both Cargo
+  files carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, RF-92, RF-97, and
+  RF-101 recorded), and the
+  codepoint scan on the base tree
+  and on the head tree (0 em dashes
+  and 0 en dashes in each, each
+  scan proven on a planted control
+  reading 1 and 1).
+- RF-108. The output destination surface of
+  the propose CLI was measured
+  fresh against the oracle, in one
+  battery of 11 cells (22 runs),
+  the surface proposed in the
+  lane's record before any cell
+  ran. Prior rounds celled the
+  invocation shapes (RF-104, whose
+  file-writing cells wrote fresh
+  files in the working directory
+  only), the output name's length
+  boundary (RF-82, one path
+  component at 242 and 243 bytes),
+  the tape file's name (RF-94), the
+  exclusion rollup (RF-98), and the
+  README captures (RF-99, RF-103);
+  no round had celled the
+  destination's own semantics. Each
+  cell ran in a fresh per-arm
+  sandbox with the same relative
+  layout (the tape directory named
+  tapes, holding the quickstart
+  tape alone, run1.json, 995 bytes,
+  sha256 80390bc6..., the run from
+  the sandbox root as propose
+  tapes), whose control document is
+  the 1,161-byte quickstart
+  document. The contract at every
+  cell is exact agreement on exit
+  code, stdout bytes, and stderr
+  bytes, and on the post-state: a
+  written file byte-identical to
+  the control document where the
+  cell writes one, seeded and tape
+  bytes unchanged where the cell
+  protects them, and no temporary
+  file left anywhere in the sandbox
+  after any cell. The cells: W0,
+  the control, propose tapes -o
+  out.json, exit 0, stdout and
+  stderr empty, out.json
+  byte-identical to the control
+  document on both arms; W1, the
+  overwrite, out.json seeded with
+  sentinel bytes first, exit 0, the
+  file replaced byte-identical to
+  the control document; W2, the
+  guard under the direct spelling
+  (-o tapes/run1.json), exit 1 with
+  the 93-byte guard line on stderr,
+  stdout empty, the tape's bytes
+  unchanged; W3, the guard under
+  the dot spelling (-o
+  tapes/./run1.json), the same
+  refusal, byte-identical stderr,
+  the tape unchanged, the guard
+  comparing resolved paths and not
+  spellings; W4, the guard under
+  the absolute spelling, the same
+  refusal, byte-identical stderr
+  (the guard line names no path),
+  the tape unchanged; W5, a missing
+  parent (-o missing-dir/out.json),
+  exit 1 with the 60-byte
+  cannot-write line naming the raw
+  spelling, no file written and the
+  parent still absent; W6, the
+  destination is a directory (-o
+  tapes), exit 1 with the 45-byte
+  cannot-write line naming tapes,
+  the tape unchanged; W7, inside
+  the source directory (-o
+  tapes/proposals.json), exit 0,
+  the file written beside the tape,
+  byte-identical to the control
+  document, the tape unchanged; W8,
+  a redundant spelling (-o
+  ./out.json), exit 0, out.json
+  written at the sandbox root,
+  byte-identical to the control
+  document, path construction
+  dropping the dot component on
+  both arms; W9, an empty output
+  value (-o with an empty string),
+  treated as no output at all, exit
+  0, the control document on
+  stdout, stderr empty, no file
+  created; W10, a failed run leaves
+  the earlier file intact, the tape
+  directory holding only a broken
+  tape and out.json seeded with
+  sentinel bytes, exit 1 with 98
+  bytes on stderr (the 59-byte
+  exclusion line naming broken.json
+  and the 39-byte no-valid-tapes
+  line), the sentinel bytes intact.
+  In every cell the two sides' exit
+  codes, stdout bytes, and stderr
+  bytes agree exactly, every
+  post-state holds, and no
+  temporary file stands in any
+  sandbox. No disagreement anywhere
+  in the measured cells; no finding
+  in them.
+- RF-109. Closure. The README records 17 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  standing regression, and output
+  destination measurements are the
+  whole of the change.
