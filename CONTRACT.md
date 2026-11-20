@@ -3889,3 +3889,118 @@ sentence is superseded for every round until that one.
   cells and RF-103 whole in exact
   agreement) are graded against
   this record and stand exact.
+- RF-107. The standing regression stands
+  re-verified whole at this lane's
+  hand, the port arm being this
+  round's own gate build from the
+  gated tree. The local cargo gate
+  stands run on the current main
+  tree (tree d88d4dbb at commit
+  f8bf7224, staged from the Round
+  16 lane's head-tree copy and
+  re-verified at this lane's hand
+  blob for blob against the API
+  manifest, 24 blobs, then copied
+  fresh inside the hold and
+  verified again, 24 files with no
+  mismatches) in one hold of the
+  line build slot taken inside this
+  lane's own sitting in the
+  retry-hold shape: the probe gate
+  opened after 2 tries; cargo test
+  passed 48 with 0 failed in the
+  contracted split (9 library, 27
+  proposals, 12 rescue), exit 0 on
+  its first in-hold attempt; cargo
+  clippy --all-targets with
+  warnings denied, exit 0 on its
+  first in-hold attempt; cargo fmt
+  --check, exit 0 on its first
+  in-hold attempt; and the
+  flighttape pin's digest_cli suite
+  passed 5 with 0 failed, exit 0 on
+  its first in-hold attempt, the
+  golden digest constant
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  standing in the suite's source.
+  The head tree of this round
+  differs from the gated tree only
+  in CONTRACT.md (RF-106 to RF-109)
+  and, in the closure commit, one
+  README line, so the code under
+  gate is the gated tree itself.
+  The Quickstart captures on both
+  arms: item 5's form (the
+  introduction's captured propose
+  run over the synthetic fixture)
+  reproduced on stdout on both
+  arms, the 147-byte document, exit
+  0, stderr empty; item 6's stdout
+  form (the Quickstart's propose
+  run) reproduced on both arms, the
+  1,161-byte quickstart document,
+  exit 0, stderr empty; item 6's
+  landed form (the same run with
+  the output flag naming
+  proposals.json beside the tape)
+  stands landed at this lane's hand
+  this round on both arms, exit 0
+  on each arm, the written file
+  1,161 bytes byte-identical to the
+  README document. The Usage
+  section's own capture is a
+  separate one, the output-flag run
+  over the tapes directory holding
+  the synthetic fixture and a
+  broken.json, its exclusion line
+  printed on stderr; it was not
+  separately re-run this round, and
+  its exclusion line's form stands
+  measured in RF-98's X1 cell (the
+  same line naming bad.json) and in
+  RF-108's W10 cell. The RF-104
+  invocation battery stands re-run
+  whole at its contracted
+  dispositions: 18 cells and 36
+  runs, exact agreement on exit
+  code, stdout bytes, and stderr
+  bytes at every cell, the byte
+  counts identical to RF-104's
+  contract at every cell (the
+  102-byte top-level usage error at
+  V1, the 148-byte usage error at
+  V2, the 225-byte top-level help
+  at V3, the 221-byte propose help
+  at V4, the 127-byte
+  invalid-choice error at V5, the
+  88-byte unrecognized-argument
+  error at V6, the 143-byte errors
+  at V7 and V8, the 93-byte refusal
+  at V10, the 97-byte
+  not-a-directory refusal at V11,
+  the 140-byte error at V14, the
+  1,160-byte documents at V15 and
+  V16), the written files at V9 and
+  V12 byte-identical to the control
+  document on both arms, the V15
+  and V16 pair agreeing within each
+  arm, and V17's stderr
+  byte-identical on both arms with
+  the name's undecodable bytes
+  rendered as literal escape text.
+  Re-verified this round: the
+  flighttape pin (tree afd4d7d1, 50
+  blobs matching the Round 11 pin
+  tree blob for blob, both Cargo
+  files carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, RF-92, RF-97, and
+  RF-101 recorded), and the
+  codepoint scan on the base tree
+  and on the head tree (0 em dashes
+  and 0 en dashes in each, each
+  scan proven on a planted control
+  reading 1 and 1).
