@@ -4462,3 +4462,9 @@ sentence is superseded for every round until that one.
   No disagreement anywhere in the
   measured cells; no finding in
   them.
+- RF-113. Closure. The README records 18 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  standing regression, and target
+  measurements are the whole of the
+  change.
