@@ -3419,3 +3419,374 @@ sentence is superseded for every round until that one.
   gate, rollup measurements, and
   Quickstart regression are the
   whole of the change.
+- RF-101. The local cargo gate stands run
+  at this lane's hand on the
+  current main tree, and the
+  reliance RF-84, RF-89, RF-92, and
+  RF-97 carried stands retired. The
+  tree under gate is main's tree
+  07ea82dbe6f934fe7540d10530d8826fc5e89f8a
+  at commit
+  4f4fc8242b8fb33aecddeebd57079b9ba9e0c577,
+  staged from the owner discharge
+  lane's verified copy and
+  re-verified at this lane's hand
+  blob for blob (24 blobs against
+  the discharge manifest), then
+  copied fresh inside the hold and
+  verified again (24 files, no
+  mismatches). The run of record
+  stood in one hold of the line
+  build slot taken inside this
+  lane's own sitting in the
+  retry-hold shape: the probe gate
+  opened after 2 tries; cargo test
+  passed 48 with 0 failed in the
+  contracted split (9 library, 27
+  proposals, 12 rescue), exit 0 on
+  its first in-hold attempt; cargo
+  clippy --all-targets with
+  warnings denied, exit 0 on its
+  first in-hold attempt; cargo fmt
+  --check, exit 0 on its first
+  in-hold attempt; and the
+  flighttape pin's digest_cli suite
+  passed 5 with 0 failed, exit 0 on
+  its first in-hold attempt, the
+  golden digest constant
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  standing in the suite's source.
+  Two earlier holds in this sitting
+  are counted and produced no
+  stage: the first queued about 49
+  minutes, acquired, and its probe
+  gate timed out after 90 tries
+  inside a closed write-fault wave
+  (about 22 minutes), every one of
+  its log writes refused or zeroed
+  by the same fault, its zeroed
+  exits file standing as its
+  evidence; the second queued about
+  one minute and was killed
+  unacquired by a runtime restart's
+  SIGTERM. The third hold was taken
+  after that restart cleared the
+  wave and the queue, acquired
+  about a minute and a half after
+  its launch, and ran whole. The
+  head tree of this round differs
+  from the gated tree only in
+  CONTRACT.md (RF-101 to RF-105)
+  and, in the closure commit, one
+  README line, so the code under
+  gate is the gated tree itself.
+  Re-verified this round: the
+  flighttape pin (tree afd4d7d1, 50
+  blobs matching the Round 11 pin
+  tree blob for blob, both Cargo
+  files carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, RF-92, and RF-97
+  recorded), and the codepoint scan
+  on the base tree (0 em dashes and
+  0 en dashes, the scan proven on a
+  planted control reading 1 and 1).
+- RF-102. Round 16 first read PR 22 whole,
+  the Round 15 pull request. The
+  body stands at 15,990 characters:
+  the Round 15 lane's body (the
+  summary and per-item account
+  RF-96 to RF-100, the storefront
+  readiness list with item 3 not
+  passing, the Verified block, the
+  spec reference, the known
+  deviations, the disclosures, the
+  step 0 disposition, and the
+  hosted CI block) with the owner
+  completion record appended to it.
+  The census around it at this
+  lane's hand: 4 issue comments, 1
+  review, 1 review comment, every
+  body read to its end. The issue
+  comments are the trunk-io merged
+  notice (6964930172, 113
+  characters); the CodeRabbit shell
+  (6964932735, below); the Round 15
+  lane's "/trunk merge"
+  (6965129919, 12 characters); and
+  the owner's landing record
+  (7030335171, 2,341 characters,
+  carrying this round's five
+  charges), which stands last, so
+  nothing stands after it to
+  disposition. The owner completion
+  record counted 3 issue comments
+  at its writing, before the
+  landing record posted; the count
+  at this hand is 4 with the
+  landing record last, the same
+  tail shape RF-96 recorded for PR
+  20. The review is the bot's
+  walkthrough review (5948865697,
+  COMMENTED, 3,854 characters, Run
+  ID
+  05518144-e02d-4712-80c5-e87f933d366b,
+  "Actionable comments posted: 1").
+  The review comment is its one
+  inline finding (4607591620, 2,384
+  characters, Minor, on
+  CONTRACT.md: RF-99 had attributed
+  the 147-byte stdout run to the
+  Usage section where that run is
+  the README introduction's
+  capture; the bot's own final form
+  marks it addressed in commit
+  15f2d86a). The shell in its true
+  final form at this lane's hand:
+  comment 6964932735, last edited
+  2026-11-18T00:26:40Z, 9,022
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (9,038 UTF-8 bytes);
+  its walkthrough, change
+  assessment, and coverage stand
+  under the pre-repair head
+  bd9f3138, the repaired head
+  23bad86d is nowhere named in it,
+  the rate-limit notice stands
+  rotated out (no ef3e882a
+  reference anywhere in the shell
+  at this hand), the Merge Risk row
+  reads Low, and no new review and
+  no new findings stand after the
+  repair. The landing is censused:
+  PR 22 landed through the Trunk
+  queue on 2026-11-18 as squash
+  commit
+  4f4fc8242b8fb33aecddeebd57079b9ba9e0c577
+  on main, single parent
+  ae1466e2fe6a1e8cf94a070de85a60fb736b2db1,
+  its tree
+  07ea82dbe6f934fe7540d10530d8826fc5e89f8a
+  identical to the reviewed head
+  tree, the README on main reading
+  15 of 100; main's ref at this
+  lane's hand stands at 4f4fc824,
+  and the seven commits on the pull
+  request (b18f2419, cdfe4b45,
+  2b4bb8fd, dfba98b2, bd9f3138,
+  15f2d86a, 23bad86d) match the
+  body's account. The two audit
+  Minors the completion record
+  charges to this round are
+  contracted here by name. First,
+  the intermediate-tree Minor: the
+  step 0 repair commit 15f2d86a,
+  parented on the closure commit
+  bd9f3138, was composed on a tree
+  carrying the pre-closure README
+  (14 of 100) and a CONTRACT
+  holding the repaired RF-96 to
+  RF-99 without RF-100, so for that
+  one intermediate head the pull
+  request stood with the CONTRACT
+  closed and the rounds line
+  reverted, until the final head
+  23bad86d restored both; the
+  body's "closure re-pushed" label
+  disclosed the mechanism in
+  outline but never stated the
+  intermediate tree's two
+  reversions; the landed tree was
+  correct and unaffected, and no
+  count was ever overstated. The
+  hygiene rule that Minor carries
+  is contracted for this round and
+  stands in this item: any repair
+  commit on this round is composed
+  on the closure head's full tree,
+  and any intermediate revert of a
+  closure file is stated in the
+  pull request body in so many
+  words. Second, the
+  proposal-heading Minor: RF-98's
+  lane-record proposal heading
+  ("recorded before running
+  anything") is broader than the
+  record's own log, which shows the
+  X0 control measured clean during
+  setup, before the setup redesign
+  and before the proposal section
+  was banked; the
+  derivation-bearing cells X1 to X9
+  and the battery of record all ran
+  after the proposal was banked,
+  and no contracted figure is
+  affected; the heading stands
+  corrected to that scope here. The
+  completion record's remaining
+  statements (the three reviews'
+  verdicts, the red team's
+  reproductions of RF-98's cells
+  and RF-99's forms and its
+  blob-hash proof of the RF-97
+  reliance, and the gate
+  discharge's three attempts with
+  their queues counted) are graded
+  against this record and stand
+  exact.
+- RF-103. The README's captures were
+  re-verified at the propose CLI
+  against the oracle, the port arm
+  being this round's own gate build
+  from the gated tree (RF-101).
+  Item 5's form (the introduction's
+  captured propose run over the
+  synthetic fixture) reproduced on
+  stdout on both arms: the 147-byte
+  document, exit 0, stderr empty.
+  The Usage section's own capture
+  is a separate one, the
+  output-flag run over the tapes
+  directory holding the synthetic
+  fixture and a broken.json, its
+  exclusion line printed on stderr;
+  it was not separately re-run this
+  round, and its exclusion line's
+  form stands measured in RF-98's
+  X1 cell (the same line naming
+  bad.json). Item 6's stdout form
+  (the Quickstart's propose run)
+  reproduced on both arms: the
+  1,161-byte quickstart document,
+  exit 0, stderr empty. Item 6's
+  landed form (the same run with
+  the output flag naming
+  proposals.json beside the tape)
+  stands landed at this lane's hand
+  this round, on the first attempt
+  on both arms: exit 0 on each arm,
+  the written file 1,161 bytes
+  byte-identical to the README
+  document, in the open write
+  window that followed the
+  morning's restart. This stands
+  against Round 15's sittings,
+  where the same form was refused
+  31 counted attempts per side by
+  the box write fault and the form
+  stood on its Round 14 landing;
+  the form is contracted here as
+  re-verified landed this round.
+  The two stdout forms and the
+  landed form stand re-verified
+  whole.
+- RF-104. The invocation surface of the
+  propose CLI was measured fresh
+  against the oracle, in one
+  battery of 18 cells (36 runs),
+  the surface proposed in the
+  lane's record before any cell
+  ran. Prior rounds celled the tape
+  content surfaces (RF-94 the tape
+  file's name, RF-98 the exclusion
+  rollup) and the README captures
+  (RF-99, RF-103); no round had
+  celled the invocation shapes
+  themselves: the argument parser's
+  observable behavior, varied over
+  argv against one fixed tape
+  directory holding the quickstart
+  tape alone, whose control
+  document is the 1,161-byte
+  quickstart document. The contract
+  at every cell is exact agreement
+  on exit code, stdout bytes, and
+  stderr bytes, on the written
+  file's bytes at the cells that
+  write one, and the prefix and
+  full forms of --target agreeing
+  within each arm. The cells: V0,
+  the control, propose over the
+  directory, exit 0, the 1,161-byte
+  document on stdout, stderr empty,
+  on both arms; V1, no arguments at
+  all, exit 2 with the 102-byte
+  top-level usage error on stderr;
+  V2, propose with no source_dir,
+  exit 2 with the 148-byte usage
+  error; V3, --help, exit 0 with
+  the 225-byte top-level help text
+  on stdout; V4, propose --help,
+  exit 0 with the 221-byte propose
+  help text; V5, an unknown command
+  (frobnicate), exit 2 with the
+  127-byte invalid-choice error;
+  V6, propose --bogus with the
+  directory, exit 2 with the
+  88-byte unrecognized-argument
+  error; V7, propose with the
+  directory twice (an extra
+  positional), exit 2 with the
+  143-byte error; V8, propose -o
+  with no value, exit 2 with the
+  143-byte expected-one-argument
+  error; V9, propose --out FILE
+  with the directory (the unique
+  prefix of --output, argparse's
+  prefix matching standing
+  reproduced), exit 0, stdout
+  empty, the written file
+  byte-identical to the control
+  document; V10, propose naming a
+  directory that does not exist,
+  exit 1 with the 93-byte refusal
+  naming it; V11, propose naming a
+  tape file where the directory
+  goes, exit 1 with the 97-byte
+  not-a-directory refusal; V12,
+  propose with the directory first
+  and -o FILE after the positional,
+  exit 0, the written file
+  byte-identical to the control
+  document; V13, propose -- with
+  the directory, exit 0, the
+  document on stdout; V14, propose
+  --target with no value, exit 2
+  with the 140-byte error; V15,
+  propose --tar RULES.md with the
+  directory (the unique prefix of
+  --target), exit 0 with a
+  1,160-byte document on stdout;
+  V16, propose --target RULES.md
+  with the directory (the full
+  form), exit 0, its stdout
+  byte-identical to V15's on each
+  arm, and each cell agreeing
+  across the arms; V17, a
+  source_dir argument carrying
+  bytes that are not valid UTF-8,
+  exit 1 on both arms with
+  byte-identical stderr, the one
+  line "error, not a directory,
+  missing-\udcff\udcfe-dir", the
+  name's undecodable bytes rendered
+  as literal escape text on both
+  arms alike. In every cell the two
+  sides' exit codes, stdout bytes,
+  and stderr bytes agree exactly,
+  and the written files at V9 and
+  V12 are byte-identical to the
+  control document on both arms. No
+  disagreement anywhere in the
+  measured cells; no finding in
+  them.
+- RF-105. Closure. The README records 16 of
+  100 in the commit carrying this
+  item. This round's gate,
+  read-back, Quickstart regression,
+  and invocation measurements are
+  the whole of the change.
