@@ -5416,3 +5416,83 @@ sentence is superseded for every round until that one.
   one limitation) are graded
   against this record and stand
   exact.
+- RF-124. The carried red team reproduction
+  stands discharged at this lane's
+  hand, by name, against the Round
+  20 red team's stated limitation.
+  That review's gate and spot runs
+  never ran: its gate script
+  launched under the line build
+  slot at 2026-11-21T05:43:32Z,
+  queued about 3 hours 49 minutes
+  behind sibling holds, acquired at
+  about 09:32Z into a closed write
+  wave, and died with 241
+  consecutive probe writes refused,
+  its exits file at zero bytes, no
+  stage run; its spot instrument
+  never ran, its sandbox creation
+  refused by the same wave. Its
+  scripts gate_rt.sh and spot_rt.py
+  stood ready in its review
+  scratch; this lane re-derived the
+  gate in the same retry-hold shape
+  and re-ran the spot cells with
+  its own instrument at its own
+  hand. The full local cargo gate
+  stands run at this lane's hand on
+  the landed Round 20 tree, which
+  is this round's base tree (tree
+  656f64a1), in the retry-hold
+  shape inside this sitting under
+  the line build slot, with its own
+  CARGO_TARGET_DIR and jobs 1-2
+  (the run of record stands in the
+  lane record with its hold times):
+  probe gate open, the work copy
+  verified 24 files with no
+  mismatches, cargo test 48 passed
+  with 0 failed in the split 9
+  library, 27 proposals, 12 rescue,
+  exit 0; cargo clippy
+  --all-targets with warnings
+  denied, exit 0; cargo fmt
+  --check, exit 0; and the
+  flighttape pin's digest_cli suite
+  5 passed with 0 failed, exit 0,
+  the golden constant
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  standing in the suite's source;
+  the port build stands at
+  1,689,984 bytes. The RF-121 spot
+  cells stand re-run at this lane's
+  hand, on both arms, in exact
+  agreement: the repeated-option
+  cell (exit 0, the last value's
+  file byte-identical to the
+  1,161-byte control document, the
+  superseded file never created);
+  the glued-long-onto-a-tape
+  refusal (exit 1 with exactly 93
+  bytes on stderr, the tape
+  intact); the missing-value
+  refusal (exit 2 with exactly 143
+  bytes on stderr); and the empty
+  glued value (exit 0, the
+  1,161-byte document on stdout, no
+  file created). The dead attempts
+  at this lane's hand count nowhere
+  and are disclosed by name in the
+  lane record and the pull request
+  body: the first base-gate launch
+  of this sitting, queued under the
+  slot behind sibling holds and
+  killed by a box restart before it
+  acquired, no stage run; and the
+  head-gate holds disclosed there.
+  With this entry the Round 20 red
+  team's limitation stands closed
+  at a second hand, in the
+  discharge shape that closed Round
+  18's carried reproduction in
+  Round 19.
