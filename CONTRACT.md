@@ -5293,3 +5293,9 @@ sentence is superseded for every round until that one.
   check holds. No disagreement
   anywhere in the measured cells;
   no finding in them.
+- RF-122. Closure. The README records 20 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  standing regression, and output
+  option spelling measurements are
+  the whole of the change.
