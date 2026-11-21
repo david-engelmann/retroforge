@@ -5496,3 +5496,145 @@ sentence is superseded for every round until that one.
   discharge shape that closed Round
   18's carried reproduction in
   Round 19.
+- RF-125. The standing regression stands
+  re-verified whole at this lane's
+  hand, the port arm being this
+  round's own gate build from the
+  gated tree, and the whole battery
+  set re-run again at the repaired
+  head build before the push, at
+  the same dispositions. The
+  Quickstart captures on both arms:
+  item 5's form (the introduction's
+  captured propose run over the
+  synthetic fixture) reproduced on
+  stdout on both arms, the 147-byte
+  document, exit 0, stderr empty;
+  item 6's stdout form (the
+  Quickstart's propose run)
+  reproduced on both arms, the
+  1,161-byte quickstart document,
+  exit 0, stderr empty; item 6's
+  landed form (the same run with
+  the output flag naming
+  proposals.json beside the tape)
+  stands landed at this lane's hand
+  this round on both arms, exit 0
+  on each arm, the written file
+  1,161 bytes byte-identical to the
+  README document. The Usage
+  section's own capture is a
+  separate one, the output-flag run
+  over the tapes directory holding
+  the synthetic fixture and a
+  broken.json, its exclusion line
+  printed on stderr; it was not
+  separately re-run this round, and
+  its exclusion line's form stands
+  measured in RF-98's X1 cell (the
+  same line naming bad.json) and in
+  RF-108's W10 cell. The RF-104
+  invocation battery stands re-run
+  whole at its contracted
+  dispositions: 18 cells and 36
+  runs, exact agreement on exit
+  code, stdout bytes, and stderr
+  bytes at every cell, the byte
+  counts identical to RF-104's
+  contract at every cell, the
+  written files at V9 and V12
+  byte-identical to the control
+  document on both arms, the V15
+  and V16 pair agreeing within each
+  arm, and V17's stderr
+  byte-identical on both arms with
+  the name's undecodable bytes
+  rendered as literal escape text.
+  The RF-108 output-destination
+  battery stands re-run whole at
+  its contracted dispositions: 11
+  cells and 22 runs, exact
+  agreement on exit code, stdout
+  bytes, and stderr bytes at every
+  cell, every post-state holding,
+  and no temporary file left in any
+  sandbox after any cell. The
+  RF-112 target battery stands
+  re-run whole at its contracted
+  dispositions: 10 cells and 20
+  runs, exact agreement at every
+  cell and every cross-cell
+  equality and parsed check
+  holding, including the
+  empty-value refusal at exit 1
+  with the 98-byte stderr. The
+  RF-117 source-directory spelling
+  battery stands re-run whole at
+  its contracted dispositions: 10
+  cells and 20 runs, exact
+  agreement at every cell and every
+  per-cell check holding, including
+  the parent refusal at exit 1 with
+  exactly 39 bytes on stderr and
+  the case-missed spelling refusal
+  at exit 1 with exactly 30 bytes
+  on stderr. The RF-121 output
+  option spelling battery stands
+  re-run whole at its contracted
+  dispositions: 10 cells and 20
+  runs, exact agreement at every
+  cell and every per-cell check
+  holding, as RF-124 records for
+  its spot cells. The local cargo
+  gate stands run on this round's
+  base tree (RF-124, the discharge
+  run of record) and on this
+  round's own head tree in the
+  retry-hold shape inside this
+  sitting under the line build
+  slot, each with its own
+  CARGO_TARGET_DIR and jobs 1-2
+  (the head run of record stands in
+  the lane record with its hold
+  times): probe gate open, the work
+  copy verified 24 files with no
+  mismatches, cargo test 48 passed
+  with 0 failed in the split 9
+  library, 27 proposals, 12 rescue,
+  exit 0; cargo clippy
+  --all-targets with warnings
+  denied, exit 0; cargo fmt
+  --check, exit 0; and the
+  flighttape pin's digest_cli suite
+  5 passed with 0 failed, exit 0,
+  the golden constant standing in
+  the suite's source; the port
+  build at the head stands at
+  1,690,208 bytes (the base build
+  at 1,689,984 bytes, the
+  difference the repair's added
+  lines in src/cli.rs); the head
+  tree differs from the base tree
+  only in CONTRACT.md, RF-123 to
+  RF-127, the one-line separator
+  repair in src/cli.rs at the
+  RF-126 slice, and, in the closure
+  commit, one README line.
+  Re-verified this round: the
+  flighttape pin (commit 74a83298,
+  tree afd4d7d1, 50 blobs matching
+  the Round 11 pin tree blob for
+  blob, both Cargo files carrying
+  revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, RF-92, RF-97,
+  RF-101, RF-107, RF-111, RF-116,
+  and RF-120 recorded), and the
+  codepoint scan on the base tree
+  and on the head tree (0 em dashes
+  and 0 en dashes in each, each
+  scan proven on a planted control
+  reading 1 and 1).
