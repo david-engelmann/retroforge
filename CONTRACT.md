@@ -4918,3 +4918,384 @@ sentence is superseded for every round until that one.
   regression, and source-directory
   spelling measurements are the
   whole of the change.
+- RF-119. Round 20 first read PR 30 whole,
+  the Round 19 pull request. The
+  body stands at 20,741 characters
+  (20,741 UTF-8 bytes): the Round
+  19 lane's body (the summary and
+  per-item account RF-114 to
+  RF-118, the storefront readiness
+  list with item 3 not passing, the
+  Verified block, the spec
+  reference, the known deviations,
+  the disclosures, the step 0
+  disposition, and the hosted CI
+  block) with the owner completion
+  record appended to it. The census
+  around it at this lane's hand: 4
+  issue comments, 0 reviews, 0
+  review comments, every body read
+  to its end. The issue comments
+  are the trunk-io notice
+  (7055408910, 113 characters,
+  created 2026-11-21T01:48:52Z as
+  the queue submission and updated
+  2026-11-21T02:00:54Z to the
+  merged notice); the CodeRabbit
+  shell (7055411191, below); the
+  Round 19 lane's "/trunk merge"
+  (7055458226, 12 characters); and
+  the owner's landing record
+  (7056637859, 1,859 characters,
+  carrying this round's four
+  charges), which stands last, so
+  nothing stands after it to
+  disposition. The owner completion
+  record counted 3 issue comments
+  at its writing, before the
+  landing record posted; the count
+  at this hand is 4 with the
+  landing record last, the same
+  tail shape RF-114 recorded for PR
+  28. No review and no review
+  comment stand on the pull
+  request: the bot's Round 19
+  review took the form of its shell
+  alone. The shell in its true
+  final form at this lane's hand:
+  comment 7055411191, last edited
+  2026-11-21T01:52:47Z, 10,959
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (10,970 UTF-8 bytes),
+  Run ID
+  c8eda4fc-2c7c-4620-9749-bf463e713c98;
+  its walkthrough and coverage
+  stand at the final head 207b5d07,
+  it carries no actionable
+  comments, its Merge Risk reads
+  Minimal, and its four pre-merge
+  checks pass. The Round 19 lane's
+  finished-form reading in the body
+  was 10,957 characters and the
+  owner's final census read 10,959;
+  this hand reads 10,959 exactly,
+  so the two-character drift the
+  owner recorded stands closed at
+  the owner's figure, and no
+  content in the shell changed with
+  it. The landing is censused: PR
+  30 landed through the Trunk queue
+  on 2026-11-21 as squash commit
+  597d7f0c8d6e89272873fe8cbea1b62937fb398d
+  on main, single parent
+  f2b941d8bfb4360f2da3b023cecce711ff5cad1b,
+  merged at 2026-11-21T02:00:51Z,
+  its tree
+  e7be44ffbdd9797bed8b0476ab138ad61fae09ff
+  identical to the reviewed head
+  tree, the README on main reading
+  19 of 100; main's ref at this
+  lane's hand stands at 597d7f0c,
+  and the five commits on the pull
+  request (13c1aa03, a3d9fb7b,
+  b41ca56e, 2f27e919, 207b5d07)
+  match the body's account. Nothing
+  is carried into this round by
+  name: the owner completion record
+  states the Round 18 gate
+  reproduction standing complete
+  (RF-115 discharged it at the
+  Round 19 build lane's hand on the
+  landed Round 18 tree, and the
+  Round 19 red team confirmed it at
+  a third hand by its own gate run
+  on tree 2744f03e, run of record
+  2026-11-21T03:26:03Z to
+  03:26:46Z), so that item stands
+  closed and is not re-charged; the
+  landing record's charges name
+  only the read-back itself, the
+  standing regression whole, the
+  fresh measurement, storefront
+  item 3 standing not passing, and
+  the closure. The owner completion
+  record's remaining statements
+  (spec fidelity APPROVE with no
+  findings, standards APPROVE with
+  no findings, and the red team
+  APPROVE with no findings at any
+  grade) are graded against this
+  record and stand exact.
+- RF-120. The standing regression stands
+  re-verified whole at this lane's
+  hand, the port arm being this
+  round's own gate build from the
+  gated tree. The Quickstart
+  captures on both arms: item 5's
+  form (the introduction's captured
+  propose run over the synthetic
+  fixture) reproduced on stdout on
+  both arms, the 147-byte document,
+  exit 0, stderr empty; item 6's
+  stdout form (the Quickstart's
+  propose run) reproduced on both
+  arms, the 1,161-byte quickstart
+  document, exit 0, stderr empty;
+  item 6's landed form (the same
+  run with the output flag naming
+  proposals.json beside the tape)
+  stands landed at this lane's hand
+  this round on both arms, exit 0
+  on each arm, the written file
+  1,161 bytes byte-identical to the
+  README document. The Usage
+  section's own capture is a
+  separate one, the output-flag run
+  over the tapes directory holding
+  the synthetic fixture and a
+  broken.json, its exclusion line
+  printed on stderr; it was not
+  separately re-run this round, and
+  its exclusion line's form stands
+  measured in RF-98's X1 cell (the
+  same line naming bad.json) and in
+  RF-108's W10 cell. The RF-104
+  invocation battery stands re-run
+  whole at its contracted
+  dispositions: 18 cells and 36
+  runs, exact agreement on exit
+  code, stdout bytes, and stderr
+  bytes at every cell, the byte
+  counts identical to RF-104's
+  contract at every cell (the
+  102-byte top-level usage error at
+  V1, the 148-byte usage error at
+  V2, the 225-byte top-level help
+  at V3, the 221-byte propose help
+  at V4, the 127-byte
+  invalid-choice error at V5, the
+  88-byte unrecognized-argument
+  error at V6, the 143-byte errors
+  at V7 and V8, the 93-byte refusal
+  at V10, the 97-byte
+  not-a-directory refusal at V11,
+  the 140-byte error at V14, the
+  1,160-byte documents at V15 and
+  V16), the written files at V9 and
+  V12 byte-identical to the control
+  document on both arms, the V15
+  and V16 pair agreeing within each
+  arm, and V17's stderr
+  byte-identical on both arms with
+  the name's undecodable bytes
+  rendered as literal escape text.
+  The RF-108 output-destination
+  battery stands re-run whole at
+  its contracted dispositions: 11
+  cells and 22 runs, exact
+  agreement on exit code, stdout
+  bytes, and stderr bytes at every
+  cell, and every post-state
+  holding (the control and
+  overwrite and inside-directory
+  and redundant-spelling writes
+  byte-identical to the control
+  document, the guard refusing
+  under the direct, dot, and
+  absolute spellings with the tape
+  intact, the missing parent and
+  directory destinations refusing
+  with nothing created, the empty
+  output value yielding the
+  document on stdout, the failed
+  run leaving the seeded file
+  intact), and no temporary file
+  left in any sandbox after any
+  cell. The RF-112 target battery
+  stands re-run whole at its
+  contracted dispositions: 10 cells
+  and 20 runs, exact agreement on
+  exit code, stdout bytes, and
+  stderr bytes at every cell, and
+  every cross-cell equality and
+  parsed check holding (the
+  explicit default byte-identical
+  to the control; the named
+  target's document at 1,160 bytes
+  equal to the control except at
+  the target value and the registry
+  experiment id, with the glued and
+  prefix spellings byte-identical
+  to it; the repeated option
+  byte-identical to the last value
+  alone, the last value winning;
+  the empty value refused at exit 1
+  with exactly 98 bytes on stderr,
+  the 43-byte validation line and
+  the 55-byte defect line naming
+  proposals[0].target; the verbatim
+  spelling docs/MY RULES.md carried
+  exactly at 1,168 bytes; and the
+  non-ASCII value round-tripping
+  through the parsed document on
+  both arms at 1,164 bytes). The
+  RF-117 source-directory spelling
+  battery stands re-run whole at
+  its contracted dispositions: 10
+  cells and 20 runs, exact
+  agreement on exit code, stdout
+  bytes, and stderr bytes at every
+  cell, and every per-cell check
+  holding (the trailing separator,
+  dot prefix, absolute, dotdot
+  roundtrip, dot itself, dotted
+  tail, and symlink spellings each
+  byte-identical to the control
+  document; the parent refused at
+  exit 1 with exactly 39 bytes on
+  stderr, the one no-valid-tapes
+  line; and the case-missed
+  spelling refused at exit 1 with
+  exactly 30 bytes on stderr, the
+  not-a-directory line naming the
+  spelled TAPES). The local cargo
+  gate stands run on this round's
+  base tree and on this round's own
+  head tree in the retry-hold shape
+  inside this sitting under the
+  line build slot, each with its
+  own CARGO_TARGET_DIR and jobs 1-2
+  (the base run of record stands in
+  the lane record with its hold
+  times): probe gate open, the work
+  copy verified 24 files with no
+  mismatches, cargo test 48 passed
+  with 0 failed in the split 9
+  library, 27 proposals, 12 rescue,
+  exit 0; cargo clippy
+  --all-targets with warnings
+  denied, exit 0; cargo fmt
+  --check, exit 0; and the
+  flighttape pin's digest_cli suite
+  5 passed with 0 failed, exit 0,
+  the golden constant
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  standing in the suite's source;
+  the port build stands at
+  1,689,984 bytes; the head tree
+  differs from the base tree only
+  in CONTRACT.md, RF-119 to RF-122,
+  and, in the closure commit, one
+  README line. Re-verified this
+  round: the flighttape pin (commit
+  74a83298, tree afd4d7d1, 50 blobs
+  matching the Round 11 pin tree
+  blob for blob, both Cargo files
+  carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, RF-92, RF-97,
+  RF-101, RF-107, RF-111, and
+  RF-116 recorded), and the
+  codepoint scan on the base tree
+  and on the head tree (0 em dashes
+  and 0 en dashes in each, each
+  scan proven on a planted control
+  reading 1 and 1).
+- RF-121. The output option's own spelling
+  surface of the propose CLI was
+  measured fresh against the
+  oracle, in one battery of 10
+  cells (20 runs), the surface
+  proposed in the lane's record
+  before any cell ran. Prior rounds
+  celled the invocation shapes
+  (RF-104, whose only output-option
+  cells were one prefix spelling,
+  V9's --out, and one separate
+  short spelling after the
+  positional, V12), the output
+  destination's spelling and
+  pre-state (RF-108, every cell in
+  the separate -o form), the target
+  value's own spellings (RF-112,
+  the glued, prefix, repeated, and
+  empty forms of --target, never of
+  the output option), the
+  source-directory argument's
+  spelling (RF-117), the tape
+  file's spelling (RF-88) and name
+  (RF-94), and the exclusion rollup
+  (RF-98); no round had celled the
+  output option's own spelling as a
+  battery. Each run went against
+  one fixed tape content (the
+  quickstart tape alone, run1.json,
+  995 bytes, sha256 80390bc6...),
+  whose control document is the
+  1,161-byte quickstart document,
+  in equivalent per-arm sandboxes
+  with the same relative layout.
+  The contract at every cell is
+  exact agreement on exit code,
+  stdout bytes, and stderr bytes,
+  plus the per-cell checks stated
+  in the proposal. The cells: O0,
+  the control (propose tapes -o
+  out.json), exit 0, stdout and
+  stderr empty, the written file
+  byte-identical to the control
+  document; O1, the full long form
+  separate (--output out.json),
+  exit 0, the written file
+  byte-identical to O0 on each arm;
+  O2, the glued long form
+  (--output=out.json), exit 0,
+  byte-identical to O0 on each arm;
+  O3, the prefix long form separate
+  (--out out.json), exit 0,
+  byte-identical to O0 on each arm;
+  O4, the glued short form
+  (-oout.json), exit 0,
+  byte-identical to O0 on each arm;
+  O5, the minimal prefix (--o
+  out.json, matching --output alone
+  among the propose options), exit
+  0, byte-identical to O0 on each
+  arm; O6, the repeated option (-o
+  first.json --output out.json),
+  exit 0, out.json byte-identical
+  to O0 and first.json never
+  created on each arm, the last
+  value winning; O7, the glued long
+  form onto an input tape
+  (--output=tapes/run1.json),
+  refused at exit 1 with exactly 93
+  bytes on stderr on both arms, the
+  tape byte-identical after the
+  run; O8, the long form with its
+  value missing (propose tapes
+  --output as the last token),
+  refused at exit 2 with exactly
+  143 bytes on stderr on both arms,
+  no file created; O9, the glued
+  long form with an empty value
+  (--output=), exit 0, stdout
+  byte-identical to the control
+  document, stderr empty, no file
+  created, on each arm. In every
+  cell the two sides' exit codes,
+  stdout bytes, and stderr bytes
+  agree exactly, and every per-cell
+  check holds. No disagreement
+  anywhere in the measured cells;
+  no finding in them.
+- RF-122. Closure. The README records 20 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  standing regression, and output
+  option spelling measurements are
+  the whole of the change.
