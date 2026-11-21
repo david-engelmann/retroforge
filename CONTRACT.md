@@ -4918,3 +4918,112 @@ sentence is superseded for every round until that one.
   regression, and source-directory
   spelling measurements are the
   whole of the change.
+- RF-119. Round 20 first read PR 30 whole,
+  the Round 19 pull request. The
+  body stands at 20,741 characters
+  (20,741 UTF-8 bytes): the Round
+  19 lane's body (the summary and
+  per-item account RF-114 to
+  RF-118, the storefront readiness
+  list with item 3 not passing, the
+  Verified block, the spec
+  reference, the known deviations,
+  the disclosures, the step 0
+  disposition, and the hosted CI
+  block) with the owner completion
+  record appended to it. The census
+  around it at this lane's hand: 4
+  issue comments, 0 reviews, 0
+  review comments, every body read
+  to its end. The issue comments
+  are the trunk-io notice
+  (7055408910, 113 characters,
+  created 2026-11-21T01:48:52Z as
+  the queue submission and updated
+  2026-11-21T02:00:54Z to the
+  merged notice); the CodeRabbit
+  shell (7055411191, below); the
+  Round 19 lane's "/trunk merge"
+  (7055458226, 12 characters); and
+  the owner's landing record
+  (7056637859, 1,859 characters,
+  carrying this round's four
+  charges), which stands last, so
+  nothing stands after it to
+  disposition. The owner completion
+  record counted 3 issue comments
+  at its writing, before the
+  landing record posted; the count
+  at this hand is 4 with the
+  landing record last, the same
+  tail shape RF-114 recorded for PR
+  28. No review and no review
+  comment stand on the pull
+  request: the bot's Round 19
+  review took the form of its shell
+  alone. The shell in its true
+  final form at this lane's hand:
+  comment 7055411191, last edited
+  2026-11-21T01:52:47Z, 10,959
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (10,970 UTF-8 bytes),
+  Run ID
+  c8eda4fc-2c7c-4620-9749-bf463e713c98;
+  its walkthrough and coverage
+  stand at the final head 207b5d07,
+  it carries no actionable
+  comments, its Merge Risk reads
+  Minimal, and its four pre-merge
+  checks pass. The Round 19 lane's
+  finished-form reading in the body
+  was 10,957 characters and the
+  owner's final census read 10,959;
+  this hand reads 10,959 exactly,
+  so the two-character drift the
+  owner recorded stands closed at
+  the owner's figure, and no
+  content in the shell changed with
+  it. The landing is censused: PR
+  30 landed through the Trunk queue
+  on 2026-11-21 as squash commit
+  597d7f0c8d6e89272873fe8cbea1b62937fb398d
+  on main, single parent
+  f2b941d8bfb4360f2da3b023cecce711ff5cad1b,
+  merged at 2026-11-21T02:00:51Z,
+  its tree
+  e7be44ffbdd9797bed8b0476ab138ad61fae09ff
+  identical to the reviewed head
+  tree, the README on main reading
+  19 of 100; main's ref at this
+  lane's hand stands at 597d7f0c,
+  and the five commits on the pull
+  request (13c1aa03, a3d9fb7b,
+  b41ca56e, 2f27e919, 207b5d07)
+  match the body's account. Nothing
+  is carried into this round by
+  name: the owner completion record
+  states the Round 18 gate
+  reproduction standing complete
+  (RF-115 discharged it at the
+  Round 19 build lane's hand on the
+  landed Round 18 tree, and the
+  Round 19 red team confirmed it at
+  a third hand by its own gate run
+  on tree 2744f03e, run of record
+  2026-11-21T03:26:03Z to
+  03:26:46Z), so that item stands
+  closed and is not re-charged; the
+  landing record's charges name
+  only the read-back itself, the
+  standing regression whole, the
+  fresh measurement, storefront
+  item 3 standing not passing, and
+  the closure. The owner completion
+  record's remaining statements
+  (spec fidelity APPROVE with no
+  findings, standards APPROVE with
+  no findings, and the red team
+  APPROVE with no findings at any
+  grade) are graded against this
+  record and stand exact.
