@@ -5752,3 +5752,11 @@ sentence is superseded for every round until that one.
   exactly 83 bytes on stderr, no
   file created). The repair is the
   round's only code change.
+- RF-127. Closure. The README records 21 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  carried-reproduction discharge,
+  standing regression, separator
+  measurement, and one-line
+  separator repair are the whole of
+  the change.
