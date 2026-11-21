@@ -4911,3 +4911,10 @@ sentence is superseded for every round until that one.
   disagreement anywhere in the
   measured cells; no finding in
   them.
+- RF-118. Closure. The README records 19 of
+  100 in the commit carrying this
+  item. This round's read-back,
+  carried gate discharge, standing
+  regression, and source-directory
+  spelling measurements are the
+  whole of the change.
