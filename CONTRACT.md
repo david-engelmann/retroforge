@@ -4468,3 +4468,129 @@ sentence is superseded for every round until that one.
   standing regression, and target
   measurements are the whole of the
   change.
+- RF-114. Round 19 first read PR 28 whole,
+  the Round 18 pull request. The
+  body stands at 18,312 characters
+  (18,312 UTF-8 bytes): the Round
+  18 lane's body (the summary and
+  per-item account RF-110 to
+  RF-113, the storefront readiness
+  list with item 3 not passing, the
+  Verified block, the spec
+  reference, the known deviations,
+  the disclosures, the step 0
+  disposition, and the hosted CI
+  block) with the owner completion
+  record appended to it. The census
+  around it at this lane's hand: 4
+  issue comments, 0 reviews, 0
+  review comments, every body read
+  to its end. The issue comments
+  are the trunk-io notice
+  (7051130465, 113 characters,
+  created 2026-11-20T21:32:37Z as
+  the queue submission and updated
+  2026-11-20T21:48:01Z to the
+  merged notice); the CodeRabbit
+  shell (7051133652, below); the
+  Round 18 lane's "/trunk merge"
+  (7051286563, 12 characters); and
+  the owner's landing record
+  (7052722501, 2,520 characters,
+  carrying this round's five
+  charges), which stands last, so
+  nothing stands after it to
+  disposition. The owner completion
+  record counted 3 issue comments
+  at its writing, before the
+  landing record posted; the count
+  at this hand is 4 with the
+  landing record last, the same
+  tail shape RF-110 recorded for PR
+  26. No review and no review
+  comment stand on the pull
+  request: the bot's Round 18
+  review took the form of its shell
+  alone. The shell in its true
+  final form at this lane's hand:
+  comment 7051133652, last edited
+  2026-11-20T21:40:33Z, 10,885
+  characters measured by Python len
+  of the body exactly as the API
+  returns it (10,900 UTF-8 bytes),
+  Run ID
+  ed72bd30-282a-499b-a956-bba5142a5e0f;
+  its walkthrough and coverage
+  stand at the final head b63626ef
+  (the coverage block names the
+  source and covered commit
+  b63626eff59fa69d4968757c3e2cdd507cd7f4bb
+  alike), it carries no actionable
+  comments, its Merge Risk reads
+  Minimal, and its four pre-merge
+  checks pass. The Round 18 lane's
+  finished-form reading in the body
+  was 10,883 characters and the
+  owner's final census read 10,885;
+  this hand reads 10,885 exactly,
+  so the two-character drift the
+  owner recorded stands closed at
+  the owner's figure, and no
+  content in the shell changed with
+  it. The landing is censused: PR
+  28 landed through the Trunk queue
+  on 2026-11-20 as squash commit
+  f2b941d8bfb4360f2da3b023cecce711ff5cad1b
+  on main, single parent
+  e3544aa0a8e085ac2066c81427f9d1d33311b3a3,
+  merged at 2026-11-20T21:47:57Z,
+  its tree
+  2744f03e070b7155dbb945f6cfd92321decfc8b2
+  identical to the reviewed head
+  tree, the README on main reading
+  18 of 100; main's ref at this
+  lane's hand stands at f2b941d8,
+  and the four commits on the pull
+  request (9793e564, a92692d7,
+  2792a1d0, b63626ef) match the
+  body's account. The spec Minor
+  from the owner completion record
+  is contracted here by name: the
+  body's RF-112 sentence calls the
+  target surface "a surface no
+  prior round celled", unqualified,
+  while the CONTRACT's RF-112 entry
+  carries the qualified form in
+  full (prior rounds celled the
+  invocation shapes, RF-104, whose
+  only target cells were the prefix
+  and full spellings of one
+  RULES.md run, the V15 and V16
+  cells; the output destination's
+  semantics, RF-108; the tape
+  file's spelling, RF-88, and name,
+  RF-94; and the exclusion rollup,
+  RF-98; no round had celled the
+  target value's own semantics).
+  The body's sentence omits the V15
+  and V16 qualification; the
+  CONTRACT's qualified form stands
+  as the record of what was
+  actually novel in RF-112, the
+  target value's own semantics.
+  Wording only, no figure affected,
+  as the owner recorded. The owner
+  completion record's remaining
+  statements (spec fidelity APPROVE
+  with that one Minor, standards
+  APPROVE with no findings at any
+  grade, and the red team APPROVE
+  with no findings and one stated
+  limitation, its own gate build
+  never run and its landed-form
+  write never landed, the
+  reproduction carried to this
+  round by name) are graded against
+  this record and stand exact, the
+  limitation's discharge standing
+  at RF-115.
