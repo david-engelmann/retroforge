@@ -4828,3 +4828,86 @@ sentence is superseded for every round until that one.
   tree (0 em dashes and 0 en dashes
   in each, each scan proven on a
   planted control reading 1 and 1).
+- RF-117. The source-directory spelling
+  surface of the propose CLI was
+  measured fresh against the
+  oracle, in one battery of 10
+  cells (20 runs), the surface
+  proposed in the lane's record
+  before any cell ran. Prior rounds
+  celled the invocation shapes
+  (RF-104, whose directory cells
+  were one missing path and one
+  file-as-directory, both spelled
+  absolute), the output
+  destination's spelling and
+  pre-state (RF-108), the target
+  value's semantics (RF-112), the
+  tape file's spelling (RF-88) and
+  name (RF-94), and the exclusion
+  rollup (RF-98); no round had
+  celled the directory argument's
+  own spelling. Each run went to
+  stdout over one fixed tape
+  content (the quickstart tape
+  alone, run1.json, 995 bytes,
+  sha256 80390bc6...), whose
+  control document is the
+  1,161-byte quickstart document,
+  in equivalent per-arm sandboxes
+  with the same relative layout.
+  The contract at every cell is
+  exact agreement on exit code,
+  stdout bytes, and stderr bytes,
+  plus the per-cell checks stated
+  in the proposal. The cells: S0,
+  the control (propose tapes from
+  the sandbox root), exit 0, stdout
+  byte-identical to the control
+  document, stderr empty; S1, the
+  trailing separator (tapes/), exit
+  0, stdout byte-identical to S0 on
+  each arm; S2, the dot prefix
+  (./tapes), exit 0, byte-identical
+  to S0 on each arm; S3, the
+  absolute spelling, exit 0,
+  byte-identical to S0 on each arm
+  (the document names tape files,
+  never the directory); S4, the
+  dotdot roundtrip
+  (tapes/../tapes), exit 0,
+  byte-identical to S0 on each arm;
+  S5, the dot itself (propose .
+  with the working directory the
+  tapes directory), exit 0, stdout
+  byte-identical to the control
+  document on each arm; S6, the
+  parent with no tapes of its own
+  (propose .. with the working
+  directory the tapes directory,
+  the parent holding only the tapes
+  directory), exit 1, stdout empty,
+  stderr exactly 39 bytes on both
+  arms, the one no-valid-tapes
+  line, which names no path; S7,
+  the dotted tail (tapes/.), exit
+  0, byte-identical to S0 on each
+  arm; S8, the symlink spelling
+  (linktapes, a symlink to tapes),
+  exit 0, byte-identical to S0 on
+  each arm, both arms following the
+  link for the metadata check and
+  the listing; S9, the case-missed
+  spelling refused with its echo
+  (propose TAPES, no such
+  directory), exit 1, stdout empty,
+  stderr exactly 30 bytes on both
+  arms, the not-a-directory line
+  naming the spelled TAPES. In
+  every cell the two sides' exit
+  codes, stdout bytes, and stderr
+  bytes agree exactly, and every
+  per-cell check holds. No
+  disagreement anywhere in the
+  measured cells; no finding in
+  them.
