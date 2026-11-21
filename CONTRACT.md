@@ -4678,3 +4678,153 @@ sentence is superseded for every round until that one.
   tree, and the Round 18 red team's
   limitation stands discharged, not
   merely carried.
+- RF-116. The standing regression stands
+  re-verified whole at this lane's
+  hand, the port arm being this
+  round's own gate build from the
+  gated tree. The Quickstart
+  captures on both arms: item 5's
+  form (the introduction's captured
+  propose run over the synthetic
+  fixture) reproduced on stdout on
+  both arms, the 147-byte document,
+  exit 0, stderr empty; item 6's
+  stdout form (the Quickstart's
+  propose run) reproduced on both
+  arms, the 1,161-byte quickstart
+  document, exit 0, stderr empty;
+  item 6's landed form (the same
+  run with the output flag naming
+  proposals.json beside the tape)
+  stands landed at this lane's hand
+  this round on both arms, exit 0
+  on each arm, the written file
+  1,161 bytes byte-identical to the
+  README document. The Usage
+  section's own capture is a
+  separate one, the output-flag run
+  over the tapes directory holding
+  the synthetic fixture and a
+  broken.json, its exclusion line
+  printed on stderr; it was not
+  separately re-run this round, and
+  its exclusion line's form stands
+  measured in RF-98's X1 cell (the
+  same line naming bad.json) and in
+  RF-108's W10 cell. The RF-104
+  invocation battery stands re-run
+  whole at its contracted
+  dispositions: 18 cells and 36
+  runs, exact agreement on exit
+  code, stdout bytes, and stderr
+  bytes at every cell, the byte
+  counts identical to RF-104's
+  contract at every cell (the
+  102-byte top-level usage error at
+  V1, the 148-byte usage error at
+  V2, the 225-byte top-level help
+  at V3, the 221-byte propose help
+  at V4, the 127-byte
+  invalid-choice error at V5, the
+  88-byte unrecognized-argument
+  error at V6, the 143-byte errors
+  at V7 and V8, the 93-byte refusal
+  at V10, the 97-byte
+  not-a-directory refusal at V11,
+  the 140-byte error at V14, the
+  1,160-byte documents at V15 and
+  V16), the written files at V9 and
+  V12 byte-identical to the control
+  document on both arms, the V15
+  and V16 pair agreeing within each
+  arm, and V17's stderr
+  byte-identical on both arms with
+  the name's undecodable bytes
+  rendered as literal escape text.
+  The RF-108 output-destination
+  battery stands re-run whole at
+  its contracted dispositions: 11
+  cells and 22 runs, exact
+  agreement on exit code, stdout
+  bytes, and stderr bytes at every
+  cell, and every post-state
+  holding (the control and
+  overwrite and inside-directory
+  and redundant-spelling writes
+  byte-identical to the control
+  document, the guard refusing
+  under the direct, dot, and
+  absolute spellings with the tape
+  intact, the missing parent and
+  directory destinations refusing
+  with nothing created, the empty
+  output value yielding the
+  document on stdout, the failed
+  run leaving the seeded file
+  intact), and no temporary file
+  left in any sandbox after any
+  cell. The RF-112 target battery
+  stands re-run whole at its
+  contracted dispositions: 10 cells
+  and 20 runs, exact agreement on
+  exit code, stdout bytes, and
+  stderr bytes at every cell, and
+  every cross-cell equality and
+  parsed check holding (the
+  explicit default byte-identical
+  to the control; the named
+  target's document at 1,160 bytes
+  equal to the control except at
+  the target value and the registry
+  experiment id, with the glued and
+  prefix spellings byte-identical
+  to it; the repeated option
+  byte-identical to the last value
+  alone, the last value winning;
+  the empty value refused at exit 1
+  with exactly 98 bytes on stderr,
+  the 43-byte validation line and
+  the 55-byte defect line naming
+  proposals[0].target; the verbatim
+  spelling docs/MY RULES.md carried
+  exactly at 1,168 bytes; and the
+  non-ASCII value round-tripping
+  through the parsed document on
+  both arms at 1,164 bytes). The
+  local cargo gate stands run on
+  this round's own head tree in the
+  retry-hold shape inside this
+  sitting (the head tree differs
+  from the base tree gated at
+  RF-115 only in CONTRACT.md,
+  RF-114 to RF-118, and, in the
+  closure commit, one README line):
+  probe gate open, the work copy
+  verified 24 files with no
+  mismatches, cargo test 48 passed
+  with 0 failed in the split 9
+  library, 27 proposals, 12 rescue,
+  exit 0; cargo clippy
+  --all-targets with warnings
+  denied, exit 0; cargo fmt
+  --check, exit 0; and the
+  flighttape pin's digest_cli suite
+  5 passed with 0 failed, exit 0,
+  the golden constant standing in
+  the suite's source. Re-verified
+  this round: the flighttape pin
+  (commit 74a83298, tree afd4d7d1,
+  50 blobs matching the Round 11
+  pin tree blob for blob, both
+  Cargo files carrying revision
+  74a83298aeb31c82e62b9fb0c613f5bc8600799e),
+  the oracle pairing (14 held files
+  against commit 09b46865, blob for
+  blob, the same 14-file shape
+  RF-84, RF-89, RF-92, RF-97,
+  RF-101, RF-107, and RF-111
+  recorded), and the codepoint scan
+  on the base tree and on the head
+  tree (0 em dashes and 0 en dashes
+  in each, each scan proven on a
+  planted control reading 1 and 1).
