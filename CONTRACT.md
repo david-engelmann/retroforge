@@ -5205,3 +5205,91 @@ sentence is superseded for every round until that one.
   and 0 en dashes in each, each
   scan proven on a planted control
   reading 1 and 1).
+- RF-121. The output option's own spelling
+  surface of the propose CLI was
+  measured fresh against the
+  oracle, in one battery of 10
+  cells (20 runs), the surface
+  proposed in the lane's record
+  before any cell ran. Prior rounds
+  celled the invocation shapes
+  (RF-104, whose only output-option
+  cells were one prefix spelling,
+  V9's --out, and one separate
+  short spelling after the
+  positional, V12), the output
+  destination's spelling and
+  pre-state (RF-108, every cell in
+  the separate -o form), the target
+  value's own spellings (RF-112,
+  the glued, prefix, repeated, and
+  empty forms of --target, never of
+  the output option), the
+  source-directory argument's
+  spelling (RF-117), the tape
+  file's spelling (RF-88) and name
+  (RF-94), and the exclusion rollup
+  (RF-98); no round had celled the
+  output option's own spelling as a
+  battery. Each run went against
+  one fixed tape content (the
+  quickstart tape alone, run1.json,
+  995 bytes, sha256 80390bc6...),
+  whose control document is the
+  1,161-byte quickstart document,
+  in equivalent per-arm sandboxes
+  with the same relative layout.
+  The contract at every cell is
+  exact agreement on exit code,
+  stdout bytes, and stderr bytes,
+  plus the per-cell checks stated
+  in the proposal. The cells: O0,
+  the control (propose tapes -o
+  out.json), exit 0, stdout and
+  stderr empty, the written file
+  byte-identical to the control
+  document; O1, the full long form
+  separate (--output out.json),
+  exit 0, the written file
+  byte-identical to O0 on each arm;
+  O2, the glued long form
+  (--output=out.json), exit 0,
+  byte-identical to O0 on each arm;
+  O3, the prefix long form separate
+  (--out out.json), exit 0,
+  byte-identical to O0 on each arm;
+  O4, the glued short form
+  (-oout.json), exit 0,
+  byte-identical to O0 on each arm;
+  O5, the minimal prefix (--o
+  out.json, matching --output alone
+  among the propose options), exit
+  0, byte-identical to O0 on each
+  arm; O6, the repeated option (-o
+  first.json --output out.json),
+  exit 0, out.json byte-identical
+  to O0 and first.json never
+  created on each arm, the last
+  value winning; O7, the glued long
+  form onto an input tape
+  (--output=tapes/run1.json),
+  refused at exit 1 with exactly 93
+  bytes on stderr on both arms, the
+  tape byte-identical after the
+  run; O8, the long form with its
+  value missing (propose tapes
+  --output as the last token),
+  refused at exit 2 with exactly
+  143 bytes on stderr on both arms,
+  no file created; O9, the glued
+  long form with an empty value
+  (--output=), exit 0, stdout
+  byte-identical to the control
+  document, stderr empty, no file
+  created, on each arm. In every
+  cell the two sides' exit codes,
+  stdout bytes, and stderr bytes
+  agree exactly, and every per-cell
+  check holds. No disagreement
+  anywhere in the measured cells;
+  no finding in them.
