@@ -5638,3 +5638,117 @@ sentence is superseded for every round until that one.
   and 0 en dashes in each, each
   scan proven on a planted control
   reading 1 and 1).
+- RF-126. The end-of-options separator
+  surface of the propose CLI was
+  measured fresh against the
+  oracle, in one battery of 10
+  cells (20 runs), the surface
+  proposed in the lane's record
+  before any cell ran. Prior rounds
+  celled the invocation shapes
+  (RF-104), the output
+  destination's spelling and
+  pre-state (RF-108), the target
+  value's own spellings (RF-112),
+  the source-directory argument's
+  spelling (RF-117), and the output
+  option's own spelling (RF-121);
+  no round had celled the separator
+  token's position as a battery, in
+  the qualified sense that the
+  separator appeared only inside
+  other batteries' paths, never as
+  the varied surface itself. Each
+  run went against one fixed tape
+  content (the quickstart tape
+  alone, run1.json, 995 bytes,
+  sha256 80390bc6...), whose
+  control document is the
+  1,161-byte quickstart document,
+  in equivalent per-arm sandboxes
+  with the same relative layout.
+  The contract at every cell is
+  exact agreement on exit code,
+  stdout bytes, and stderr bytes,
+  plus the per-cell checks stated
+  in the proposal, with the exact
+  stderr byte counts hard-asserted
+  as constants in the instrument
+  (92, 143, 86, 148, 27, and 83
+  after the repair below). The
+  cells: D0, the control (propose
+  tapes -o out.json), exit 0, the
+  written file byte-identical to
+  the control document; D1, the
+  separator before the source
+  (propose -- tapes -o out.json),
+  refused at exit 2 with exactly 92
+  bytes on stderr, no file created;
+  D2, the separator after the
+  source (propose tapes -- -o
+  out.json), refused at exit 2 with
+  stderr byte-identical to D1, no
+  file created; D3, the trailing
+  separator (propose tapes -o
+  out.json --), the finding below;
+  D4, the separator as the output
+  value (propose tapes -o --),
+  refused at exit 2 with exactly
+  143 bytes on stderr, no file
+  created; D5, the doubled
+  separator (propose -- -- tapes),
+  refused at exit 2 with exactly 86
+  bytes on stderr, the second
+  separator standing as the source
+  value; D6, the separator alone
+  (propose --), refused at exit 2
+  with exactly 148 bytes on stderr,
+  the required source_dir error;
+  D7, the separator before an
+  option-like source (propose --
+  -o), refused at exit 1 with
+  exactly 27 bytes on stderr, the
+  not-a-directory line naming -o;
+  D8, the separator between option
+  and source (propose -o out.json
+  -- tapes), exit 0, the written
+  file byte-identical to D0; D9,
+  the separator between a long
+  option and its value (propose
+  tapes --output -- out.json),
+  refused at exit 2 with exactly
+  143 bytes on stderr,
+  byte-identical to D4, no file
+  created. Nine cells agreed
+  exactly at both arms on the first
+  run, every hard-asserted byte
+  count exact. At D3 the arms
+  disagreed, a finding: the oracle
+  refuses a trailing separator at
+  exit 2 with exactly 83 bytes on
+  stderr (the top usage line and
+  the unrecognized-arguments line
+  naming the separator alone) and
+  creates no file, while the port
+  consumed the separator, exited 0,
+  and wrote the file. The port is
+  the deviating side against its
+  behavioral spec, and the round
+  repairs it in this slice: in the
+  propose scan a trailing separator
+  now stands as an extra, reported
+  by the top parser after the scan,
+  the missing-source refusal still
+  settling first, so the D6 shape
+  is unchanged and no standing
+  battery cell moves (the only
+  separator cell in the standing
+  batteries, RF-104's V13, carries
+  a token after the separator). At
+  the repaired head the battery
+  stands re-run whole: all 10 cells
+  in exact agreement, D3 at its
+  repaired disposition (exit 2,
+  exactly 83 bytes on stderr, no
+  file created). The repair is the
+  round's only code change.

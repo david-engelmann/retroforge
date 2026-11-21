@@ -492,7 +492,17 @@ fn parse_propose(args: &[Token], stdout_closed: bool, stderr_closed: bool) -> Su
         let token = &args[index];
         let u = &token.units;
         if !positional_only && units_eq(u, "--") {
-            positional_only = true;
+            if index + 1 == args.len() {
+                // A trailing separator is not
+                // consumed: argparse leaves it as
+                // an extra, which the top parser
+                // reports after the scan (the
+                // missing-source refusal below
+                // still settles first).
+                extras.push(token.clone());
+            } else {
+                positional_only = true;
+            }
             index += 1;
             continue;
         }
