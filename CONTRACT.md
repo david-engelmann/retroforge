@@ -4594,3 +4594,87 @@ sentence is superseded for every round until that one.
   this record and stand exact, the
   limitation's discharge standing
   at RF-115.
+- RF-115. The carried gate reproduction
+  stands discharged at this lane's
+  hand, by name, against the Round
+  18 red team's stated limitation.
+  The limitation, as the owner
+  completion record on PR 28
+  carries it in full: the red
+  team's own cargo gate build never
+  ran (its gate script waited under
+  the slot lock for more than 70
+  minutes behind the post-restart
+  queue and never acquired, and the
+  write fault stood closed at its
+  hand for the whole sitting, so no
+  build could have written a target
+  directory in any case; it ended
+  the queued attempt itself and it
+  counts nowhere), and for the same
+  reason its landed-form write
+  never landed (both arms returned
+  the cannot-write error and
+  agreed; the same document
+  reproduced byte-identically on
+  stdout). The discharge at this
+  hand: the full local cargo gate
+  stands run on the landed Round 18
+  tree, tree 2744f03e at commit
+  f2b941d8, which is this round's
+  base tree (staged from the Round
+  18 lane's head-tree copy and
+  re-verified at this lane's hand
+  blob for blob against the API
+  manifest, 24 blobs, then copied
+  fresh inside the hold and
+  verified again, 24 files with no
+  mismatches), in one hold of the
+  line build slot taken inside this
+  lane's own sitting in the
+  retry-hold shape, the run of
+  record standing as the sitting's
+  second hold (the first hold
+  queued behind other lanes' gates
+  for about 14 minutes and was
+  killed by a box restart before
+  the gate script started, no stage
+  ran and nothing from it stands):
+  in the run of record
+  (2026-11-20T23:26:15Z to
+  23:27:36Z) the probe gate opened
+  after 2 tries; cargo test passed
+  48 with 0 failed in the
+  contracted split (9 library, 27
+  proposals, 12 rescue), exit 0 on
+  its first in-hold attempt; cargo
+  clippy --all-targets with
+  warnings denied, exit 0 on its
+  first in-hold attempt; cargo fmt
+  --check, exit 0 on its first
+  in-hold attempt; and the
+  flighttape pin's digest_cli suite
+  passed 5 with 0 failed, exit 0 on
+  its first in-hold attempt, the
+  golden digest constant
+  cc9c4e01fca418dcc33114caf75fae1f6bf0d401f297b5d61f6776903fa955a3
+  standing in the suite's source
+  (one occurrence counted in the
+  pin copy's digest_cli.rs). The
+  port build stands at 1,689,984
+  bytes, the Round 16, 17, and 18
+  builds' size. The landed-form
+  Quickstart write stands re-run at
+  this hand beside a tape: propose
+  -o proposals.json on both arms,
+  exit 0 on each arm, the written
+  file 1,161 bytes byte-identical
+  to the control document on each
+  arm (the same run stands in
+  RF-116's Quickstart account). The
+  gate therefore now stands
+  reproduced at a second
+  independent hand on the landed
+  tree, and the Round 18 red team's
+  limitation stands discharged, not
+  merely carried.
