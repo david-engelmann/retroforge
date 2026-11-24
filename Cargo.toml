@@ -2,6 +2,7 @@
 name = "retroforge"
 version = "0.1.0"
 edition = "2021"
+description = "The retrospective that ends in a pull request against your own agent setup, every proposed hunk annotated with the trace moments that justify it."
 
 [dependencies]
 flighttape = { git = "https://github.com/david-engelmann/flighttape", rev = "74a83298aeb31c82e62b9fb0c613f5bc8600799e" }
